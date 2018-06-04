@@ -1,8 +1,8 @@
 <template>
-    <div class="index">
-        <h1>Main Page</h1>
+    <div class ="login">
+        <h1>Login Page</h1>
         <router-link to="/workspaces">Go to workspaces</router-link>
-        <router-link to="/Login">Go to Login</router-link>
+        <router-link to="/">Go to Main page</router-link>
     </div>
 </template>
 
@@ -11,7 +11,3 @@ export default {
 
 }
 </script>
-
-<style>
-
-</style>
