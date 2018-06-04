@@ -9,11 +9,16 @@
 <script>
     import { mapState } from 'vuex'
 
+    import mockData from '../mockData.json'
+
     export default {
         computed: {
             ...mapState({
                 helloMsg: 'msg'
             })
+        },
+        created () {
+            console.log(mockData)
         }
     }
 </script>
