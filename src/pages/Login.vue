@@ -1,13 +1,19 @@
 <template>
-    <div class ="login">
-        <h1>Login Page</h1>
-        <router-link to="/workspaces">Go to workspaces</router-link>
-        <router-link to="/">Go to Main page</router-link>
+    <div class="login">
+        <h1>Log In</h1>
+        <input type="text" placeholder="Email"><br>
+        <input type="password" placeholder="Password"><br>
+        <button>Login</button>
+        <p>Don't have an account? Create one here.</p>
     </div>
 </template>
 
 <script>
 export default {
-
+    name: 'Login',
+    data: function () {
+        return {}
+    },
+    methods: {}
 }
 </script>
