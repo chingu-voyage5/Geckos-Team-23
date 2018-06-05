@@ -1,12 +1,23 @@
 <template>
     <div class="workspaces">
-        <h1>Workspaces</h1>
-        <router-link to="/">Go to main</router-link>
+        <Column/>
     </div>
 </template>
 
 <script>
-    export default {
+    import Column from '../components/Column'
 
+    export default {
+        components: {
+            Column
+        }
     }
 </script>
+
+<style>
+
+    .workspaces {
+        padding: 2.5rem;
+    }
+
+</style>

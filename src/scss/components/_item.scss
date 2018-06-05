@@ -1,0 +1,41 @@
+.item {
+    width: 100%;
+
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    background: var(--color-white);
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 1rem 1.5rem;
+        border-radius: 1rem 1rem 0 0;
+        background: var(--item-header);
+    }
+
+    &__title {
+
+    }
+
+    &__body {
+        padding: 2rem;
+    }
+
+    &__button {
+        width: 100%;
+        height: 3.5rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: 1rem;
+        background: var(--item-header);
+    }
+
+    &__icon {
+
+    }
+}

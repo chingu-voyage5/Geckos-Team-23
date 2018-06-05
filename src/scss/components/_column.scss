@@ -1,0 +1,34 @@
+.column {
+    width: 25rem;
+
+    padding: 2rem;
+    border-radius: 1rem;
+    background: var(--column-bg);
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    &__title {
+
+    }
+
+    &__button {
+        width: 100%;
+        height: 3.5rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: 1rem;
+        background: var(--column-bg-light);
+    }
+
+    &__icon {
+
+    }
+}
