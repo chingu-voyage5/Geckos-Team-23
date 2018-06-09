@@ -11,10 +11,9 @@
     <div class="sign-up">
       <h3>Sign Up</h3>
       <input type="text" v-model="signUpEmail" placeholder="Email">
-      <input type="text" v-model="username" placeholder="Username">
       <input type="password" v-model="signUpPassword" placeholder="Password">
       <button v-on:click="signUp">Sign Up</button>
-      <p>Email: {{ signInEmail }}</p>
+      <p>Signed User: {{ signedUser }}</p>
     </div>
 
   </div>
@@ -31,7 +30,8 @@
           signInEmail: '',
           signInPassword: '',
           signUpEmail: '',
-          signUpPassword: ''
+          signUpPassword: '',
+          signedUser: firebase.auth().currentUser
         }
     },
     methods: {

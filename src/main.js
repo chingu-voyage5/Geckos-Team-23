@@ -8,6 +8,8 @@ import firebase from 'firebase'
 
 Vue.config.productionTip = false
 
+let app
+
 // Initialize Firebase
 /* CHANGE IN PRODUCTION - Import firebase config from external config file */
 var config = {
@@ -20,11 +22,16 @@ var config = {
 }
 firebase.initializeApp(config)
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  store,
-  components: { App },
-  template: '<App/>'
+// Initialize the app only when we are sure Firebase Auth object is ready to use.
+firebase.auth().onAuthStateChanged(function (user) {
+  if (!app) {
+    /* eslint-disable no-new */
+    app = new Vue({
+      el: '#app',
+      router,
+      store,
+      components: { App },
+      template: '<App/>'
+    })
+  }
 })
