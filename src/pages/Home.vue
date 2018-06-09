@@ -40,20 +40,22 @@
       },
       signIn: function () {
         firebase.auth().signInWithEmailAndPassword(this.signInEmail, this.signInPassword).then(
-          function (user) {
-            alert('Signed In!')
+          // use arrow notation to fix this's context
+          (user) => {
+            this.$router.replace('workspaces')
           },
-          function (err) {
+          (err) => {
             alert('Oops. ' + err.message)
           }
         )
       },
       signUp: function () {
         firebase.auth().createUserWithEmailAndPassword(this.signUpEmail, this.signUpPassword).then(
-          function (user) {
-            alert('Your account has been created')
+          // use arrow notation to fix this's context
+          (user) => {
+            this.$router.replace('workspaces')
           },
-          function (err) {
+          (err) => {
             alert('Oops. ' + err.message)
           }
         )
