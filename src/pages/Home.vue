@@ -1,53 +1,65 @@
 <template>
-	<div class="home">
+  <div class="home">
 
-		<div class="sign-in">
-			<h3>Sign In</h3>
-			<input type="text" placeholder="Email">
-			<input type="password" placeholder="Password">
-			<button v-on:click="login">Sign In</button>
-		</div>
+    <div class="sign-in">
+      <h3>Sign In</h3>
+      <input type="text" v-model="signInEmail" placeholder="Email">
+      <input type="password" v-model="signInPassword" placeholder="Password">
+      <button v-on:click="signIn">Sign In</button>
+    </div>
 
-		<div class="sign-up">
-			<h3>Sign Up</h3>
-			<input type="text" v-model="email" placeholder="Email">
-			<input type="text" v-model="username" placeholder="Username">
-			<input type="password" v-model="password" placeholder="Password">
-			<button v-on:click="signUp">Sign Up</button>
-			<p>Email: {{ email }}</p>
-		</div>
+    <div class="sign-up">
+      <h3>Sign Up</h3>
+      <input type="text" v-model="signUpEmail" placeholder="Email">
+      <input type="text" v-model="username" placeholder="Username">
+      <input type="password" v-model="signUpPassword" placeholder="Password">
+      <button v-on:click="signUp">Sign Up</button>
+      <p>Email: {{ signInEmail }}</p>
+    </div>
 
-	</div>
+  </div>
 
 </template>
 
 <script>
-	import firebase from 'firebase'
+  import firebase from 'firebase'
 
-	export default {
-		name: 'home',
-		data () {
-				return {
-					email: '',
-					passord: ''
-				}
-		},
-		methods: {
-			login: function () {
-				this.$router.replace('workspaces');
-			},
-			signUp: function () {
-				firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
-					function (user) {
-						alert('Your account has been created')
-					},
-					function (err) {
-						alert('Oops. ' + err.message)
-					}
-				);
-			}
-		}
-	}
+  export default {
+    name: 'home',
+    data () {
+        return {
+          signInEmail: '',
+          signInPassword: '',
+          signUpEmail: '',
+          signUpPassword: ''
+        }
+    },
+    methods: {
+      goToWorkspaces: function () {
+        this.$router.replace('workspaces')
+      },
+      signIn: function () {
+        firebase.auth().signInWithEmailAndPassword(this.signInEmail, this.signInPassword).then(
+          function (user) {
+            alert('Signed In!')
+          },
+          function (err) {
+            alert('Oops. ' + err.message)
+          }
+        )
+      },
+      signUp: function () {
+        firebase.auth().createUserWithEmailAndPassword(this.signUpEmail, this.signUpPassword).then(
+          function (user) {
+            alert('Your account has been created')
+          },
+          function (err) {
+            alert('Oops. ' + err.message)
+          }
+        )
+      }
+    }
+  }
 </script>
 
 <style scoped>
