@@ -40,7 +40,7 @@ const createStore = () => {
                     id: 3
                 }
             ],
-            column: [
+            columns: [
                 {
                     title: 'Column 1',
                     workspaceIds: [1],
@@ -66,6 +66,33 @@ const createStore = () => {
                     workspaceIds: [5],
                     id: 5
                 }
+            ],
+            items: [
+                {
+                    title: 'Item 1',
+                    columnIds: [1],
+                    id: 1
+                },
+                {
+                    title: 'Item 2',
+                    columnIds: [2],
+                    id: 2
+                },
+                {
+                    title: 'Item 3',
+                    columnIds: [3],
+                    id: 3
+                },
+                {
+                    title: 'Item 4',
+                    columnIds: [4],
+                    id: 4
+                },
+                {
+                    title: 'Item 5',
+                    columnIds: [5],
+                    id: 5
+                }
             ]
         },
         getters: {
@@ -75,6 +102,9 @@ const createStore = () => {
             },
             showWorkspace: state => {
                 return state.workspace
+            },
+            showColumns: state => {
+                return state.columns
             }
         },
         mutations: {
