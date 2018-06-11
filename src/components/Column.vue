@@ -8,7 +8,7 @@
         <Item/>
 
         <div class="column__button">
-            <i class="fas fa-plus column__icon"></i>
+            <i class="fa fa-plus column__icon"></i>
         </div>
     </div>
 </template>
