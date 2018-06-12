@@ -3,8 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const createStore = () => {
-    return new Vue.Store({
+export default new Vuex.Store({
         state: {
             workspaces: [
                 {
@@ -55,65 +54,45 @@ const createStore = () => {
                     title: 'Column 3',
                     workspaceIds: [3],
                     id: 3
-                },
-                {
-                    title: 'Column 4',
-                    workspaceIds: [4],
-                    id: 4
-                },
-                {
-                    title: 'Column 5',
-                    workspaceIds: [5],
-                    id: 5
                 }
             ],
             items: [
                 {
                     title: 'Item 1',
-                    columnIds: [1],
+                    columnId: 1,
                     id: 1
                 },
                 {
                     title: 'Item 2',
-                    columnIds: [2],
+                    columnId: 2,
                     id: 2
                 },
                 {
                     title: 'Item 3',
-                    columnIds: [3],
+                    columnId: 3,
                     id: 3
-                },
-                {
-                    title: 'Item 4',
-                    columnIds: [4],
-                    id: 4
-                },
-                {
-                    title: 'Item 5',
-                    columnIds: [5],
-                    id: 5
                 }
             ]
         },
         getters: {
             // functions to return the state if dynamic
-            showWorkspaces: state => {
-                return state.workspaces
-            },
-            showWorkspace: state => {
-                return state.workspace
-            },
-            showColumns: state => {
-                return state.columns
+            filterItems: (state) => (column) => {
+                const columnId = column
+                const items = state.items
+
+                return items.filter(item => columnId.includes(item.columnId))
             }
         },
         mutations: {
             // functions to mutate the state
+            addColumn (state, payload) {
+                state.columns.push(payload)
+            },
+            addItem (state, payload) {
+                state.items.push(payload)
+            }
         },
         actions: {
             // functions that commit mutations, these can contain async code
         }
     })
-}
-
-export default createStore

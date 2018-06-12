@@ -4,6 +4,7 @@
     padding: 2rem;
     border-radius: 1rem;
     background: var(--column-bg);
+    margin-right: 2rem;
 
     &__header {
         display: flex;
@@ -16,7 +17,7 @@
 
     }
 
-    &__button {
+    &__add-item {
         width: 100%;
         height: 3.5rem;
 
@@ -26,9 +27,6 @@
 
         border-radius: 1rem;
         background: var(--column-bg-light);
-    }
-
-    &__icon {
-
+        cursor: pointer;
     }
 }

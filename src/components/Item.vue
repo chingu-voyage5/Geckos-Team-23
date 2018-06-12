@@ -1,7 +1,7 @@
 <template>
     <div class="item">
         <div class="item__header">
-            <h2 class="item__title">Item #1</h2>
+            <slot class="item__title"></slot>
             <i class="fas fa-ellipsis-v"></i>
         </div>
 
@@ -14,11 +14,7 @@
 </template>
 
 <script>
-export default {
+    export default {
 
-}
+    }
 </script>
-
-<style>
-
-</style>

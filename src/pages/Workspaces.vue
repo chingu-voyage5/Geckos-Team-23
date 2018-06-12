@@ -1,15 +1,15 @@
 <template>
     <div class="workspaces">
-        <Column/>
+        <Workspace/>
     </div>
 </template>
 
 <script>
-    import Column from '../components/Column'
+    import Workspace from '../components/Workspace'
 
     export default {
         components: {
-            Column
+            Workspace
         }
     }
 </script>

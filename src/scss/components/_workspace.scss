@@ -1,0 +1,21 @@
+.workspace {
+    display: flex;
+
+    &__list {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    &__add-button {
+        display: flex;
+        justify-content: center;
+
+        height: 100%;
+        width: 25rem;
+
+        padding: 2rem;
+        border-radius: 1rem;
+        background: var(--column-bg);
+        cursor: pointer;
+    }
+}
