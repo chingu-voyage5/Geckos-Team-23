@@ -1,29 +1,36 @@
 <template>
     <div class="tile">
         <div class="tile-header">
-        <h2 >SIGN IN</h2>
+        <h2 >SIGN UP</h2>
     </div>
     <div class="tile-body">
         <form id="form">
             <label class="form-input">
-                <i class="material-icons">email</i>
+                    <input type="text" autofocus="true" required />
+                    <span class="label">Name</span>
+                <span class="underline"></span>
+            </label>
+            <label class="form-input">
+                    <input type="text" autofocus="true" required />
+                    <span class="label">Surname</span>
+                <span class="underline"></span>
+            </label>
+            <label class="form-input">
                     <input type="text" autofocus="true" required />
                     <span class="label">Email</span>
                 <span class="underline"></span>
             </label>
             <label class="form-input">
-                <i class="material-icons">lock</i>
                     <input type="password" required />
-                    <span class="label">Password</span>
+                    <span class="label">New Password</span>
                 <div class="underline"></div>
             </label>
             <div class="submit-container clearfix" style="margin-top: 2rem;">
                 <div id="submit" role="button" type="button" class="btn btn-irenic float-right" tabindex="0">
-                    <span>SIGN IN</span>
+                    <span>SIGN UP</span>
                 </div>
                 <br>
                 <br>
-                <p>Don't have an account? Create one <router-link to="/SignUp">here</router-link> .</p>
                     <div class="login-pending">
                         <div class=spinner>
                             <span class="dot1"></span>

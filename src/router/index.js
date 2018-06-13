@@ -5,6 +5,7 @@ import Router from 'vue-router'
 import MainPage from '@/pages/MainPage'
 import Workspaces from '@/pages/Workspaces'
 import Login from '@/pages/Login'
+import SignUp from '@/pages/SignUp'
 
 Vue.use(Router)
 
@@ -24,6 +25,11 @@ export default new Router({
       path: '/Login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/SignUp',
+      name: 'SignUp',
+      component: SignUp
     }
   ]
 })
