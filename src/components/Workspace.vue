@@ -2,7 +2,8 @@
     <div class="workspace">
         <ul class="workspace__list">
             <Column v-for="column in columns"
-                    :key="column.id">
+                    :key="column.id"
+                    :columnId="column.id">
                 <h2 class="column__title">
                     {{ column.title }}
                 </h2>

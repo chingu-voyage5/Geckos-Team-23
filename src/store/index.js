@@ -76,12 +76,6 @@ export default new Vuex.Store({
         },
         getters: {
             // functions to return the state if dynamic
-            filterItems: (state) => (column) => {
-                const columnId = column
-                const items = state.items
-
-                return items.filter(item => columnId.includes(item.columnId))
-            }
         },
         mutations: {
             // functions to mutate the state

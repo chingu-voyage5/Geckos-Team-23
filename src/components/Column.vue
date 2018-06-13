@@ -5,7 +5,7 @@
             <i class="fas fa-ellipsis-v"></i>
         </div>
 
-        <Item v-for="item in items" :key="item.id">
+        <Item v-for="item in filterItems" :key="item.id">
             <h2 class="item__title">{{ item.title }}</h2>
         </Item>
 
@@ -24,17 +24,25 @@
     export default {
         methods: {
             addItem () {
-                this.$store.commit('addItem', { title: 'Item' })
+                this.$store.commit('addItem', { title: 'Item', columnId: this.columnId })
             }
         },
         computed: {
             ...mapState([
-                'items',
-                'filterItems'
-            ])
+                'items'
+            ]),
+            filterItems () {
+                const items = this.items
+                const column = this.columnId
+
+                return items.filter(item => column === item.columnId)
+            }
         },
         components: {
             Item
-        }
+        },
+        props: [
+            'columnId'
+        ]
     }
 </script>
