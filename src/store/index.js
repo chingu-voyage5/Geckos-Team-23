@@ -76,6 +76,9 @@ export default new Vuex.Store({
         },
         getters: {
             // functions to return the state if dynamic
+            getColumnTitle: state => {
+                return state.columns
+            }
         },
         mutations: {
             // functions to mutate the state

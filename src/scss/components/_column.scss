@@ -1,20 +1,40 @@
 .column {
     width: 25rem;
 
-    padding: 2rem;
+    align-self: flex-start;
+
+    padding: 1rem 2rem 2rem 2rem;
     border-radius: 1rem;
     background: var(--column-bg);
-    margin-right: 2rem;
+    margin-right: 1.5rem;
 
     &__header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
     }
 
-    &__title {
+    &__input {
+        font-family: 'Source Sans Pro';
+        font-size: 1.6rem;
+        font-weight: 600;
 
+        width: 90%;
+
+        border-radius: .5rem;
+        padding: .75rem;
+        background: transparent;
+        border: 1px solid transparent;
+        transition: all .3s;
+
+        &:focus {
+            background: var(--column-bg-light);
+            outline: none;
+
+            border: 1px solid var(--input-border);
+            box-shadow: 0 0 1rem var(--input-boxshadow);
+        }
     }
 
     &__add-item {

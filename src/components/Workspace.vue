@@ -4,9 +4,7 @@
             <Column v-for="column in columns"
                     :key="column.id"
                     :columnId="column.id">
-                <h2 class="column__title">
-                    {{ column.title }}
-                </h2>
+                <input class="column__input" type="text" v-model="column.title">
             </Column>
         </ul>
 
@@ -25,7 +23,7 @@
     export default {
         methods: {
             addColumn () {
-                this.$store.commit('addColumn', { title: 'Column' })
+                this.$store.commit('addColumn', { title: 'Column', id: this.columns.length + 1 })
             }
         },
         computed: {

@@ -15,8 +15,26 @@
         background: var(--item-header);
     }
 
-    &__title {
+    &__input {
+        font-family: 'Source Sans Pro';
+        font-size: 1.5rem;
+        font-weight: 600;
 
+        width: 90%;
+
+        border-radius: .5rem;
+        padding: .5rem;
+        background: transparent;
+        border: 1px solid transparent;
+        transition: all .3s;
+
+        &:focus {
+            background: var(--input-item);
+            outline: none;
+
+            border: 1px solid var(--input-border);
+            box-shadow: 0 0 1rem var(--input-boxshadow);
+        }
     }
 
     &__body {
