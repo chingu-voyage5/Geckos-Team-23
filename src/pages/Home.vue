@@ -22,6 +22,7 @@
 
 <script>
   import firebase from 'firebase'
+	import { db } from '../main'
 
   export default {
     name: 'home',
@@ -53,7 +54,21 @@
         firebase.auth().createUserWithEmailAndPassword(this.signUpEmail, this.signUpPassword).then(
           // use arrow notation to fix this's context
           (user) => {
-            this.$router.replace('workspaces')
+						// Add user data to DB
+						db.collection("users").add({
+					    first: "Ada",
+					    last: "Lovelace",
+					    born: 1815
+						})
+						.then(function(docRef) {
+					    console.log("Document written with ID: ", docRef.id);
+						})
+						.catch(function(error) {
+					    console.error("Error adding document: ", error);
+						});
+
+						// Redirect to User Workspaces
+            this.$router.replace('workspaces')						
           },
           (err) => {
             alert('Oops. ' + err.message)
@@ -62,6 +77,7 @@
       }
     }
   }
+
 </script>
 
 <style scoped>

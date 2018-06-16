@@ -22,7 +22,14 @@ export default {
       firebase.auth().signOut().then(() => {
         this.$router.replace('/')
       })
-    }
+  	},
+  	showUsers: function () {
+			db.collection("users").get().then((querySnapshot) => {
+	    	querySnapshot.forEach((doc) => {
+	        console.log(`${doc.id} => ${doc.data()}`);
+			    });
+			});
+		}
   }
 }
 </script>
