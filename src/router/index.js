@@ -6,15 +6,23 @@ import MainPage from '@/pages/MainPage'
 import Workspaces from '@/pages/Workspaces'
 import Login from '@/pages/Login'
 import SignUp from '@/pages/SignUp'
+import firebase from 'firebase'
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   routes: [
+    {
+      path: '*',
+      redirect: '/Login'
+    },
     {
       path: '/',
       name: 'MainPage',
-      component: MainPage
+      component: MainPage,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/workspaces',
@@ -33,3 +41,14 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  let currentUser = firebase.auth().currentUser
+  let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+
+  if (requiresAuth && !currentUser) next('Login')
+  else if (!requiresAuth && currentUser) next('MainPage')
+  else next()
+})
+
+export default router

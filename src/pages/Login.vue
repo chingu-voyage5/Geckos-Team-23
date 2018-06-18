@@ -7,32 +7,21 @@
         <form id="form">
             <label class="form-input">
                 <i class="material-icons">email</i>
-                    <input type="text" autofocus="true" required />
+                    <input type="text" v-model="email" autofocus="true" required />
                     <span class="label">Email</span>
                 <span class="underline"></span>
             </label>
             <label class="form-input">
                 <i class="material-icons">lock</i>
-                    <input type="password" required />
+                    <input type="password" v-model="password" required />
                     <span class="label">Password</span>
                 <div class="underline"></div>
             </label>
             <div class="submit-container clearfix" style="margin-top: 2rem;">
-                <div id="submit" role="button" type="button" class="btn btn-irenic float-right" tabindex="0">
+                <div v-on:click="MainPage" id="submit" role="button" type="button" class="btn btn-irenic float-right" tabindex="0">
                     <span>SIGN IN</span>
                 </div>
-                <br>
-                <br>
-                <p>Don't have an account? Create one <router-link to="/SignUp">here</router-link> .</p>
-                    <div class="login-pending">
-                        <div class=spinner>
-                            <span class="dot1"></span>
-                            <span class="dot2"></span>
-                        </div>
-                    <div class="login-granted-content">
-                        <i class="material-icons">done</i>
-                    </div>
-                </div>
+                <p>Don't have an account? Create one <router-link to="/SignUp">here</router-link>.</p>
             </div>
         </form>
     </div>
@@ -40,11 +29,27 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
     name: 'Login',
     data: function () {
-        return {}
+        return {
+            email: '',
+            password: ''
+        }
     },
-    methods: {}
+    methods: {
+        MainPage: function () {
+            firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
+                function (user) {
+                    alert('Welcome!')
+                },
+                function (err) {
+                    alert('Oops!' + err.message)
+                }
+            )
+        }
+    }
 }
 </script>
