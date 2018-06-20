@@ -44,6 +44,7 @@ export default {
             firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
                 function (user) {
                     alert('Welcome!')
+                    window.location.href = '/MainPage'
                 },
                 function (err) {
                     alert('Oops!' + err.message)

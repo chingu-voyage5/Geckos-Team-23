@@ -27,7 +27,10 @@ let router = new Router({
     {
       path: '/workspaces',
       name: 'Workspaces',
-      component: Workspaces
+      component: Workspaces,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/Login',
