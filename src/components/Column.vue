@@ -2,7 +2,12 @@
     <div class="column">
         <div class="column__header">
             <slot class="column__title"></slot>
-            <i class="fas fa-ellipsis-v"></i>
+            <i class="fas fa-ellipsis-v" @click="openDropdown"></i>
+
+            <div class="dropdown" v-if="showDropdown">
+                <i class="fas fa-caret-up dropdown__arrow"></i>
+                <div class="dropdown__body"></div>
+            </div>
         </div>
 
         <Item v-for="item in filterItems"
@@ -26,12 +31,15 @@
     export default {
         data () {
             return {
-
+                showDropdown: false
             }
         },
         methods: {
             addItem () {
                 this.$store.commit('addItem', { title: 'Item', columnId: this.columnId, id: this.items.length + 1 })
+            },
+            openDropdown () {
+                this.showDropdown = !this.showDropdown
             }
         },
         computed: {
