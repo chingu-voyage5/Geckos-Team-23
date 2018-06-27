@@ -10,6 +10,7 @@
 
     <div class="sign-up">
       <h3>Sign Up</h3>
+			<input type="text" v-model="userName" placeholder="Display Name">
       <input type="text" v-model="signUpEmail" placeholder="Email">
       <input type="password" v-model="signUpPassword" placeholder="Password">
       <button v-on:click="signUp">Sign Up</button>
@@ -32,7 +33,8 @@
           signInPassword: '',
           signUpEmail: '',
           signUpPassword: '',
-          signedUser: firebase.auth().currentUser
+          signedUser: firebase.auth().currentUser,
+					userName
         }
     },
     methods: {
@@ -56,9 +58,10 @@
           (user) => {
             // Add user data to DB
             db.collection("users").add({
-              first: "Ada",
-              last: "Lovelace",
-              born: 1815
+              email: this.signUpEmail,
+							name: this.userName,
+							image: '',
+							workspaces: []
             })
             .then(function (docRef) {
               console.log('Document written with ID: ', docRef.id)
