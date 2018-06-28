@@ -4,11 +4,8 @@ import Router from 'vue-router'
 // pages
 import MainPage from '@/pages/Home'
 import Workspaces from '@/pages/Workspaces'
-<<<<<<< HEAD
-=======
 import Login from '@/pages/Login'
 import SignUp from '@/pages/SignUp'
->>>>>>> homepage
 import firebase from 'firebase'
 
 Vue.use(Router)
@@ -33,9 +30,6 @@ let router = new Router({
       meta: {
         requiresAuth: true
       }
-<<<<<<< HEAD
-    }
-=======
     },
       {
         path: '/Login',
@@ -47,7 +41,6 @@ let router = new Router({
         name: 'SignUp',
         component: SignUp
       }
->>>>>>> homepage
   ]
 })
 

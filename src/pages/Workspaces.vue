@@ -3,11 +3,6 @@ import sidebar from '../components/sidebar'
 import Workspace from '../components/Workspace'
 
 <template>
-<<<<<<< HEAD
-  <div class="workspaces">
-    <Workspace/>
-  </div>
-       
   <div class="workspaces">
 		<sidebar/>
     <h1>Workspaces</h1>
@@ -15,13 +10,6 @@ import Workspace from '../components/Workspace'
     <br><br>
     <router-link to="/">Go to main</router-link>
 	</div>
-=======
-    <div class="workspaces">
-        <h1>Workspaces</h1>
-        <router-link to="/">Go to main</router-link>
-        <router-link to="/Login">Go to Login</router-link>
-    </div>
->>>>>>> homepage
 </template>
 
 <script>
@@ -44,7 +32,7 @@ export default {
       })
     },
     showUsers: function () {
-      db.collection("users").get().then((querySnapshot) => {
+      db.collection('users').get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           console.log(`${doc.id} => ${doc.data()}`)
           })
@@ -53,7 +41,6 @@ export default {
   }
 }
 </script>
-
 
 <style>
   .workspaces {

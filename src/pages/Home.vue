@@ -60,7 +60,7 @@
             db.collection("users").add({
               email: this.signUpEmail,
 							name: this.userName,
-							image: '',
+					    image: '',
 							workspaces: []
             })
             .then(function (docRef) {
