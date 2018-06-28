@@ -26,7 +26,7 @@
                 <div class="underline"></div>
             </label>
             <div class="submit-container clearfix" style="margin-top: 2rem;">
-                <div v-on:click="MainPage" id="submit" role="button" type="button" class="btn btn-irenic float-right" tabindex="0">
+                <div v-on:click="Dashboard" id="submit" role="button" type="button" class="btn btn-irenic float-right" tabindex="0">
                     <span>SIGN UP</span>
                 </div>
                     <div class="login-pending">
@@ -48,7 +48,8 @@
 import firebase from 'firebase'
 
 export default {
-    name: 'SignUp',
+    components: 'Signup',
+    name: 'Signup',
     data: function () {
         return {
             email: '',

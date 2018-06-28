@@ -1,12 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
-// pages
-import MainPage from '@/pages/Home'
-import Workspaces from '@/pages/Workspaces'
-import Login from '@/pages/Login'
-import SignUp from '@/pages/SignUp'
 import firebase from 'firebase'
+// pages
+import Home from '@/pages/Home'
+import Dashboard from '@/pages/Dashboard'
+import Workspace from '@/pages/Workspace'
 
 Vue.use(Router)
 
@@ -20,27 +18,26 @@ let router = new Router({
     {
       path: '/',
       name: 'Home',
-      component: MainPage
+      component: Home
     },
     {
-      path: '/workspaces',
-      name: 'Workspaces',
-      component: Workspaces,
+      path: '/Dashboard',
+      name: 'Dashboard',
+      component: Dashboard,
       // check if user is logged in
       meta: {
         requiresAuth: true
       }
     },
-      {
-        path: '/Login',
-        name: 'Login',
-        component: Login
-      },
-      {
-        path: '/SignUp',
-        name: 'SignUp',
-        component: SignUp
+    {
+      path: '/Dashboard/Workspace',
+      name: 'Workspace',
+      component: Workspace,
+      // check if user is logged in
+      meta: {
+        requiresAuth: true
       }
+    }
   ]
 })
 
@@ -58,9 +55,9 @@ router.beforeEach((to, from, next) => {
   let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
 
   // if page requires auth and user not logged => go to login view
-  if (requiresAuth && !currentUser) next('login')
+  if (requiresAuth && !currentUser) next('Home')
   // if page does not require auth and user logged in => go to workspaces view
-  else if (!requiresAuth && currentUser) next('workspaces')
+  else if (!requiresAuth && currentUser) next('Workspace')
   // otherwise, proceed navigation
   else next()
 })
