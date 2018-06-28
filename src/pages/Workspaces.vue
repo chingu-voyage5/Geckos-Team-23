@@ -3,6 +3,7 @@ import sidebar from '../components/sidebar'
 import Workspace from '../components/Workspace'
 
 <template>
+<<<<<<< HEAD
   <div class="workspaces">
     <Workspace/>
   </div>
@@ -14,6 +15,13 @@ import Workspace from '../components/Workspace'
     <br><br>
     <router-link to="/">Go to main</router-link>
 	</div>
+=======
+    <div class="workspaces">
+        <h1>Workspaces</h1>
+        <router-link to="/">Go to main</router-link>
+        <router-link to="/Login">Go to Login</router-link>
+    </div>
+>>>>>>> homepage
 </template>
 
 <script>
