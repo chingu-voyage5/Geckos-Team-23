@@ -1,4 +1,12 @@
+import firebase from 'firebase'
+import sidebar from '../components/sidebar'
+import Workspace from '../components/Workspace'
+
 <template>
+  <div class="workspaces">
+    <Workspace/>
+  </div>
+       
   <div class="workspaces">
 		<sidebar/>
     <h1>Workspaces</h1>
@@ -9,8 +17,6 @@
 </template>
 
 <script>
-import firebase from 'firebase'
-import sidebar from '../components/sidebar'
 
 export default {
   name: 'workspaces',
@@ -20,7 +26,8 @@ export default {
     }
   },
 	components: {
-		sidebar
+		sidebar,
+    Workspace
 	},
   methods: {
     logOut: function () {
@@ -39,6 +46,9 @@ export default {
 }
 </script>
 
-<style scoped>
 
+<style>
+  .workspaces {
+    padding: 2.5rem;
+  }
 </style>
