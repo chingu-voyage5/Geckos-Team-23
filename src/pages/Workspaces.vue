@@ -1,7 +1,3 @@
-import firebase from 'firebase'
-import sidebar from '../components/sidebar'
-import Workspace from '../components/Workspace'
-
 <template>
   <div class="workspaces">
 		<sidebar/>
@@ -13,6 +9,10 @@ import Workspace from '../components/Workspace'
 </template>
 
 <script>
+import firebase from 'firebase'
+import sidebar from '../components/sidebar'
+import Workspace from '../components/Workspace'
+
 
 export default {
   name: 'workspaces',
