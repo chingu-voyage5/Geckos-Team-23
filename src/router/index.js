@@ -5,6 +5,7 @@ import firebase from 'firebase'
 import Home from '@/pages/Home'
 import Dashboard from '@/pages/Dashboard'
 import Workspace from '@/pages/Workspace'
+import Signup from '@/pages/Signup'
 
 Vue.use(Router)
 
@@ -19,6 +20,11 @@ let router = new Router({
       path: '/',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/Signup',
+      name: 'Signup',
+      component: Signup
     },
     {
       path: '/Dashboard',

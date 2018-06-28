@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import firebase from 'firebase'
 
 export default {
     components: 'Signup',
@@ -61,7 +60,7 @@ export default {
             firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
                 function (user) {
                     alert('Welcome!')
-                    window.location.href = '/MainPage'
+                    window.location.href = '/Dashboard'
                 },
                 function (err) {
                     alert('Oops.' + err.message)
