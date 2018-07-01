@@ -14,17 +14,17 @@ export default {
   name: 'Home',
   components: {
     'Login': Login,
-	'Signup': Signup,
+  'Signup': Signup,
   },
   data () {
-        return {
-          signInEmail: '',
-          signInPassword: '',
-          signUpEmail: '',
-          signUpPassword: '',
-          signedUser: firebase.auth().currentUser,
-					userName
-        }
+      return {
+        signInEmail: '',
+        signInPassword: '',
+        signUpEmail: '',
+        signUpPassword: '',
+        signedUser: firebase.auth().currentUser,
+        userName
+      }
     },
     methods: {
       goToWorkspaces: function () {
@@ -48,9 +48,9 @@ export default {
             // Add user data to DB
             db.collection("users").add({
               email: this.signUpEmail,
-							name: this.userName,
-					    image: '',
-							workspaces: []
+              name: this.userName,
+              image: '',
+              workspaces: []
             })
             .then(function (docRef) {
               console.log('Document written with ID: ', docRef.id)
