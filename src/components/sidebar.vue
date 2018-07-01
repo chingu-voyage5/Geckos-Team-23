@@ -1,7 +1,20 @@
 <template>
-    <div class="sidebar">
-            SIDEBAR2
-    </div>
+  <div class="sidebar">
+
+  	<div class="top-bar">
+			<i class="fas fa-times"></i>
+			<a href="">Clipboard</a>
+  	</div>
+
+		<ul class="workspaces-list">
+			<li><a href=""><i class="fas fa-columns "></i> Workspace 1</a></li>
+			<li><a href=""><i class="fas fa-columns "></i> Workspace 2</a></li>
+			<li><a href=""><i class="fas fa-columns "></i> Workspace 3</a></li>
+		</ul>
+
+		<a href=""><i class="fas fa-user-circle"></i> Account</a>
+
+  </div>
 </template>
 
 <script>
