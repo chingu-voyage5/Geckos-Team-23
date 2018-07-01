@@ -10,7 +10,8 @@ import Login from '../components/Login'
 export default {
   name: 'Home',
   components: {
-    'Login': Login
+    'Login': Login,
+
   },
   data () {
     return {
