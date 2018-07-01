@@ -1,6 +1,6 @@
 <template>
     <div class="sidebar">
-			sidebar
+            SIDEBAR2
     </div>
 </template>
 
@@ -8,7 +8,8 @@
 import firebase from 'firebase'
 
 export default {
-  name: 'sidebar',
+  name: 'Sidebar',
+  components: 'Sidebar',
   data () {
     return {
 
@@ -16,10 +17,20 @@ export default {
   },
   methods: {
 
-	}
+  }
 }
 </script>
 
 <style scoped>
+
+	.sidebar {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 400px;
+		height: 100%;
+		background: var(--column-bg-light);
+	}
+
 
 </style>
