@@ -1,7 +1,7 @@
 <template>
-    <div class="tile">
-        <div class="tile-header">
-        <h2 >SIGN IN</h2>
+  <div class="tile">
+    <div class="tile-header">
+      <h2 >SIGN IN</h2>
     </div>
     <div class="tile-body">
         <form id="form">
@@ -25,13 +25,14 @@
             </div>
         </form>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
 import firebase from 'firebase'
 
 export default {
+    components: 'Login',
     name: 'Login',
     data: function () {
         return {
@@ -44,7 +45,7 @@ export default {
             firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
                 function (user) {
                     alert('Welcome!')
-                    window.location.href = '/MainPage'
+                    window.location.href = '/#/Dashboard'
                 },
                 function (err) {
                     alert('Oops!' + err.message)
