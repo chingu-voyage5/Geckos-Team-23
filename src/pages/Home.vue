@@ -6,6 +6,7 @@
 
 <script>
 import Login from '../components/Login'
+import Signup from '../components/Signup'
 import firebase from 'firebase'
 import { db } from '../main'
 
@@ -13,7 +14,7 @@ export default {
   name: 'Home',
   components: {
     'Login': Login,
-
+	'Signup': Signup,
   },
   data () {
         return {

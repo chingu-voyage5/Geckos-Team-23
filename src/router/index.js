@@ -5,7 +5,7 @@ import firebase from 'firebase'
 import Home from '@/pages/Home'
 import Dashboard from '@/pages/Dashboard'
 import Workspace from '@/pages/Workspace'
-import Signup from '@/pages/Signup'
+import Signup from '@/components/Signup'
 
 Vue.use(Router)
 
