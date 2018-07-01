@@ -63,7 +63,7 @@ router.beforeEach((to, from, next) => {
   // if page requires auth and user not logged => go to login view
   if (requiresAuth && !currentUser) next('Home')
   // if page does not require auth and user logged in => go to workspaces view
-  else if (!requiresAuth && currentUser) next('Workspace')
+  else if (!requiresAuth && currentUser) next('Dashboard')
   // otherwise, proceed navigation
   else next()
 })
