@@ -26,7 +26,7 @@
                 <div class="underline"></div>
             </label>
             <div class="submit-container clearfix" style="margin-top: 2rem;">
-                <div v-on:click="Dashboard" id="submit" role="button" type="button" class="btn btn-irenic float-right" tabindex="0">
+                <div v-on:click="SignUp" id="submit" role="button" type="button" class="btn btn-irenic float-right" tabindex="0">
                     <span>SIGN UP</span>
                 </div>
                     <div class="login-pending">
@@ -57,14 +57,13 @@ export default {
         }
     },
     methods: {
-        MainPage: function () {
+        SignUp: function () {
             firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
-                function (user) {
-                    alert('Welcome!')
-                    window.location.href = '/Dashboard'
+                (user) => {
+                    this.$router.replace('Dashboard')
                 },
-                function (err) {
-                    alert('Oops.' + err.message)
+                (err) => {
+                    alert('Oops. ' + err.message)
                 }
             )
         }
