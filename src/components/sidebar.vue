@@ -16,13 +16,13 @@
 				<li><a href=""><i class="fas fa-columns"></i> Workspace 3</a></li>
 			</ul>
 
-			<a href="" ><i class="fas fa-user-circle"></i> Account</a>
+			<a href="" v-on:click="switchSidebarPage"><i class="fas fa-user-circle"></i> Account</a>
 
 		</div>
 
 		<div class="sidebar-account" v-if="accountPageState === 'open'">
 			<div class="top-bar">
-				<i class="fas fa-arrow-left"></i>
+				<i class="fas fa-arrow-left" v-on:click="switchSidebarPage"></i>
 				<a href="">Account</a>
 	  		</div>
 
@@ -75,7 +75,13 @@ export default {
   },
   methods: {
 		switchSidebarPage: function () {
-			this.accountPageState = !this.accountPageState;
+			switch(this.accountPageState) {
+		    case 'open':
+	        this.accountPageState = 'closed';
+	        break;
+		    default:
+	        this.accountPageState = 'open';
+			}
 		}
   }
 }
