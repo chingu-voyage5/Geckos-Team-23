@@ -1,6 +1,6 @@
 <template>
-  <nav class="dashboard-navigation">
-    <ul>
+  <nav>
+    <ul class="dashboard-navigation">
       <li>Dashboard</li>
     </ul>
   </nav>
@@ -8,7 +8,7 @@
 <script>
 export default {
   name: 'Navigation',
-  data() {
+  data () {
     return {
 
     }
@@ -21,9 +21,13 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss">
 .dashboard-navigation {
-  width: 100%;
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+li {
+  
 }
 </style>
-

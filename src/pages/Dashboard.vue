@@ -1,11 +1,12 @@
 <template>
-  <div class="workspaces">
-    <Sidebar />
-    <Navigation />
-  <h1>Workspaces</h1>
-  
-  <br><br>
-  <!--<router-link to="/">Go to main</router-link>-->
+  <div class="dashboard-container">
+    <div id="sidebar-container">
+      <Sidebar />
+    </div>
+    <div id="dashboard-content">
+      <Navigation />
+      <h1>Dashboard</h1>
+    </div>
   </div>
 </template>
 
@@ -42,6 +43,21 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+.dashboard-container {
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  height: 100vh;
+}
+#sidebar-container {
+  flex-grow: 1;
+  width: 40%;
+  height: 100%;
+}
+#dashboard-content {
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+}
 </style>

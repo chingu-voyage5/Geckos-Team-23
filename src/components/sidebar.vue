@@ -1,11 +1,11 @@
 <template>
   <div class="sidebar">
 
-		<div class="sidebar-normal">
-			<div class="top-bar">
-				<i class="fas fa-times"></i>
-				<a href="">Clipboard</a>
-	  	</div>
+    <div class="sidebar-normal">
+      <div class="top-bar">
+        <i class="fas fa-times"></i>
+        <a href="">Clipboard</a>
+      </div>
 
 			<ul class="workspaces-list">
 				<li><a href=""><i class="fas fa-columns"></i> Workspace 1</a></li>
@@ -74,16 +74,9 @@ export default {
 </script>
 
 <style scoped>
-
-	.sidebar {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 400px;
-		height: 100%;
-		background: var(--column-bg-light);
-		box-shadow: var(--drop-shadow);
-	}
-
-
+.sidebar {
+  width: 100%;
+  height: 100%;
+  background: var(--column-bg-light);
+  box-shadow: var(--drop-shadow);}
 </style>
