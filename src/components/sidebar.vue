@@ -1,9 +1,6 @@
 <template>
   <div class="sidebar">
 
-	  	<!-- this is for debuging -->
-	  	<p>{{ accountPageState }}</p>
-
 		<div class="sidebar-normal" v-if="accountPageState === 'closed'">
 			<div class="top-bar">
 				<i class="fas fa-times"></i>
@@ -16,7 +13,7 @@
 				<li><a href=""><i class="fas fa-columns"></i> Workspace 3</a></li>
 			</ul>
 
-			<a href="" v-on:click="switchSidebarPage"><i class="fas fa-user-circle"></i> Account</a>
+			<a v-on:click="switchSidebarPage"><i class="fas fa-user-circle"></i> Account</a>
 
 		</div>
 
