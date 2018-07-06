@@ -4,7 +4,7 @@
 		<div class="sidebar-normal" v-if="accountPageState === 'closed'">
 			<div class="top-bar">
 				<i class="fas fa-times"></i>
-				<a href="">Clipboard</a>
+				<h2>Clipboard</h2>
 	  		</div>
 
 			<ul class="workspaces-list">
@@ -20,31 +20,31 @@
 		<div class="sidebar-account" v-if="accountPageState === 'open'">
 			<div class="top-bar">
 				<i class="fas fa-arrow-left" v-on:click="switchSidebarPage"></i>
-				<a href="">Account</a>
+				<h2>Account</h2>
 	  		</div>
 
 			<div id="account-settings">
 
 				<h3>Public Info</h3>
 
-				<label for="account-username">Display Name</label>
+				<label for="account-username">Display Name:</label>
 				<input id="account-username" type="text" value="">
 
 				<h3>Private Info</h3>
 
-				<label for="account-user-email">Email</label>
+				<label for="account-user-email">Email:</label>
 				<input id="account-user-email" type="text" value="">
 				<a v-on:click="sendEmail()" href="">Verify Email</a>
 
 				<h3>Password</h3>
 
-				<label for="account-user-password">Current Password</label>
+				<label for="account-user-password">Current Password:</label>
 				<input id="user-password" type="password" value="">
 
-				<label for="account-user-new-password">New Password</label>
+				<label for="account-user-new-password">New Password:</label>
 				<input id="account-user-new-password" type="password" value="">
 
-				<label for="account-user-new-password-confirm">Confirm New Password</label>
+				<label for="account-user-new-password-confirm">Confirm New Password:</label>
 				<input id="account-user-new-password-confirm" type="password" value="">
 
 				<a v-on:click="changePassword()" href="">Change Password</a>
@@ -86,6 +86,16 @@ export default {
 
 <style scoped>
 
+	h2 {
+		font-family: sans-serif;
+		font-size: 1.3em;
+	}
+
+	input {
+		border: none;
+		/* background: transparent; */
+	}
+
 	.sidebar {
 		position: absolute;
 		top: 0;
@@ -106,6 +116,23 @@ export default {
 	.sidebar .top-bar *:nth-child(2) {
 		flex-grow: 1;
 		text-align: center;
+	}
+
+	#account-settings {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	#account-settings h3 {
+		grid-column: 1 / 3;
+	}
+
+	#account-settings h3:not(:first-child) {
+		margin-top: 30px;
+	}
+
+	#account-settings *:not(h3) {
+		margin-top: 10px;
 	}
 
 
