@@ -30,13 +30,12 @@
 				<h3>Public Info</h3>
 
 				<label for="account-username">Display Name:</label>
-				<input id="account-username" type="text" value="">
+				<input id="account-username" type="text" v-model="userName" v-on:keyup="updateUserName">
 
 				<h3>Private Info</h3>
 
 				<label for="account-user-email">Email:</label>
-				<input id="account-user-email" type="text" v-model="userEmail">
-				<a v-on:click="sendEmail()" href="">Verify Email</a>
+				<input id="account-user-email" type="email" v-model="userEmail" v-on:keyup="updateEmail">
 
 				<h3>Password</h3>
 
@@ -49,11 +48,11 @@
 				<label for="account-user-new-password-confirm">Confirm New Password:</label>
 				<input id="account-user-new-password-confirm" type="password" value="">
 
-				<a v-on:click="changePassword()" href="">Change Password</a>
+				<button v-on:click="changePassword()">Change Password</button>
 
 				<h3>Danger</h3>
 
-				<a id="account-delete" v-on:click="deleteAccount()" href=""><i class="fas fa-exclamation-triangle "></i> Delete Account</a>
+				<button id="account-delete" v-on:click="deleteAccount()"><i class="fas fa-exclamation-triangle "></i> Delete Account</button>
 			</div>
 		</div>
 
@@ -70,25 +69,43 @@ export default {
   data () {
     return {
 			accountPageState: 'closed',
+			user: firebase.auth().currentUser,
+			userName: firebase.auth().currentUser.displayName,
 			userEmail: firebase.auth().currentUser.email
     }
   },
   methods: {
-	switchSidebarPage: function () {
-		switch(this.accountPageState) {
-	    case 'closed':
-        this.accountPageState = 'open';
-        break;
-	    default:
-        this.accountPageState = 'closed';
-		}
-		console.log(firebase.auth().currentUser.email);
-	},
-	logOut: function () {
+		switchSidebarPage: function () {
+			switch(this.accountPageState) {
+		    case 'closed':
+	        this.accountPageState = 'open';
+	        break;
+		    default:
+	        this.accountPageState = 'closed';
+			}
+		},
+		logOut: function () {
       firebase.auth().signOut().then(() => {
       this.$router.replace('/')
       })
     },
+		updateUserName: function () {
+			this.user.updateProfile({
+			  displayName: this.userName,
+			  photoURL: "https://example.com/jane-q-user/profile.jpg"
+			}).then(function() {
+			  console.log("Update successful");
+			}).catch(function(error) {
+			  console.log(error);
+			});
+		},
+		updateEmail: function () {
+			this.user.updateEmail(this.userEmail).then(function() {
+			  console.log("Update successful");
+			}).catch(function(error) {
+			  console.log(error);
+			});
+		}
   }
 }
 </script>
@@ -127,6 +144,7 @@ export default {
 		background: transparent;
 		border: none;
 		font-size: 1em;
+		/* background: lightblue; */
 	}
 
 	.sidebar {
@@ -181,6 +199,10 @@ export default {
 
 	#account-settings *:not(h3) {
 		margin-top: 10px;
+	}
+
+	#account-settings button {
+		text-align: left;
 	}
 
 
