@@ -40,19 +40,22 @@
 				<h3>Password</h3>
 
 				<label for="account-user-password">Current Password:</label>
-				<input id="user-password" type="password" v-model="password">
+				<input id="user-password" type="password" v-model="password" v-on:keyup="validatePassword">
+				<p class="warning">Please fill in your current password</p>
 
 				<label for="account-user-new-password">New Password:</label>
-				<input id="account-user-new-password" type="password" v-model="newPassword">
+				<input id="account-user-new-password" type="password" v-model="newPassword" v-on:keyup="validatePassword">
+				<p class="warning">Password must be at least 6 characters long!</p>
 
 				<label for="account-user-new-password-confirm">Confirm New Password:</label>
-				<input id="account-user-new-password-confirm" type="password" v-model="newPasswordConfirmation">
+				<input id="account-user-new-password-confirm" type="password" v-model="newPasswordConfirmation" v-on:keyup="validatePassword">
+				<p class="warning">Looks like New Password doen't correspond!</p>
 
-				<button v-on:click="changePassword">Change Password</button>
+				<button v-on:click="changePassword" v-bind:disabled="changePasswordBtnDisabled"><i class="fas fa-key"></i> Change Password</button>
 
 				<h3>Danger</h3>
 
-				<button id="account-delete" v-on:click="showDeleteConfirmation = true"><i class="fas fa-exclamation-triangle "></i> Delete Account</button>
+				<button id="account-delete" v-on:click="showDeleteConfirmation = true"><i class="fas fa-exclamation-triangle"></i> Delete Account</button>
 
 				<div id="delete-account-confirmation" v-if="showDeleteConfirmation">
 					<p>This action is irreversible. Are you sure?</p>
@@ -81,6 +84,7 @@ export default {
 			password: '',
 			newPassword: '',
 			newPasswordConfirmation: '',
+			changePasswordBtnDisabled: true,
 			showDeleteConfirmation: false
     }
   },
@@ -115,6 +119,36 @@ export default {
 			}).catch(function(error) {
 			  console.log(error);
 			});
+		},
+		validatePassword: function () {
+			const userPasswordWarning = document.querySelector('#user-password+p');
+			const invalidPasswordWarning = document.querySelector('#account-user-new-password+p');
+			const differentPasswordWarning = document.querySelector('#account-user-new-password-confirm+p');
+
+			if (this.password.length < 6) {
+				userPasswordWarning.style.display = "block";
+				this.changePasswordBtnDisabled = true;
+			} else {
+				userPasswordWarning.style.display = "none";
+			}
+
+			if (this.newPassword.length < 6) {
+				invalidPasswordWarning.style.display = "block";
+				this.changePasswordBtnDisabled = true;
+			} else {
+				invalidPasswordWarning.style.display = "none";
+			}
+
+			if (this.newPassword !== this.newPasswordConfirmation) {
+				differentPasswordWarning.style.display = "block";
+				this.changePasswordBtnDisabled = true;
+			} else {
+				differentPasswordWarning.style.display = "none";
+			}
+
+			if (!(this.password.length < 6) && !(this.newPassword < 6) && !(this.newPassword !== this.newPasswordConfirmation)) {
+				this.changePasswordBtnDisabled = false;
+			}
 		},
 		changePassword: function () {
 			// create user credential (needed for reauthentication)
@@ -201,6 +235,7 @@ export default {
 		width: 360px;
 		height: 100%;
 		padding: 20px;
+		overflow-y: auto;
 		background: var(--column-bg-light);
 		box-shadow: var(--drop-shadow);
 	}
@@ -234,6 +269,12 @@ export default {
 	#account-settings {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
+	}
+
+	#account-settings .warning {
+		grid-column: 1 / 3;
+		color: var(--color-danger);
+		display: none;
 	}
 
 	#account-settings h3 {
