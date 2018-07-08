@@ -117,14 +117,26 @@ export default {
 			});
 		},
 		changePassword: function () {
-			// validate password change
-			if (this.newPassword === this.newPasswordConfirmation) {
-				this.user.updatePassword(this.newPassword).then(function() {
-				  console.log("Update successful");
-				}).catch(function(error) {
-				  console.log(error);
-				});
-			} // end of if
+			// create user credential (needed for reauthentication)
+			const user = firebase.auth().currentUser;
+			const credential = firebase.auth.EmailAuthProvider.credential(
+				user.email,
+    		this.password
+			);
+
+			user.reauthenticateAndRetrieveDataWithCredential(credential).then(
+				() => {
+					alert("Reauthenticated!");
+					// User re-authenticated.
+					user.updatePassword(this.newPassword).then(function() {
+					  alert("Update successful");
+					}).catch(function(error) {
+					  alert(error);
+					});
+				}
+			).catch(function(error) {
+				alert(error);
+			});
 		},
 		deleteAccount: function () {
 			this.user.delete().then(() => {
