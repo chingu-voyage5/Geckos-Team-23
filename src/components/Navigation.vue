@@ -1,7 +1,7 @@
 <template>
   <nav>
     <ul class="dashboard-navigation">
-      <li>Dashboard</li>
+      <li>User Dashboard</li>
     </ul>
   </nav>
 </template>

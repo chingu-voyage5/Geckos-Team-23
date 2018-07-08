@@ -5,15 +5,17 @@
     </div>
     <div id="dashboard-content">
       <Navigation />
-      <h1>Dashboard</h1>
+      <DashboardView /> 
     </div>
   </div>
 </template>
 
 <script>
 import firebase from 'firebase'
+import { db } from '../main'
 import Sidebar from '../components/Sidebar'
 import Navigation from '../components/Navigation'
+import DashboardView from '../components/DashboardView'
 
 export default {
   name: 'Dashboard',
@@ -38,7 +40,8 @@ export default {
   },
   components: {
     Sidebar,
-    Navigation
+    Navigation,
+    DashboardView
   }
 }
 </script>
