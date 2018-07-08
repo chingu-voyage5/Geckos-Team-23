@@ -126,8 +126,6 @@ export default {
 
 			user.reauthenticateAndRetrieveDataWithCredential(credential).then(
 				() => {
-					alert("Reauthenticated!");
-					// User re-authenticated.
 					user.updatePassword(this.newPassword).then(function() {
 					  alert("Update successful");
 					}).catch(function(error) {
