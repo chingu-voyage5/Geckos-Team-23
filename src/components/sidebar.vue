@@ -40,19 +40,25 @@
 				<h3>Password</h3>
 
 				<label for="account-user-password">Current Password:</label>
-				<input id="user-password" type="password" value="">
+				<input id="user-password" type="password" v-model="password">
 
 				<label for="account-user-new-password">New Password:</label>
-				<input id="account-user-new-password" type="password" value="">
+				<input id="account-user-new-password" type="password" v-model="newPassword">
 
 				<label for="account-user-new-password-confirm">Confirm New Password:</label>
-				<input id="account-user-new-password-confirm" type="password" value="">
+				<input id="account-user-new-password-confirm" type="password" v-model="newPasswordConfirmation">
 
-				<button v-on:click="changePassword()">Change Password</button>
+				<button v-on:click="changePassword">Change Password</button>
 
 				<h3>Danger</h3>
 
-				<button id="account-delete" v-on:click="deleteAccount()"><i class="fas fa-exclamation-triangle "></i> Delete Account</button>
+				<button id="account-delete" v-on:click="showDeleteConfirmation = true"><i class="fas fa-exclamation-triangle "></i> Delete Account</button>
+
+				<div id="delete-account-confirmation" v-if="showDeleteConfirmation">
+					<p>This action is irreversible. Are you sure?</p>
+					<button v-on:click="deleteAccount">Delete</button>
+					<button v-on:click="showDeleteConfirmation = false">Cancel</button>
+				</div>
 			</div>
 		</div>
 
@@ -71,7 +77,11 @@ export default {
 			accountPageState: 'closed',
 			user: firebase.auth().currentUser,
 			userName: firebase.auth().currentUser.displayName,
-			userEmail: firebase.auth().currentUser.email
+			userEmail: firebase.auth().currentUser.email,
+			password: '',
+			newPassword: '',
+			newPasswordConfirmation: '',
+			showDeleteConfirmation: false
     }
   },
   methods: {
@@ -105,6 +115,24 @@ export default {
 			}).catch(function(error) {
 			  console.log(error);
 			});
+		},
+		changePassword: function () {
+			// validate password change
+			if (this.newPassword === this.newPasswordConfirmation) {
+				this.user.updatePassword(this.newPassword).then(function() {
+				  console.log("Update successful");
+				}).catch(function(error) {
+				  console.log(error);
+				});
+			} // end of if
+		},
+		deleteAccount: function () {
+			this.user.delete().then(() => {
+			  alert("Account Deleted");
+				this.$router.replace('Home');
+			}).catch(function(error) {
+			  alert(error);
+			});
 		}
   }
 }
@@ -132,6 +160,15 @@ export default {
 	h2 {
 		font-family: sans-serif;
 		font-size: 1.3em;
+	}
+
+	h3 {
+		margin: 0;
+	}
+
+	p {
+		font-size: 1em;
+		padding: 0;
 	}
 
 	input {
@@ -197,7 +234,7 @@ export default {
 		margin-top: 30px;
 	}
 
-	#account-settings *:not(h3) {
+	#account-settings > *:not(h3) {
 		margin-top: 10px;
 	}
 
@@ -205,5 +242,35 @@ export default {
 		text-align: left;
 	}
 
+	#delete-account-confirmation {
+		grid-column: 1 / 3;
+		display: flex;
+		flex-direction: column;
+	}
+
+	#delete-account-confirmation p, #delete-account-confirmation button {
+		margin-bottom: 10px;
+	}
+
+	#delete-account-confirmation button {
+		text-align: center;
+		padding: 10px 15px;
+		border-radius: var(--standard-border-radius);
+		transition: .2s;
+	}
+
+	#delete-account-confirmation button:first-of-type {
+		background-color: var(--color-danger);
+	}
+	#delete-account-confirmation button:first-of-type:hover {
+		background-color: var(--color-danger-hover);
+	}
+
+	#delete-account-confirmation button:first-of-type+button {
+		background-color: var(--color-neutral);
+	}
+	#delete-account-confirmation button:first-of-type+button:hover {
+		background-color: var(--color-neutral-hover);
+	}
 
 </style>
