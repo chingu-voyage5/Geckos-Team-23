@@ -24,9 +24,10 @@
 </div>
 </template>
 <script>
-const MODAL_WIDTH = 656
 import firebase from 'firebase'
 import { db } from '../main'
+const MODAL_WIDTH = 656
+
 export default {
   name: 'CreateWorkspace',
   data () {
@@ -36,27 +37,28 @@ export default {
   },
   methods: {
     show () {
-      this.$modal.show('create-workspace');
+      this.$modal.show('create-workspace')
     },
     hide () {
-      this.$modal.hide('create-workspace');
+      this.$modal.hide('create-workspace')
     },
-    createWorkspace() {
-      return this.workspaceTitle;
+    createWorkspace () {
+      return this.workspaceTitle
     },
-    pastelColors() {
-      var r = (Math.round(Math.random()* 127) + 127).toString(16);
-      var g = (Math.round(Math.random()* 127) + 127).toString(16);
-      var b = (Math.round(Math.random()* 127) + 127).toString(16);
-      return '#' + r + g + b;
+    pastelColors () {
+      var r = (Math.round(Math.random() * 127) + 127).toString(16)
+      var g = (Math.round(Math.random() * 127) + 127).toString(16)
+      var b = (Math.round(Math.random() * 127) + 127).toString(16)
+      return '#' + r + g + b
     },
-    sendToDb() {
-      var color = this.pastelColors();
-      var title = this.createWorkspace();
-      db.collection("workspaces").add({
+    sendToDb () {
+      var color = this.pastelColors()
+      var title = this.createWorkspace()
+      db.collection('workspaces').add({
           title: title,
           color: color
       })
+      this.hide()
     }
   },
   created () {

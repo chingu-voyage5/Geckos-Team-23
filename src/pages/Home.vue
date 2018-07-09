@@ -14,7 +14,7 @@ export default {
   name: 'Home',
   components: {
     'Login': Login,
-  'Signup': Signup,
+    'Signup': Signup
   },
   data () {
       return {
@@ -46,7 +46,7 @@ export default {
           // use arrow notation to fix this's context
           (user) => {
             // Add user data to DB
-            db.collection("users").add({
+            db.collection('users').add({
               email: this.signUpEmail,
               name: this.userName,
               image: '',

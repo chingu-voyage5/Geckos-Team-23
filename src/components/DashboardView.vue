@@ -1,7 +1,10 @@
 <template>
-  <h1>Dashboard View</h1>
+  <div>
+    <h1>Dashboard View</h1>
+  </div>
 </template>
 <script>
+
 export default {
   name: 'DashboardView',
   data () {
