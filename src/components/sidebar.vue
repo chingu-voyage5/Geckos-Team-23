@@ -12,7 +12,7 @@
 			<button v-on:click="switchSidebarPage"><i class="fas fa-user-circle"></i> Account</button>
 
 			<ul class="workspaces-list">
-				<li v-for="(workspace, idx) in workspaces" :key="idx">
+				<li v-for="(workspace, idx) in userDB.workspaces" :key="idx">
 					<a href=""><i class="fas fa-columns"></i> {{ workspace.title }}</a>
 				</li>
 			</ul>
@@ -80,6 +80,7 @@ export default {
     return {
 			accountPageState: 'closed',
 			user: firebase.auth().currentUser,
+			userId: firebase.auth().currentUser.uid,
 			userName: firebase.auth().currentUser.displayName,
 			userEmail: firebase.auth().currentUser.email,
 			password: '',
@@ -87,12 +88,12 @@ export default {
 			newPasswordConfirmation: '',
 			changePasswordBtnDisabled: true,
 			showDeleteConfirmation: false,
-			workspaces: []
+			userDB: []
     }
   },
 	firestore () {
 		return {
-			workspaces: db.collection('workspaces')
+			userDB: db.collection('users').doc(this.userId)
 		}
 	},
   methods: {
