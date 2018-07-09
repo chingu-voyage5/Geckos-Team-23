@@ -1,8 +1,6 @@
 <template>
   <div class="sidebar">
-
 		<!-- safety commit -->
-
 		<div class="sidebar-normal" v-if="accountPageState === 'closed'">
 			<div class="top-bar">
 				<i class="fas fa-times"></i>
@@ -66,9 +64,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
   </div>
 </template>
 
@@ -193,7 +188,6 @@ export default {
 </script>
 
 <style scoped>
-
 	*:not(i) {
 		font-family: 'Source Sans Pro';
 	}
@@ -333,5 +327,4 @@ export default {
 	#delete-account-confirmation button:first-of-type+button:hover {
 		background-color: var(--color-neutral-hover);
 	}
-
 </style>
