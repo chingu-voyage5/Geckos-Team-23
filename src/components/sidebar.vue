@@ -12,9 +12,6 @@
 			<button v-on:click="switchSidebarPage"><i class="fas fa-user-circle"></i> Account</button>
 
 			<ul class="workspaces-list">
-				<!-- <li><a href="#/Dashboard/Workspace"><i class="fas fa-columns"></i> Workspace 1</a></li>
-				<li><a href=""><i class="fas fa-columns"></i> Workspace 2</a></li>
-				<li><a href=""><i class="fas fa-columns"></i> Workspace 3</a></li> -->
 				<li v-for="(workspace, idx) in workspaces" :key="idx">
 					<a href=""><i class="fas fa-columns"></i> {{ workspace.title }}</a>
 				</li>
