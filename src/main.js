@@ -8,7 +8,9 @@ import firebase from 'firebase'
 // firestore config
 import VueFire from 'vuefire'
 import 'firebase/firestore'
+import VModal from 'vue-js-modal'
 
+Vue.use(VModal)
 Vue.use(VueFire)
 
 Vue.config.productionTip = false

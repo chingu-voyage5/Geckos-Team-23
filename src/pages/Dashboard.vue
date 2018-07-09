@@ -5,7 +5,8 @@
     </div>
     <div id="dashboard-content">
       <Navigation />
-      <DashboardView /> 
+      <DashboardView />
+      
     </div>
   </div>
 </template>
@@ -16,6 +17,7 @@ import { db } from '../main'
 import Sidebar from '../components/Sidebar'
 import Navigation from '../components/Navigation'
 import DashboardView from '../components/DashboardView'
+
 
 export default {
   name: 'Dashboard',

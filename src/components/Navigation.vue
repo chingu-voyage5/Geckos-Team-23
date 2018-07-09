@@ -2,10 +2,13 @@
   <nav>
     <ul class="dashboard-navigation">
       <li>User Dashboard</li>
+      <li><CreateWorkspace /></li>
     </ul>
   </nav>
 </template>
 <script>
+import CreateWorkspace from './CreateWorkspace'
+
 export default {
   name: 'Navigation',
   data () {
@@ -17,7 +20,7 @@ export default {
 
   },
   components: {
-
+    CreateWorkspace
   }
 }
 </script>
