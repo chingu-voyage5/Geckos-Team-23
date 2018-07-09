@@ -29,6 +29,7 @@
                 <div v-on:click="SignUp" id="submit" role="button" type="button" class="btn btn-irenic float-right" tabindex="0">
                     <span>SIGN UP</span>
                 </div>
+                <p>Or click <router-link to="/Home">here</router-link> to go back to Sign in.</p>
                     <div class="login-pending">
                         <div class=spinner>
                             <span class="dot1"></span>
