@@ -6,6 +6,12 @@
     <div id="dashboard-content">
       <Navigation />
       <DashboardView />
+
+			<ul class="workspaces-list-dashboard">
+				<li v-for="(workspace, idx) in userDB.workspaces" :key="idx">
+					<a href="">{{ workspace.title }}</a>
+				</li>
+			</ul>
     </div>
   </div>
 </template>
@@ -21,8 +27,14 @@ export default {
   name: 'Dashboard',
   data () {
     return {
-
+		userId: firebase.auth().currentUser.uid,
+		userDB: []
     }
+  },
+  firestore () {
+	  return {
+		  userDB: db.collection('users').doc(this.userId)
+	  }
   },
   methods: {
     logOut: function () {

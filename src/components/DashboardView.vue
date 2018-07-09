@@ -5,29 +5,25 @@
         <a href=""><i class="fas fa-columns"></i> {{ workspace.title }}</a>
       </li>
     </ul>
+	<p>{{ userDB }}</p>
   </div>
 </template>
 <script>
 import firebase from 'firebase'
+import Sidebar from '../components/Sidebar'
 import { db } from '../main'
 
 export default {
   name: 'DashboardView',
   data () {
     return {
-      userDB: []
     }
   },
-  firestore () {
-		return {
-			userDB: db.collection('users').doc(this.userId)
-		}
-	},
   methods: {
 
   },
   components: {
-
+		Sidebar
   }
 }
 </script>
