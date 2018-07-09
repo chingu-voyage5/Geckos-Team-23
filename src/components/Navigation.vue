@@ -31,6 +31,7 @@ export default {
   padding: 0px;
 }
 li {
-  
+  display: inline-block;
+  padding: 5px;
 }
 </style>
