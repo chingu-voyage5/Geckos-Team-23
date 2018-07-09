@@ -3,6 +3,11 @@
     --color-black: #000;
     --color-white: #fff;
 
+	--color-danger: tomato;
+	--color-danger-hover: #c64b35;
+	--color-neutral: grey;
+	--color-neutral-hover: #615d5d;
+
     --text-black: #000;
     --text-column: #333333;
 
@@ -18,4 +23,7 @@
 
     //drop shadow
     --drop-shadow: 3px 3px .75rem rgba(0, 0, 0, .25);
+
+	//elements
+	--standard-border-radius: 10px;
 }
