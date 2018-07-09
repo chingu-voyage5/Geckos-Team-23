@@ -10,13 +10,12 @@
           <div class="partition-title">CREATE WORKSPACE</div>
           <div class="partition-form">
             <form autocomplete="false">
-              <input id="n-title" type="text" placeholder="Title">
-              <input id="n-color" type="text" placeholder="Color">
+              <input id="n-title" v-model="workspaceTitle" type="text" placeholder="Title">
             </form>
             <div style="margin-top: 42px">
             </div>
             <div class="button-set">
-              <button id="goto-create-workspace">Create Workspace</button>
+              <button v-on:click="sendToDb" id="goto-create-workspace">Create Workspace</button>
             </div>
           </div>
         </div>
@@ -26,6 +25,8 @@
 </template>
 <script>
 const MODAL_WIDTH = 656
+import firebase from 'firebase'
+import { db } from '../main'
 export default {
   name: 'CreateWorkspace',
   data () {
@@ -39,6 +40,23 @@ export default {
     },
     hide () {
       this.$modal.hide('create-workspace');
+    },
+    createWorkspace() {
+      return this.workspaceTitle;
+    },
+    pastelColors() {
+      var r = (Math.round(Math.random()* 127) + 127).toString(16);
+      var g = (Math.round(Math.random()* 127) + 127).toString(16);
+      var b = (Math.round(Math.random()* 127) + 127).toString(16);
+      return '#' + r + g + b;
+    },
+    sendToDb() {
+      var color = this.pastelColors();
+      var title = this.createWorkspace();
+      db.collection("workspaces").add({
+          title: title,
+          color: color
+      })
     }
   },
   created () {
