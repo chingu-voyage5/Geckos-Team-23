@@ -6,13 +6,8 @@
     <div class="tile-body">
         <form id="form">
             <label class="form-input">
-                    <input type="text" v-model="name" autofocus="true" required />
-                    <span class="label">Name</span>
-                <span class="underline"></span>
-            </label>
-            <label class="form-input">
-                    <input type="text" v-model="surname" autofocus="true" required />
-                    <span class="label">Surname</span>
+                    <input type="text" v-model="Username" autofocus="true" required />
+                    <span class="label">Username</span>
                 <span class="underline"></span>
             </label>
             <label class="form-input">
