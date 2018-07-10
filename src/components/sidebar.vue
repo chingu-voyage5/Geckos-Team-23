@@ -13,7 +13,7 @@
 
       <ul class="workspaces-list">
         <li v-for="(workspace, idx) in userDB.workspaces" :key="idx">
-          <router-link to="/Dashboard/Workspace"><i class="fas fa-columns"></i> {{ workspace.title }}</router-link>
+          <a v-bind:href="'#/dashboard/' + workspace.id"><i class="fas fa-columns"></i> {{ workspace.title }}</a>
         </li>
       </ul>
 
