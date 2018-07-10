@@ -1,6 +1,6 @@
 <template>
 <div>
-  <a href="#" @click="$modal.show('create-workspace')">Create Workspace</a>
+  <div class="add-new"><a href="#" @click="$modal.show('create-workspace')">+</a></div>
   <modal name="create-workspace" transition="pop-out" :width="modalWidth" :height="400">
     <div class="box">
         <div class="partition" id="partition-register">
@@ -73,6 +73,17 @@ export default {
 $background_color: #404142;
 $github_color: #DBA226;
 $facebook_color: #3880FF;
+.add-new {
+  background-color:#8b8c8d;
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 20px;
+  a {
+    text-decoration: none;
+  }
+}
 .top-right {
   display: inline-block;
   position: absolute;
