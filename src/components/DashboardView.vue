@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul class="workspaces-list-dashboard">
-      <li v-for="(workspace, idx) in userDB.workspaces" :key="idx">
+      <li class="workspace-tile" v-bind:style="{ backgroundColor: workspace.color }" v-for="(workspace, idx) in userDB.workspaces" :key="idx">
         <a href="">{{ workspace.title }}</a>
       </li>
       <li><CreateWorkspace /></li>
@@ -28,7 +28,6 @@ export default {
     }
   },
   methods: {
-
   },
   components: {
     Sidebar,
@@ -37,5 +36,14 @@ export default {
 }
 </script>
 <style lang="scss">
-
+.workspace-tile {
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 20px;
+  a {
+    text-decoration: none;
+  }
+}
 </style>
