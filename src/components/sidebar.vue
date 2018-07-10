@@ -13,7 +13,7 @@
 
       <ul class="workspaces-list">
         <li v-for="(workspace, idx) in userDB.workspaces" :key="idx">
-          <a href=""><i class="fas fa-columns"></i> {{ workspace.title }}</a>
+          <router-link to="/Dashboard/Workspace"><i class="fas fa-columns"></i> {{ workspace.title }}</router-link>
         </li>
       </ul>
 
@@ -232,15 +232,13 @@ export default {
   }
 
   .sidebar {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 360px;
     height: 100%;
     padding: 20px;
     overflow-y: auto;
-    background: var(--column-bg-light);
+    background: var(--column-bg);
     box-shadow: var(--drop-shadow);
+    z-index: 10;
   }
 
   .sidebar .top-bar {
