@@ -5,7 +5,7 @@
         <a href=""><i class="fas fa-columns"></i> {{ workspace.title }}</a>
       </li>
     </ul>
-	<p>{{ userDB }}</p>
+  <p>{{ userDB }}</p>
   </div>
 </template>
 <script>
@@ -23,7 +23,7 @@ export default {
 
   },
   components: {
-		Sidebar
+    Sidebar
   }
 }
 </script>
