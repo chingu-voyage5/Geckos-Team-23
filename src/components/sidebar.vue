@@ -238,7 +238,7 @@ export default {
     overflow-y: auto;
     background: var(--column-bg);
     box-shadow: var(--drop-shadow);
-		z-index: 10;
+    z-index: 10;
   }
 
   .sidebar .top-bar {
