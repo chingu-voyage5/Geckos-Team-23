@@ -4,12 +4,10 @@
     <Sidebar />
 
     <div id="workspace-content">
-
-			<p>{{this.$route.params.id}}</p>
-			<p>{{workspace}}</p>
+			<p>{{ workspace.columns }}</p>
 
       <ul class="workspace__list">
-        <Column v-for="column in columns"
+        <Column v-for="column in workspace.columns"
             :key="column.id"
             :columnId="column.id">
           <input class="column__input" type="text" v-model="column.title">
