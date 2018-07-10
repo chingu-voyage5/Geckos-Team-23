@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar">
-    <!-- safety commit -->
+    
     <div class="sidebar-normal" v-if="accountPageState === 'closed'">
       <div class="top-bar">
         <i class="fas fa-times"></i>
