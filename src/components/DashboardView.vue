@@ -1,11 +1,11 @@
 <template>
   <div>
-    <ul class="workspaces-list">
+    <!-- <ul class="workspaces-list">
       <li v-for="(workspace, idx) in userDB.workspaces" :key="idx">
         <a href=""><i class="fas fa-columns"></i> {{ workspace.title }}</a>
       </li>
     </ul>
-  <p>{{ userDB }}</p>
+  <p>{{ userDB }}</p> -->
   </div>
 </template>
 <script>
