@@ -4,21 +4,21 @@
 // }
 
 .workspace {
-  display: flex;
 	height: 100vh;
+  display: flex;
 
   &__list {
 		display: flex;
-		flex-wrap: nowrap;
 		// background: lightblue;
   }
 
   &__add-button {
+		flex-shrink: 0; /* avoid shrinking */
     display: flex;
     justify-content: center;
 
     height: 100%;
-    width: 25rem;
+    width: var(--standard-column-width);
 
     padding: 2rem;
     border-radius: 1rem;
@@ -28,8 +28,8 @@
 }
 
 #workspace-content {
-	flex-grow: 1;
-	padding: 20px;
+	width: calc(100% - 360px);
+	padding: 20px 40px;
 	display: flex;
 	overflow-x: auto;
 	// background: steelblue;

@@ -1,12 +1,12 @@
 .column {
     position: relative;
 
-    width: 25rem;
+    width: var(--standard-column-width);
 
     align-self: flex-start;
 
-    padding: 1rem 2rem 2rem 2rem;
-    border-radius: 1rem;
+    padding: var(--standard-margin);
+    border-radius: var(--standard-border-radius);
     background: var(--column-bg);
     margin-right: 1.5rem;
 
@@ -14,7 +14,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 1rem;
+        margin-bottom: var(--standard-margin);
+		// background: lightblue;
     }
 
     &__input {
@@ -24,8 +25,7 @@
 
         width: 90%;
 
-        border-radius: .5rem;
-        padding: .75rem;
+        border-radius: calc(var(--standard-border-radius) / 2);
         background: transparent;
         border: 1px solid transparent;
         transition: all .3s;
@@ -34,8 +34,8 @@
             background: var(--column-bg-light);
             outline: none;
 
-            border: 1px solid var(--input-border);
-            box-shadow: 0 0 1rem var(--input-boxshadow);
+            border: 1px solid var(--main-color);
+            // box-shadow: 0 0 1rem var(--input-boxshadow);
         }
     }
 
@@ -47,7 +47,7 @@
         justify-content: center;
         align-items: center;
 
-        border-radius: 1rem;
+        border-radius: var(--standard-border-radius);
         background: var(--column-bg-light);
         cursor: pointer;
     }

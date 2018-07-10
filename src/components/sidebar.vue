@@ -236,7 +236,7 @@ export default {
     height: 100%;
     padding: 20px;
     overflow-y: auto;
-    background: var(--column-bg-light);
+    background: var(--column-bg);
     box-shadow: var(--drop-shadow);
 		z-index: 10;
   }
