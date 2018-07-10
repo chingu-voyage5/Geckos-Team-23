@@ -35,7 +35,7 @@ let router = new Router({
         requiresAuth: true
       }
     },
-	// Dynamic Route Matching
+  // Dynamic Route Matching
     {
       path: '/dashboard/:id',
       name: 'Workspace',
