@@ -1,7 +1,7 @@
 <template>
   <nav>
     <ul class="dashboard-navigation">
-      <li>User Dashboard</li>
+      <li class="dashboard-navigation-list">User Dashboard</li>
     </ul>
   </nav>
 </template>
@@ -25,7 +25,7 @@ export default {
   margin: 0px;
   padding: 0px;
 }
-li {
+.dashboard-navigation-list {
   display: inline-block;
   padding: 5px;
 }

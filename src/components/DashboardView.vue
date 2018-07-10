@@ -1,10 +1,10 @@
 <template>
   <div>
     <ul class="workspaces-list-dashboard">
-      <li class="workspace-tile" v-bind:style="{ backgroundColor: workspace.color }" v-for="(workspace, idx) in userDB.workspaces" :key="idx">
-        <a href="">{{ workspace.title }}</a>
+      <li class="workspace-tile-li" v-bind:style="{ backgroundColor: workspace.color }" v-for="(workspace, idx) in userDB.workspaces" :key="idx">
+        <a class="workspace-tile-a" v-bind:href="'#/dashboard/' + workspace.id">{{ workspace.title }}</a>
       </li>
-      <li><CreateWorkspace /></li>
+      <CreateWorkspace />
     </ul>
   </div>
 </template>
@@ -36,14 +36,16 @@ export default {
 }
 </script>
 <style lang="scss">
-.workspace-tile {
+.workspace-tile-li {
+  display: inline-block;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+}
+.workspace-tile-a {
   width: 200px;
   height: 200px;
-  border-radius: 20px;
-  margin: 10px;
-  padding: 20px;
-  a {
-    text-decoration: none;
-  }
+  display: block;
+  text-decoration: none;
 }
 </style>
