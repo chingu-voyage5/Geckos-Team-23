@@ -17,8 +17,6 @@
         </li>
       </ul>
 
-	  <p>{{this.$route.params}}</p>
-
     </div>
 
     <div class="sidebar-account" v-if="accountPageState === 'open'">

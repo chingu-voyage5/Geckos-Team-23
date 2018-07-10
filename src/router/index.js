@@ -35,15 +35,6 @@ let router = new Router({
         requiresAuth: true
       }
     },
-    {
-      path: '/dashboard/workspace',
-      name: 'Workspace',
-      component: Workspace,
-      // check if user is logged in
-      meta: {
-        requiresAuth: true
-      }
-    },
 	// Dynamic Route Matching
     {
       path: '/dashboard/:id',
