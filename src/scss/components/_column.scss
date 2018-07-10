@@ -10,6 +10,8 @@
     background: var(--column-bg);
     margin-right: 1.5rem;
 
+  	box-shadow: var(--drop-shadow);
+
     &__header {
         display: flex;
         justify-content: space-between;
