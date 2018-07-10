@@ -1,29 +1,38 @@
 <template>
   <div>
-    <!-- <ul class="workspaces-list">
+    <ul class="workspaces-list-dashboard">
       <li v-for="(workspace, idx) in userDB.workspaces" :key="idx">
-        <a href=""><i class="fas fa-columns"></i> {{ workspace.title }}</a>
+        <a href="">{{ workspace.title }}</a>
       </li>
+      <li><CreateWorkspace /></li>
     </ul>
-  <p>{{ userDB }}</p> -->
   </div>
 </template>
 <script>
 import firebase from 'firebase'
-import Sidebar from '../components/Sidebar'
 import { db } from '../main'
+import Sidebar from '../components/Sidebar'
+import CreateWorkspace from './CreateWorkspace'
 
 export default {
   name: 'DashboardView',
   data () {
     return {
+      userId: firebase.auth().currentUser.uid,
+      userDB: []
+    }
+  },
+  firestore () {
+    return {
+      userDB: db.collection('users').doc(this.userId)
     }
   },
   methods: {
 
   },
   components: {
-    Sidebar
+    Sidebar,
+    CreateWorkspace
   }
 }
 </script>
