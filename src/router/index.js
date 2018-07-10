@@ -27,7 +27,7 @@ let router = new Router({
       component: Signup
     },
     {
-      path: '/Dashboard',
+      path: '/dashboard',
       name: 'Dashboard',
       component: Dashboard,
       // check if user is logged in
@@ -36,7 +36,17 @@ let router = new Router({
       }
     },
     {
-      path: '/Dashboard/Workspace',
+      path: '/dashboard/workspace',
+      name: 'Workspace',
+      component: Workspace,
+      // check if user is logged in
+      meta: {
+        requiresAuth: true
+      }
+    },
+	// Dynamic Route Matching
+    {
+      path: '/dashboard/:id',
       name: 'Workspace',
       component: Workspace,
       // check if user is logged in
