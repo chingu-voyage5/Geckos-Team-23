@@ -32,7 +32,8 @@ export default {
   name: 'CreateWorkspace',
   data () {
     return {
-      modalWidth: MODAL_WIDTH
+      modalWidth: MODAL_WIDTH,
+	  workspaceTitle: ''
     }
   },
   methods: {
