@@ -1,21 +1,36 @@
+// .workspace {
+// 	display: flex;
+// 	background: lightblue;
+// }
+
 .workspace {
+  display: flex;
+	height: 100vh;
+
+  &__list {
+		display: flex;
+		flex-wrap: nowrap;
+		// background: lightblue;
+  }
+
+  &__add-button {
     display: flex;
+    justify-content: center;
 
-    &__list {
-        display: flex;
-        flex-wrap: nowrap;
-    }
+    height: 100%;
+    width: 25rem;
 
-    &__add-button {
-        display: flex;
-        justify-content: center;
+    padding: 2rem;
+    border-radius: 1rem;
+    background: var(--column-bg);
+    cursor: pointer;
+  }
+}
 
-        height: 100%;
-        width: 25rem;
-
-        padding: 2rem;
-        border-radius: 1rem;
-        background: var(--column-bg);
-        cursor: pointer;
-    }
+#workspace-content {
+	flex-grow: 1;
+	padding: 20px;
+	display: flex;
+	overflow-x: auto;
+	// background: steelblue;
 }

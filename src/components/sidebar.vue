@@ -232,15 +232,13 @@ export default {
   }
 
   .sidebar {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 360px;
     height: 100%;
     padding: 20px;
     overflow-y: auto;
     background: var(--column-bg-light);
     box-shadow: var(--drop-shadow);
+		z-index: 10;
   }
 
   .sidebar .top-bar {
