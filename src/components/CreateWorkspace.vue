@@ -33,7 +33,7 @@ export default {
   data () {
     return {
       modalWidth: MODAL_WIDTH,
-	  workspaceTitle: ''
+      workspaceTitle: ''
     }
   },
   methods: {
