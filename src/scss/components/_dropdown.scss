@@ -3,7 +3,7 @@
 
   position: absolute;
   top: calc(var(--standard-margin) * 3);
-  right: calc(var(--standard-margin) / 3);
+  right: calc(var(--standard-margin) / 2);
 
   &__body {
     padding: var(--standard-margin);
