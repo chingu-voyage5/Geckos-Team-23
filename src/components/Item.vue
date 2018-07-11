@@ -1,7 +1,7 @@
 <template>
   <div class="item">
     <div class="item__header">
-      <slot class="item__title"></slot>
+      <h3>{{title}}</h3>
       <i class="fas fa-ellipsis-v"></i>
     </div>
 
@@ -16,7 +16,7 @@
 <script>
   export default {
     props: [
-      'itemId'
+      'title'
     ]
   }
 </script>

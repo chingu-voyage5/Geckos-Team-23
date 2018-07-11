@@ -6,7 +6,7 @@
     <div id="workspace-content">
 
       <ul class="workspace__list">
-        <div v-for="(column, idx) in workspace.columns" :key="idx" class="column">
+        <div v-for="(column, idx) in workspace.columns" :key="idx" ref="column" class="column">
           <div class="column__header">
             <input class="column__input" type="text" v-model="column.title" v-on:change="saveWorkspace">
             <i class="fas fa-ellipsis-v"></i>
@@ -30,7 +30,9 @@
             </div>
           </div>
 
-          <div class="column__add-item">
+					<Item title="Item 1"/>
+
+          <div class="column__add-item" v-on:click="addItem($event)">
             <i class="fa fa-plus column__icon"></i>
           </div>
         </div>
@@ -48,7 +50,8 @@
   import firebase from 'firebase'
   import { db } from '../main'
   import Sidebar from '../components/Sidebar'
-  import Navigation from '../components/Navigation'
+  import Item from '../components/Item'
+	import Vue from 'vue'
 
   export default {
     data () {
@@ -83,12 +86,27 @@
         // Save workspace snapshot to DB
         this.saveWorkspace()
       },
-      addItem () {
+      addItem (event) {
+				const column = event.target.parentNode
+				const Hello = {
+				  props: ['text'],
+				  template: '<div class="hello">{{ text }}</div>',
+				};
+
+				const HelloCtor = Vue.extend(Hello);
+				const vm = new HelloCtor({
+				  propsData: {
+				    text: 'HI :)'
+				  }
+				}).$mount();
+				column.appendChild(vm.$el)
+				console.log(column)
 
       }
     },
     components: {
-      Sidebar
+      Sidebar,
+			Item
     }
   }
 </script>
