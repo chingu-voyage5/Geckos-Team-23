@@ -18,7 +18,7 @@
           </div>
 
 					<div class="column-items">
-						<div v-for="(item, idx) in column.items" :key="idx" class="item">
+						<!-- <div v-for="(item, idx) in column.items" :key="idx" class="item">
 	            <div class="item__header" v-bind:style="{ background: workspace.color}">
 	              <h3>{{ item.title }}</h3>
 	              <i class="fas fa-ellipsis-v"></i>
@@ -29,7 +29,8 @@
 	                <i class="fas fa-plus item__icon"></i>
 	              </div>
 	            </div>
-	          </div>
+	          </div> -->
+						<Item v-for="(item, idx) in column.items" :key="idx" class="item" v-bind:color="workspace.color">{{item.title}}</Item>
 					</div>
 
           <div class="column__add-item" v-on:click="addItem($event)">
