@@ -1,14 +1,16 @@
 .dropdown {
-	position: absolute;
-	top: calc(var(--standard-margin) * 3);
-	right: calc(var(--standard-margin) / 3);
+	display: none;
+
+  position: absolute;
+  top: calc(var(--standard-margin) * 3);
+  right: calc(var(--standard-margin) / 3);
 
   &__body {
-		padding: var(--standard-margin);
+    padding: var(--standard-margin);
     border-radius: var(--standard-border-radius);
     background: var(--color-white);
 
-  	box-shadow: var(--drop-shadow);
+    box-shadow: var(--drop-shadow);
   }
 
   &__arrow {
@@ -22,9 +24,13 @@
 }
 
 .dropdown button {
-	cursor: pointer;
+  cursor: pointer;
   background: transparent;
   border: none;
   font-size: 1em;
-	font-family: 'Source Sans Pro';
+  font-family: 'Source Sans Pro';
+}
+
+.dropdown.visible {
+	display: initial;
 }

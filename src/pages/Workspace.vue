@@ -9,9 +9,10 @@
         <div v-for="(column, idx) in workspace.columns" :key="idx" ref="column" class="column" v-bind:id="column.id">
           <div class="column__header">
             <input class="column__input" type="text" v-model="column.title" v-on:change="saveWorkspace">
-            <i class="fas fa-ellipsis-v"></i>
 
-            <div class="dropdown" v-show="true">
+            <button v-on:click="toggleDropDown($event)"><i class="fas fa-ellipsis-v"></i></button>
+
+            <div class="dropdown">
               <i class="fas fa-caret-up dropdown__arrow"></i>
               <div class="dropdown__body">
 								<button v-on:click="deleteColumn($event)"><i class="fas fa-trash"></i> Delete</button>
@@ -79,6 +80,12 @@
         // Save workspace snapshot to DB
         this.saveWorkspace()
       },
+			toggleDropDown (event) {
+				const dropDownMenu = event.target.nextElementSibling
+				console.log(
+					dropDownMenu.classList.toggle('visible')
+				)
+			},
 			deleteColumn (event) {
 				const column = event.target.parentNode.parentNode.parentNode.parentNode
 
