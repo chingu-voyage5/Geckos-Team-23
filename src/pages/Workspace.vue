@@ -89,20 +89,13 @@
 					color: this.workspace.color
         }
 
-				// Create Item Node
-				const ItemClass = Vue.extend(Item);
-				const itemInstance = new ItemClass({
-				  propsData: data
-				}).$mount();
-
 				// Add column to workspace
-        console.log( this.workspace.columns[2].items.push(data) )
-
-				// Add Item Node to DOM
-				columnItems.appendChild(itemInstance.$el)
+				const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
+				const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
+				this.workspace.columns[columnIndex].items.push(data)
 
 				// Save workspace snapshot to DB
-        // this.saveWorkspace()
+        this.saveWorkspace()
       }
     },
     components: {
