@@ -8,7 +8,7 @@
       <ul class="workspace__list">
 		  	<div v-for="(column, idx) in workspace.columns" :key="idx" class="column">
 					<div class="column__header">
-						<h3>{{ column.title }}</h3>
+						<input class="column__input" type="text" v-model="column.title" v-on:change="updateColTitle($event)">
 						<i class="fas fa-ellipsis-v"></i>
 
 						<div class="dropdown" v-show="false">
@@ -82,7 +82,13 @@
 
 				// Save workspace snapshot to DB
 				this.saveWorkspace()
-      }
+      },
+			updateColTitle (event) {
+				console.log( event )
+			},
+			addItem () {
+
+			}
     },
     components: {
       Sidebar
