@@ -36,8 +36,7 @@
         </div>
       </ul>
 
-      <div class="workspace__add-button"
-         @click="addColumn">
+      <div class="workspace__add-button" v-on:click="addColumn">
         <i class="fas fa-plus"></i>
       </div>
     </div>
@@ -50,13 +49,12 @@
   import { db } from '../main'
   import Sidebar from '../components/Sidebar'
   import Navigation from '../components/Navigation'
-  import Column from '../components/Column'
-  import { mapState } from 'vuex'
 
   export default {
     data () {
       return {
         userId: firebase.auth().currentUser.uid,
+				newColTitle: 'New Column ',
         workspace: []
       }
     },
@@ -67,17 +65,24 @@
     },
     methods: {
       addColumn () {
-        this.$store.commit('addColumn', { title: 'Column', id: this.columns.length + 1 })
+				// retrieve DB columns
+				let columns = this.workspace.columns;
+
+				// create new column
+				const data = {
+					title: this.newColTitle + (this.workspace.columns.length + 1),
+					items: []
+				}
+
+				// Add column to workspace
+				this.workspace.columns.push(data)
+
+				// Save workspace snapshot to DB
+				db.collection('workspaces').doc(this.$route.params.id).set(this.workspace)
       }
     },
-    computed: {
-      ...mapState([
-        'columns'
-      ])
-    },
     components: {
-      Sidebar,
-      Column
+      Sidebar
     }
   }
 </script>
