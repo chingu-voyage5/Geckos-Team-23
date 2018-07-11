@@ -6,11 +6,34 @@
     <div id="workspace-content">
 
       <ul class="workspace__list">
-        <Column v-for="column in workspace.columns"
-            :key="column.id"
-            :columnId="column.id">
-          <input class="column__input" type="text" v-model="column.title">
-        </Column>
+		  	<div v-for="(column, idx) in workspace.columns" :key="idx" class="column">
+					<div class="column__header">
+						<h3>{{ column.title }}</h3>
+						<i class="fas fa-ellipsis-v"></i>
+
+						<div class="dropdown">
+							<i class="fas fa-caret-up dropdown__arrow"></i>
+							<div class="dropdown__body"></div>
+						</div>
+					</div>
+
+					<div v-for="(item, idx) in column.items" :key="idx" class="item">
+						<div class="item__header">
+							<h3>{{ item.title }}</h3>
+							<i class="fas fa-ellipsis-v"></i>
+						</div>
+
+						<div class="item__body">
+							<div class="item__button">
+								<i class="fas fa-plus item__icon"></i>
+							</div>
+						</div>
+					</div>
+
+					<div class="column__add-item">
+						<i class="fa fa-plus column__icon"></i>
+					</div>
+        </div>
       </ul>
 
       <div class="workspace__add-button"
