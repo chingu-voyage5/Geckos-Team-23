@@ -17,20 +17,20 @@
             </div>
           </div>
 
-          <div v-for="(item, idx) in column.items" :key="idx" class="item">
-            <div class="item__header" v-bind:style="{ background: workspace.color}">
-              <h3>{{ item.title }}</h3>
-              <i class="fas fa-ellipsis-v"></i>
-            </div>
+					<div class="column-items">
+						<div v-for="(item, idx) in column.items" :key="idx" class="item">
+	            <div class="item__header" v-bind:style="{ background: workspace.color}">
+	              <h3>{{ item.title }}</h3>
+	              <i class="fas fa-ellipsis-v"></i>
+	            </div>
 
-            <div class="item__body">
-              <div class="item__button" v-bind:style="{ background: workspace.color}">
-                <i class="fas fa-plus item__icon"></i>
-              </div>
-            </div>
-          </div>
-
-					<Item title="Item 1"/>
+	            <div class="item__body">
+	              <div class="item__button" v-bind:style="{ background: workspace.color}">
+	                <i class="fas fa-plus item__icon"></i>
+	              </div>
+	            </div>
+	          </div>
+					</div>
 
           <div class="column__add-item" v-on:click="addItem($event)">
             <i class="fa fa-plus column__icon"></i>
@@ -88,19 +88,19 @@
       },
       addItem (event) {
 				const column = event.target.parentNode
-				const Hello = {
-				  props: ['text'],
-				  template: '<div class="hello">{{ text }}</div>',
-				};
+				const columnItems = column.getElementsByClassName('column-items')[0]
 
-				const HelloCtor = Vue.extend(Hello);
-				const vm = new HelloCtor({
+				// Create Item Node
+				const ItemClass = Vue.extend(Item);
+				const itemInstance = new ItemClass({
 				  propsData: {
-				    text: 'HI :)'
+				    title: 'New Item 😀 '
 				  }
 				}).$mount();
-				column.appendChild(vm.$el)
-				console.log(column)
+
+				// Add Item Node to DOM
+				columnItems.appendChild(itemInstance.$el)
+				console.log(columnItems)
 
       }
     },
