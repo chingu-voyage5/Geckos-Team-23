@@ -82,9 +82,19 @@
       },
 			toggleDropDown (event) {
 				const dropDownMenu = event.target.nextElementSibling
-				console.log(
-					dropDownMenu.classList.toggle('visible')
-				)
+				const allMenus = document.querySelectorAll('.dropdown')
+				const clickedMenu = Array.prototype.indexOf.call(allMenus, dropDownMenu)
+
+				// close all open menus except clicked one
+				for (let i = 0; i < allMenus.length; i++) {
+					if (allMenus[i] !== allMenus[clickedMenu]) {
+						allMenus[i].classList.remove('visible')
+					}
+				}
+
+				// open clicked menu
+				dropDownMenu.classList.toggle('visible')
+
 			},
 			deleteColumn (event) {
 				const column = event.target.parentNode.parentNode.parentNode.parentNode
