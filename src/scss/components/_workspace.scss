@@ -1,23 +1,19 @@
-// .workspace {
-// 	display: flex;
-// 	background: lightblue;
-// }
 
 .workspace {
-	height: 100vh;
+  height: 100vh;
   display: flex;
 
   &__list {
-		display: flex;
-		// background: lightblue;
+    display: flex;
   }
 
   &__add-button {
-		flex-shrink: 0; /* avoid shrinking */
+    flex-shrink: 0; /* avoid shrinking */
     display: flex;
     justify-content: center;
+    align-items: center;
 
-    height: 100%;
+    height: 138px; /* height of column after creation */
     width: var(--standard-column-width);
 
     padding: 2rem;
@@ -28,9 +24,8 @@
 }
 
 #workspace-content {
-	width: calc(100% - 360px);
-	padding: 20px 40px;
-	display: flex;
-	overflow-x: auto;
-	// background: steelblue;
+  width: calc(100% - 360px);
+  padding: 20px 40px;
+  display: flex;
+  overflow-x: auto;
 }

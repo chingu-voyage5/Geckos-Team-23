@@ -11,7 +11,7 @@
 						<h3>{{ column.title }}</h3>
 						<i class="fas fa-ellipsis-v"></i>
 
-						<div class="dropdown">
+						<div class="dropdown" v-show="false">
 							<i class="fas fa-caret-up dropdown__arrow"></i>
 							<div class="dropdown__body"></div>
 						</div>
@@ -64,6 +64,9 @@
       }
     },
     methods: {
+			saveWorkspace () {
+				db.collection('workspaces').doc(this.$route.params.id).set(this.workspace)
+			},
       addColumn () {
 				// retrieve DB columns
 				let columns = this.workspace.columns;
@@ -78,7 +81,7 @@
 				this.workspace.columns.push(data)
 
 				// Save workspace snapshot to DB
-				db.collection('workspaces').doc(this.$route.params.id).set(this.workspace)
+				this.saveWorkspace()
       }
     },
     components: {
