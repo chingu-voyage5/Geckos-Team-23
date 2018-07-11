@@ -17,9 +17,9 @@
             </div>
           </div>
 
-					<div class="column-items">
-						<Item v-for="(item, idx) in column.items" :key="idx" class="item" v-bind:color="workspace.color">{{item.title}}</Item>
-					</div>
+          <div class="column-items">
+            <Item v-for="(item, idx) in column.items" :key="idx" class="item" v-bind:color="workspace.color">{{item.title}}</Item>
+          </div>
 
           <div class="column__add-item" v-on:click="addItem($event)">
             <i class="fa fa-plus column__icon"></i>
@@ -40,14 +40,14 @@
   import { db } from '../main'
   import Sidebar from '../components/Sidebar'
   import Item from '../components/Item'
-	import Vue from 'vue'
+  import Vue from 'vue'
 
   export default {
     data () {
       return {
         userId: firebase.auth().currentUser.uid,
         newColTitle: 'New Column ',
-				newItemTitle: 'New Item 😀 ',
+        newItemTitle: 'New Item 😀 ',
         workspace: []
       }
     },
@@ -66,7 +66,7 @@
 
         // create new column
         const data = {
-					id: Date.now(),
+          id: Date.now(),
           title: this.newColTitle + (this.workspace.columns.length + 1),
           items: []
         }
@@ -78,29 +78,29 @@
         this.saveWorkspace()
       },
       addItem (event) {
-				const column = event.target.parentNode
-				const columnItems = column.getElementsByClassName('column-items')[0]
+        const column = event.target.parentNode
+        const columnItems = column.getElementsByClassName('column-items')[0]
 
-				// create new item
+        // create new item
         const data = {
-					id: Date.now(),
+          id: Date.now(),
           title: this.newItemTitle,
           content: '',
-					color: this.workspace.color
+          color: this.workspace.color
         }
 
-				// Add column to workspace
-				const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
-				const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
-				this.workspace.columns[columnIndex].items.push(data)
+        // Add column to workspace
+        const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
+        const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
+        this.workspace.columns[columnIndex].items.push(data)
 
-				// Save workspace snapshot to DB
+        // Save workspace snapshot to DB
         this.saveWorkspace()
       }
     },
     components: {
       Sidebar,
-			Item
+      Item
     }
   }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="item">
     <div class="item__header" v-bind:style="{ background: color}">
-	  <h3><slot>{{title}}</slot></h3>
+    <h3><slot>{{title}}</slot></h3>
       <i class="fas fa-ellipsis-v"></i>
     </div>
 
@@ -17,7 +17,7 @@
   export default {
     props: [
       'title',
-	  'color'
+      'color'
     ]
   }
 </script>
