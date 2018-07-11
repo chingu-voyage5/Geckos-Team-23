@@ -6,7 +6,7 @@
     <div id="workspace-content">
 
       <ul class="workspace__list">
-        <div v-for="(column, idx) in workspace.columns" :key="idx" class="column">
+        <div v-for="(column, idx) in workspace.columns" :key="idx" ref="column" class="column" v-bind:id="column.id">
           <div class="column__header">
             <input class="column__input" type="text" v-model="column.title" v-on:change="saveWorkspace">
             <i class="fas fa-ellipsis-v"></i>
@@ -17,20 +17,11 @@
             </div>
           </div>
 
-          <div v-for="(item, idx) in column.items" :key="idx" class="item">
-            <div class="item__header" v-bind:style="{ background: workspace.color}">
-              <h3>{{ item.title }}</h3>
-              <i class="fas fa-ellipsis-v"></i>
-            </div>
+					<div class="column-items">
+						<Item v-for="(item, idx) in column.items" :key="idx" class="item" v-bind:color="workspace.color">{{item.title}}</Item>
+					</div>
 
-            <div class="item__body">
-              <div class="item__button" v-bind:style="{ background: workspace.color}">
-                <i class="fas fa-plus item__icon"></i>
-              </div>
-            </div>
-          </div>
-
-          <div class="column__add-item">
+          <div class="column__add-item" v-on:click="addItem($event)">
             <i class="fa fa-plus column__icon"></i>
           </div>
         </div>
@@ -48,13 +39,15 @@
   import firebase from 'firebase'
   import { db } from '../main'
   import Sidebar from '../components/Sidebar'
-  import Navigation from '../components/Navigation'
+  import Item from '../components/Item'
+	import Vue from 'vue'
 
   export default {
     data () {
       return {
         userId: firebase.auth().currentUser.uid,
         newColTitle: 'New Column ',
+				newItemTitle: 'New Item 😀 ',
         workspace: []
       }
     },
@@ -73,6 +66,7 @@
 
         // create new column
         const data = {
+					id: Date.now(),
           title: this.newColTitle + (this.workspace.columns.length + 1),
           items: []
         }
@@ -83,12 +77,30 @@
         // Save workspace snapshot to DB
         this.saveWorkspace()
       },
-      addItem () {
+      addItem (event) {
+				const column = event.target.parentNode
+				const columnItems = column.getElementsByClassName('column-items')[0]
 
+				// create new item
+        const data = {
+					id: Date.now(),
+          title: this.newItemTitle,
+          content: '',
+					color: this.workspace.color
+        }
+
+				// Add column to workspace
+				const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
+				const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
+				this.workspace.columns[columnIndex].items.push(data)
+
+				// Save workspace snapshot to DB
+        this.saveWorkspace()
       }
     },
     components: {
-      Sidebar
+      Sidebar,
+			Item
     }
   }
 </script>
