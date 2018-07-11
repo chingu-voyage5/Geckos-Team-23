@@ -94,7 +94,8 @@
 				const ItemClass = Vue.extend(Item);
 				const itemInstance = new ItemClass({
 				  propsData: {
-				    title: 'New Item 😀 '
+				    title: 'New Item 😀 ',
+						color: this.workspace.color
 				  }
 				}).$mount();
 
