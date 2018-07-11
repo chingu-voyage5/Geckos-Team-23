@@ -1,23 +1,30 @@
 .dropdown {
+	position: absolute;
+	top: calc(var(--standard-margin) * 3);
+	right: calc(var(--standard-margin) / 3);
+
+  &__body {
+		padding: var(--standard-margin);
+    border-radius: var(--standard-border-radius);
+    background: var(--color-white);
+
+  	box-shadow: var(--drop-shadow);
+  }
+
+  &__arrow {
     position: absolute;
-    top: 5rem;
-    right: 1rem;
+    right: 5px;
+    top: -1.5rem;
 
-    box-shadow: var(--drop-shadow);
+    font-size: 2.5rem;
+    color: var(--color-white);
+  }
+}
 
-    &__body {
-        width: 10rem;
-        height: 10rem;
-        border-radius: .5rem;
-        background: var(--color-white);
-    }
-
-    &__arrow {
-        position: absolute;
-        right: 5px;
-        top: -1.5rem;
-
-        font-size: 2.5rem;
-        color: var(--color-white);
-    }
+.dropdown button {
+	cursor: pointer;
+  background: transparent;
+  border: none;
+  font-size: 1em;
+	font-family: 'Source Sans Pro';
 }

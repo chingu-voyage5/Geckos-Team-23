@@ -11,9 +11,11 @@
             <input class="column__input" type="text" v-model="column.title" v-on:change="saveWorkspace">
             <i class="fas fa-ellipsis-v"></i>
 
-            <div class="dropdown" v-show="false">
+            <div class="dropdown" v-show="true">
               <i class="fas fa-caret-up dropdown__arrow"></i>
-              <div class="dropdown__body"></div>
+              <div class="dropdown__body">
+								<button v-on:click="deleteColumn($event)"><i class="fas fa-trash"></i> Delete</button>
+							</div>
             </div>
           </div>
 
@@ -77,6 +79,16 @@
         // Save workspace snapshot to DB
         this.saveWorkspace()
       },
+			deleteColumn (event) {
+				const column = event.target.parentNode.parentNode.parentNode.parentNode
+
+				const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
+				const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
+        this.workspace.columns.splice(columnIndex, 1)
+
+				// Save workspace snapshot to DB
+        this.saveWorkspace()
+			},
       addItem (event) {
         const column = event.target.parentNode
         const columnItems = column.getElementsByClassName('column-items')[0]
