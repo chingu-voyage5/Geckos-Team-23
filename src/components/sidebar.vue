@@ -220,15 +220,15 @@ export default {
 
   input {
     border: none;
-    /* background: transparent; */
   }
 
   button {
-    cursor: pointer;
     background: transparent;
     border: none;
     font-size: 1em;
-    /* background: lightblue; */
+  }
+  button:not(:disabled) {
+    cursor: pointer;
   }
 
   .sidebar {
@@ -259,12 +259,10 @@ export default {
 
   .sidebar-normal > ul {
     margin-top: 20px;
-    /* background: lightblue; */
   }
 
   .sidebar-normal > ul li:not(:first-child) {
     margin-top: 6px;
-    /* background: lightblue; */
   }
 
   #account-settings {
