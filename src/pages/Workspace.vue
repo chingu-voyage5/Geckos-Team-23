@@ -53,7 +53,7 @@
       return {
         userId: firebase.auth().currentUser.uid,
         newColTitle: 'New Column ',
-        newItemTitle: 'New Item 😀',
+        newItemTitle: 'New Item ',
         workspace: []
       }
     },
@@ -121,7 +121,7 @@
         // create new item
         const data = {
           id: Date.now(),
-          title: this.newItemTitle,
+          title: this.newItemTitle + (columnItems.children.length + 1),
           content: '',
           color: this.workspace.color
         }
