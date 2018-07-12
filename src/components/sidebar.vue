@@ -3,17 +3,20 @@
 
     <div class="sidebar-normal" v-if="accountPageState === 'closed'">
       <div class="top-bar">
-        <i class="fas fa-times"></i>
+				<button v-on:click="toggleSidebar">
+					<i class="fas fa-times" v-show="!sidebarClosed"></i>
+					<i class="fas fa-bars" v-show="sidebarClosed"></i>
+				</button>
         <h2>Clipboard</h2>
       </div>
 
-      <button v-on:click="logOut"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+      <button v-on:click="logOut"><i class="fas fa-sign-out-alt"></i> <span v-show="!sidebarClosed">Sign Out</span></button>
 
-      <button v-on:click="switchSidebarPage"><i class="fas fa-user-circle"></i> Account</button>
+      <button v-on:click="switchSidebarPage"><i class="fas fa-user-circle"></i> <span v-show="!sidebarClosed">Account</span></button>
 
       <ul class="workspaces-list">
         <li v-for="(workspace, idx) in userDB.workspaces" :key="idx">
-          <a v-bind:href="'#/dashboard/' + workspace.id" v-bind:style="'color:' + workspace.color"><i class="fas fa-columns"></i> {{ workspace.title }}</a>
+          <a v-bind:href="'#/dashboard/' + workspace.id" v-bind:style="'color:' + workspace.color"><i class="fas fa-columns"></i> <span v-show="!sidebarClosed">{{ workspace.title }}</span></a>
         </li>
       </ul>
 
@@ -21,7 +24,7 @@
 
     <div class="sidebar-account" v-if="accountPageState === 'open'">
       <div class="top-bar">
-        <i class="fas fa-arrow-left" v-on:click="switchSidebarPage"></i>
+        <button v-on:click="switchSidebarPage"><i class="fas fa-arrow-left"></i></button>
         <h2>Account</h2>
         </div>
 
@@ -75,6 +78,7 @@ export default {
   name: 'Sidebar',
   data () {
     return {
+			sidebarClosed: false,
       accountPageState: 'closed',
       user: firebase.auth().currentUser,
       userId: firebase.auth().currentUser.uid,
@@ -94,6 +98,11 @@ export default {
     }
   },
   methods: {
+		toggleSidebar: function () {
+			const sidebar = document.querySelector('.sidebar')
+			sidebar.classList.toggle('closed')
+			this.sidebarClosed = !this.sidebarClosed
+		},
     switchSidebarPage: function () {
       switch (this.accountPageState) {
         case 'closed':
@@ -239,12 +248,25 @@ export default {
     background: var(--column-bg);
     box-shadow: var(--drop-shadow);
     z-index: 10;
+		transition: .3s;
+  }
+
+	.sidebar.closed {
+		width: calc( var(--standard-margin) * 2 + 1.5em );
+  }
+	.sidebar.closed .top-bar h2 {
+		display: none;
   }
 
   .sidebar .top-bar {
     display: flex;
     justify-content: space-between;
+		align-items: flex-start;
     margin-bottom: 20px;
+  }
+
+	.sidebar .top-bar button {
+    margin: 0;
   }
 
   .sidebar .top-bar *:nth-child(2) {
