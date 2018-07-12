@@ -13,7 +13,7 @@
 
       <ul class="workspaces-list">
         <li v-for="(workspace, idx) in userDB.workspaces" :key="idx">
-          <a v-bind:href="'#/dashboard/' + workspace.id"><i class="fas fa-columns"></i> {{ workspace.title }}</a>
+          <a v-bind:href="'#/dashboard/' + workspace.id" v-bind:style="'color:' + workspace.color"><i class="fas fa-columns"></i> {{ workspace.title }}</a>
         </li>
       </ul>
 
