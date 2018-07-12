@@ -55,12 +55,10 @@ export default {
         },
         ForgotPassword: function () {
             var auth = firebase.auth();
-            var emailAddress = "user@example.com";
+            var emailAddress = this.email;
 
             auth.sendPasswordResetEmail(emailAddress).then(function() {
-                //email sent
             }).catch(function(error) {
-                //An error happened.
             });
         }
     }
