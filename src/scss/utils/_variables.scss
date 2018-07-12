@@ -1,34 +1,36 @@
 :root {
-    //colors
-    --color-black: #000;
-    --color-white: #fff;
+  //colors
+  --color-black: #000;
+  --color-white: #fff;
 
-	--main-color: #fe9c9c;
+  --main-color: #fe9c9c;
 
-	--color-danger: tomato;
-	--color-danger-hover: #c64b35;
-	--color-neutral: grey;
-	--color-neutral-hover: #615d5d;
+  --color-danger: tomato;
+  --color-danger-hover: #c64b35;
+  --color-neutral: grey;
+  --color-neutral-hover: #615d5d;
 
-    --text-black: #000;
-    --text-column: #333333;
+  --text-black: #000;
+  --text-column: #333333;
 
-    // --column-bg: #e2e4e6;
-	--column-bg: rgba(255,255,255,0.5);
-    --column-bg-light: #f3f3f2;
+  // --column-bg: #e2e4e6;
+  --column-bg: rgba(255,255,255,0.5);
+  --column-bg-light: #f3f3f2;
 
-    --item-header: #fe9c9c;
+  --item-header: #fe9c9c;
 
-    --input-border: lightblue;
-    --input-boxshadow : #75ddff;
+  --input-border: lightblue;
+  --input-boxshadow : #75ddff;
 
-    --input-item: #ffcccc;
+  --input-item: #ffcccc;
 
-    //drop shadow
-    --drop-shadow: 2px 2px .75rem rgba(0, 0, 0, .15);
+  //drop shadow
+  --drop-shadow: 2px 2px .75rem rgba(0, 0, 0, .15);
 
-	//elements
-	--standard-border-radius: 10px;
-	--standard-margin: 20px;
-	--standard-column-width: 300px;
+  //elements
+  --standard-border-radius: 10px;
+  --standard-margin: 20px;
+  --standard-column-width: 300px;
+
+  --dropdown-arrow-size: 20px;
 }
