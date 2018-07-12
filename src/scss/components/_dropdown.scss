@@ -2,8 +2,9 @@
 	display: none;
 
   position: absolute;
-  top: calc(var(--standard-margin) * 3);
-  right: calc(var(--standard-margin) / 2);
+  top: calc(var(--standard-margin) * 1.5);
+  right: calc((var(--standard-margin) / 2.5) * -1);
+	z-index: 10;
 
   &__body {
     padding: var(--standard-margin);
@@ -23,12 +24,24 @@
   }
 }
 
+.dropdown-menu {
+	position: relative;
+}
+
+.dropdown-menu > button {
+	padding: 0 5px;
+}
+
 .dropdown button {
-  cursor: pointer;
+	display: flex;
   background: transparent;
   border: none;
   font-size: 1em;
   font-family: 'Source Sans Pro';
+  cursor: pointer;
+}
+.dropdown button i {
+	margin-right: 5px;
 }
 
 .dropdown.visible {

@@ -9,10 +9,10 @@
 				<div class="dropdown">
 					<i class="fas fa-caret-up dropdown__arrow"></i>
 					<div class="dropdown__body">
-						<button v-on:click="deleteColumn($event)"><i class="fas fa-trash"></i> Delete</button>
+						<button v-on:click="deleteItem($event)"><i class="fas fa-trash"></i> Delete</button>
 					</div>
 				</div>
-			</div>      
+			</div>
 
     </div><!-- end of item__header -->
 

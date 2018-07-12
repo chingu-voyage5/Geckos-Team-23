@@ -97,7 +97,7 @@
         dropDownMenu.classList.toggle('visible')
       },
       deleteColumn (event) {
-        const column = event.target.parentNode.parentNode.parentNode.parentNode
+        const column = event.target.parentNode.parentNode.parentNode.parentNode.parentNode
         const allMenus = document.querySelectorAll('.dropdown')
 
         const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
