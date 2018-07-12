@@ -1,5 +1,5 @@
 <template>
-  <div class="tile">
+  <div class="tile" style="margin: auto;">
     <div class="tile-header">
       <h2 >SIGN IN</h2>
     </div>
@@ -54,12 +54,12 @@ export default {
             )
         },
         ForgotPassword: function () {
-            var auth = firebase.auth();
-            var emailAddress = this.email;
+            var auth = firebase.auth()
+            var emailAddress = this.email
 
-            auth.sendPasswordResetEmail(emailAddress).then(function() {
-            }).catch(function(error) {
-            });
+            auth.sendPasswordResetEmail(emailAddress).then(function () {
+            }).catch(function (error) {
+            })
         }
     }
 }

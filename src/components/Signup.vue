@@ -1,5 +1,5 @@
 <template>
-    <div class="tile">
+    <div class="tile" style="margin:auto;">
         <div class="tile-header">
         <h2 >SIGN UP</h2>
     </div>
@@ -24,7 +24,7 @@
                 <div v-on:click="SignUp" id="submit" role="button" type="button" class="btn btn-irenic float-right" tabindex="0">
                     <span>SIGN UP</span>
                 </div>
-                <p>Or click <router-link to="/Home">here</router-link> to go back to Sign in.</p>
+                <p style="padding-top: 40px;">Or click <router-link to="/Home">here</router-link> to go back to Sign in.</p>
                     <div class="login-pending">
                         <div class=spinner>
                             <span class="dot1"></span>

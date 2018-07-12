@@ -16,7 +16,7 @@ $colors: (
 }
 
 html {
-  height: 100%;
+    height: 100%;
     font-size: 14px;
 }
 
@@ -61,6 +61,7 @@ p {
     max-width: 24rem;
     overflow: hidden;
     border-radius: 10px;
+    top: 200px;
   
     .tile-header {
         background-image: url('https://images.pexels.com/photos/326240/pexels-photo-326240.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
