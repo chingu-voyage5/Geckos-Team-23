@@ -3,10 +3,10 @@
 
     <div class="sidebar-normal" v-if="accountPageState === 'closed'">
       <div class="top-bar">
-				<button v-on:click="toggleSidebar">
-					<i class="fas fa-times" v-show="!sidebarClosed"></i>
-					<i class="fas fa-bars" v-show="sidebarClosed"></i>
-				</button>
+        <button v-on:click="toggleSidebar">
+          <i class="fas fa-times" v-show="!sidebarClosed"></i>
+          <i class="fas fa-bars" v-show="sidebarClosed"></i>
+        </button>
         <h2>Clipboard</h2>
       </div>
 
@@ -78,7 +78,7 @@ export default {
   name: 'Sidebar',
   data () {
     return {
-			sidebarClosed: false,
+      sidebarClosed: false,
       accountPageState: 'closed',
       user: firebase.auth().currentUser,
       userId: firebase.auth().currentUser.uid,
@@ -98,12 +98,15 @@ export default {
     }
   },
   methods: {
-		toggleSidebar: function () {
-			const sidebar = document.querySelector('.sidebar')
-			sidebar.classList.toggle('closed')
-			this.sidebarClosed = !this.sidebarClosed
-		},
-    switchSidebarPage: function () {
+    toggleSidebar () {
+      const sidebar = document.querySelector('.sidebar')
+      sidebar.classList.toggle('closed')
+      this.sidebarClosed = !this.sidebarClosed
+    },
+    switchSidebarPage () {
+      if (this.sidebarClosed) {
+        this.toggleSidebar()
+      }
       switch (this.accountPageState) {
         case 'closed':
           this.accountPageState = 'open'
@@ -112,12 +115,12 @@ export default {
           this.accountPageState = 'closed'
       }
     },
-    logOut: function () {
+    logOut () {
       firebase.auth().signOut().then(() => {
       this.$router.replace('/')
       })
     },
-    updateUserName: function () {
+    updateUserName () {
       this.user.updateProfile({
         displayName: this.userName,
         photoURL: 'https://example.com/jane-q-user/profile.jpg'
@@ -127,14 +130,14 @@ export default {
         console.log(error)
       })
     },
-    updateEmail: function () {
+    updateEmail () {
       this.user.updateEmail(this.userEmail).then(function () {
         console.log('Update successful')
       }).catch(function (error) {
         console.log(error)
       })
     },
-    validatePassword: function () {
+    validatePassword () {
       const userPasswordWarning = document.querySelector('#user-password+p')
       const invalidPasswordWarning = document.querySelector('#account-user-new-password+p')
       const differentPasswordWarning = document.querySelector('#account-user-new-password-confirm+p')
@@ -164,7 +167,7 @@ export default {
         this.changePasswordBtnDisabled = false
       }
     },
-    changePassword: function () {
+    changePassword () {
       // create user credential (needed for reauthentication)
       const user = firebase.auth().currentUser
       const credential = firebase.auth.EmailAuthProvider.credential(
@@ -183,7 +186,7 @@ export default {
         alert(error)
       })
     },
-    deleteAccount: function () {
+    deleteAccount () {
       this.user.delete().then(() => {
         alert('Account Deleted')
         this.$router.replace('Home')
@@ -248,24 +251,24 @@ export default {
     background: var(--column-bg);
     box-shadow: var(--drop-shadow);
     z-index: 10;
-		transition: .3s;
+    transition: .3s;
   }
 
-	.sidebar.closed {
-		width: calc( var(--standard-margin) * 2 + 1.5em );
+  .sidebar.closed {
+    width: calc( var(--standard-margin) * 2 + 1.5em );
   }
-	.sidebar.closed .top-bar h2 {
-		display: none;
+  .sidebar.closed .top-bar h2 {
+    display: none;
   }
 
   .sidebar .top-bar {
     display: flex;
     justify-content: space-between;
-		align-items: flex-start;
+    align-items: flex-start;
     margin-bottom: 20px;
   }
 
-	.sidebar .top-bar button {
+  .sidebar .top-bar button {
     margin: 0;
   }
 
