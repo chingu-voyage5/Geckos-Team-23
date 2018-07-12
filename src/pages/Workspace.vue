@@ -10,18 +10,19 @@
           <div class="column__header">
             <input class="column__input" type="text" v-model="column.title" v-on:change="saveWorkspace">
 
-            <button v-on:click="toggleDropDown($event)"><i class="fas fa-ellipsis-v"></i></button>
-
-            <div class="dropdown">
-              <i class="fas fa-caret-up dropdown__arrow"></i>
-              <div class="dropdown__body">
-                <button v-on:click="deleteColumn($event)"><i class="fas fa-trash"></i> Delete</button>
-              </div>
-            </div>
+						<div class="dropdown-menu">
+							<button v-on:click="toggleDropDown($event)"><i class="fas fa-ellipsis-v"></i></button>
+							<div class="dropdown">
+								<i class="fas fa-caret-up dropdown__arrow"></i>
+								<div class="dropdown__body">
+									<button v-on:click="deleteColumn($event)"><i class="fas fa-trash"></i> Delete</button>
+								</div>
+							</div>
+						</div>
           </div>
 
           <div class="column-items">
-            <Item v-for="(item, idx) in column.items" :key="idx" class="item" v-bind:color="workspace.color">{{item.title}}</Item>
+            <Item v-for="(item, idx) in column.items" :key="idx" v-bind:color="workspace.color">{{item.title}}</Item>
           </div>
 
           <div class="column__add-item" v-on:click="addItem($event)">
@@ -96,7 +97,7 @@
         dropDownMenu.classList.toggle('visible')
       },
       deleteColumn (event) {
-        const column = event.target.parentNode.parentNode.parentNode.parentNode
+        const column = event.target.parentNode.parentNode.parentNode.parentNode.parentNode
         const allMenus = document.querySelectorAll('.dropdown')
 
         const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
