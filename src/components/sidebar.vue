@@ -255,7 +255,7 @@ export default {
   }
 
   .sidebar.closed {
-    width: calc( var(--standard-margin) * 2 + 1.5em );
+    width: calc( var(--standard-margin) * 2 + 1.7em );
   }
   .sidebar.closed .top-bar h2 {
     display: none;
