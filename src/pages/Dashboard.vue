@@ -1,8 +1,8 @@
 <template>
   <div class="dashboard-container">
-    <div id="sidebar-container">
-      <Sidebar />
-    </div>
+
+    <Sidebar />
+
     <div id="dashboard-content">
       <Navigation />
       <DashboardView />
@@ -34,8 +34,6 @@ export default {
 <style lang="scss">
 .dashboard-container {
   display: flex;
-  align-items: flex-start;
-  align-content: flex-start;
   height: 100vh;
 }
 #sidebar-container {
@@ -44,8 +42,10 @@ export default {
   height: 100%;
 }
 #dashboard-content {
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
+	width: 100%;
+  padding: 20px 40px;
+  display: flex;
+	justify-content: center;
+  overflow-x: auto;
 }
 </style>
