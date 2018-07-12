@@ -247,6 +247,7 @@ export default {
     width: 360px;
     height: 100%;
     padding: 20px;
+		overflow-x: hidden; /* prevent scrollbar when collapsing */
     overflow-y: auto;
     background: var(--column-bg);
     box-shadow: var(--drop-shadow);
