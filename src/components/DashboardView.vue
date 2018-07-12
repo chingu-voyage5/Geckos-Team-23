@@ -1,11 +1,24 @@
 <template>
   <div>
     <div class="workspaces-list-dashboard">
-      <router-link v-for="(workspace, idx) in userDB.workspaces" :key="idx" v-bind:to="'/dashboard/' + workspace.id">
-        <div class="workspace" v-bind:style="{ background: workspace.color }">
-          {{ workspace.title }}
+
+      <div class="workspace" v-for="(workspace, idx) in userDB.workspaces" :key="idx" v-bind:style="{ background: workspace.color }">
+        <div class="top-bar">
+        	<span class="title">{{ workspace.title }}</span>
+
+					<div class="dropdown-menu">
+            <button v-on:click="toggleDropDown($event)"><i class="fas fa-ellipsis-v"></i></button>
+            <div class="dropdown">
+              <span class="dropdown__arrow"></span>
+              <div class="dropdown__body">
+                <button v-on:click="deleteColumn($event)"><i class="fas fa-trash"></i> Delete</button>
+              </div>
+            </div>
+          </div>
+
         </div>
-      </router-link>
+				<router-link class="router-link" v-bind:to="'/dashboard/' + workspace.id"></router-link>
+			</div>
 
       <button v-on:click="addWorkspace">
         <i class="fas fa-plus"></i>
@@ -43,6 +56,21 @@ export default {
       var b = (Math.round(Math.random() * 127) + 127).toString(16)
       return '#' + r + g + b
     },
+		toggleDropDown (event) {
+			const dropDownMenu = event.target.nextElementSibling
+			const allMenus = document.querySelectorAll('.dropdown')
+			const clickedMenu = Array.prototype.indexOf.call(allMenus, dropDownMenu)
+
+			// close all open menus except clicked one
+			for (let i = 0; i < allMenus.length; i++) {
+				if (allMenus[i] !== allMenus[clickedMenu]) {
+					allMenus[i].classList.remove('visible')
+				}
+			}
+
+			// open clicked menu
+			dropDownMenu.classList.toggle('visible')
+		},
     addWorkspace () {
       var color = this.pastelColors()
       var title = this.title
@@ -71,18 +99,43 @@ export default {
 	.workspaces-list-dashboard {
 		display: flex;
 		padding: calc( var(--standard-margin) / 2 );
-		background: lightblue;
+		/* background: lightblue; */
 	}
 
-  .workspaces-list-dashboard button, .workspaces-list-dashboard .workspace {
+  .workspaces-list-dashboard > button, .workspaces-list-dashboard .workspace {
     display: inline-block;
     width: var(--dashboard-workspace-width);
     height: var(--dashboard-workspace-width);
     border: none;
     border-radius: var(--standard-border-radius);
     background: var(--column-bg);
+		padding: var(--standard-margin);
 		margin: calc( var(--standard-margin) / 2 );
     cursor: pointer;
   }
+
+	.workspaces-list-dashboard .workspace {
+		position: relative;
+	}
+
+	.workspaces-list-dashboard .top-bar {
+		width: calc( 100% - (var(--standard-margin) * 2) );
+		position: absolute;
+		top: var(--standard-margin);
+		left: var(--standard-margin);
+		z-index: 1;
+
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.workspaces-list-dashboard .router-link {
+		width: 100%;
+		height: 100%;
+
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
 
 </style>

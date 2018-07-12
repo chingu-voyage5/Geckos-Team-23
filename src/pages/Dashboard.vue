@@ -4,7 +4,7 @@
     <Sidebar />
 
     <div id="dashboard-content">
-      <Navigation />
+      <!-- <Navigation /> -->
       <DashboardView />
     </div>
   </div>
