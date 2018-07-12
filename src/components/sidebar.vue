@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar" v-bind:class="{ closed: sidebarClosed }">
 
     <div class="sidebar-normal" v-if="accountPageState === 'closed'">
       <div class="top-bar">
@@ -78,7 +78,7 @@ export default {
   name: 'Sidebar',
   data () {
     return {
-      sidebarClosed: false,
+      sidebarClosed: true,
       accountPageState: 'closed',
       user: firebase.auth().currentUser,
       userId: firebase.auth().currentUser.uid,
