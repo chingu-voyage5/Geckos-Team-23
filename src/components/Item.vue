@@ -25,12 +25,23 @@
 </template>
 
 <script>
+	import firebase from 'firebase'
+	import { db } from '../main'
+
   export default {
     props: [
       'title',
       'color'
     ],
+    firestore () {
+      return {
+        workspace: db.collection('workspaces').doc(this.$route.params.id)
+      }
+    },
 		methods: {
+			saveWorkspace () {
+        db.collection('workspaces').doc(this.$route.params.id).set(this.workspace)
+      },
 			toggleDropDown (event) {
         const dropDownMenu = event.target.nextElementSibling
         const allMenus = document.querySelectorAll('.dropdown')
@@ -46,6 +57,27 @@
         // open clicked menu
         dropDownMenu.classList.toggle('visible')
       },
+			deleteItem (event) {
+				const item = event.target.parentNode.parentNode.parentNode.parentNode.parentNode
+				const columnItems = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes
+
+				const column = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode
+        const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
+        const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
+
+				const allMenus = document.querySelectorAll('.dropdown')
+				const itemIndex = Array.prototype.indexOf.call(columnItems, item)
+
+				this.workspace.columns[columnIndex].items.splice(itemIndex, 1)
+
+				// close all open menus
+				for (let i = 0; i < allMenus.length; i++) {
+					allMenus[i].classList.remove('visible')
+				}
+
+				// Save workspace snapshot to DB
+				this.saveWorkspace()
+			}
 		}
   }
 </script>

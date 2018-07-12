@@ -22,7 +22,7 @@
           </div>
 
           <div class="column-items">
-            <Item v-for="(item, idx) in column.items" :key="idx" class="item" v-bind:color="workspace.color">{{item.title}}</Item>
+            <Item v-for="(item, idx) in column.items" :key="idx" v-bind:color="workspace.color">{{item.title}}</Item>
           </div>
 
           <div class="column__add-item" v-on:click="addItem($event)">
