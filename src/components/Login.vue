@@ -21,7 +21,8 @@
                 <div v-on:click="MainPage" id="submit" role="button" type="button" class="btn btn-irenic float-right" tabindex="0">
                     <span>SIGN IN</span>
                 </div>
-                <p>Don't have an account? Create one <router-link to="/SignUp">here</router-link>.</p>
+                <p style="padding-top: 40px;">Don't have an account? Create one <router-link to="/SignUp">here</router-link>.</p>
+                <p style="cursor: pointer; width: 110px;height: 25px; margin: auto; color: blue" v-on:click="ForgotPassword">Forgot my password</p>
             </div>
         </form>
     </div>
@@ -51,6 +52,16 @@ export default {
                     alert('Oops!' + err.message)
                 }
             )
+        },
+        ForgotPassword: function () {
+            var auth = firebase.auth();
+            var emailAddress = "user@example.com";
+
+            auth.sendPasswordResetEmail(emailAddress).then(function() {
+                //email sent
+            }).catch(function(error) {
+                //An error happened.
+            });
         }
     }
 }
