@@ -22,7 +22,9 @@
           </div>
 
           <div class="column-items">
-            <Item v-for="(item, idx) in column.items" :key="idx" v-bind:color="workspace.color">{{item.title}}</Item>
+            <Item v-for="(item, idx) in column.items" :key="idx" v-bind:color="workspace.color">
+							<input class="item__input" type="text" v-model="item.title" v-on:change="saveWorkspace">
+						</Item>
           </div>
 
           <div class="column__add-item" v-on:click="addItem($event)">
@@ -51,7 +53,7 @@
       return {
         userId: firebase.auth().currentUser.uid,
         newColTitle: 'New Column ',
-        newItemTitle: 'New Item 😀 ',
+        newItemTitle: 'New Item 😀',
         workspace: []
       }
     },

@@ -2,7 +2,7 @@
   <div class="item">
     <div class="item__header" v-bind:style="{ background: color}">
 
-    	<h3><slot>{{title}}</slot></h3>
+    	<slot></slot>			
 
 			<div class="dropdown-menu">
 				<button v-on:click="toggleDropDown($event)"><i class="fas fa-ellipsis-v"></i></button>
