@@ -33,10 +33,20 @@ export default {
   data () {
     return {
       modalWidth: MODAL_WIDTH,
-      workspaceTitle: ''
+      workspaceTitle: '',
+			userId: firebase.auth().currentUser.uid,
+			userDB: []
+    }
+  },
+  firestore () {
+    return {
+      userDB: db.collection('users').doc(this.userId)
     }
   },
   methods: {
+		saveUser () {
+			db.collection('users').doc(this.userId).set(this.userDB)
+		},
     show () {
       this.$modal.show('create-workspace')
     },
@@ -57,9 +67,16 @@ export default {
       var title = this.createWorkspace()
       db.collection('workspaces').add({
           title: title,
-          color: color
-      })
+          color: color,
+					columns: []
+      }).then((docRef) => {
+				// const path = 'workspaces/' + docRef.id
+				console.log(
+					this.userDB.workspaces.push(docRef)
+				)
+			})
       this.hide()
+			this.saveUser()
     }
   },
   created () {
