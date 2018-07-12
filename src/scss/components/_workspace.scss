@@ -1,21 +1,30 @@
 .workspace {
+  height: 100vh;
+  display: flex;
+
+  &__list {
     display: flex;
+  }
 
-    &__list {
-        display: flex;
-        flex-wrap: nowrap;
-    }
+  &__add-button {
+    flex-shrink: 0; /* avoid shrinking */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    &__add-button {
-        display: flex;
-        justify-content: center;
+    height: 138px; /* height of column after creation */
+    width: var(--standard-column-width);
 
-        height: 100%;
-        width: 25rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    background: var(--column-bg);
+    cursor: pointer;
+  }
+}
 
-        padding: 2rem;
-        border-radius: 1rem;
-        background: var(--column-bg);
-        cursor: pointer;
-    }
+#workspace-content {
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  overflow-x: auto;
 }

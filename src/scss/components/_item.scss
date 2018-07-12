@@ -1,59 +1,57 @@
 .item {
+  width: 100%;
+
+  background: var(--color-white);
+	border-radius: var(--standard-border-radius);
+	overflow: hidden;
+  margin-bottom: var(--standard-margin);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: calc(var(--standard-margin) / 2) var(--standard-margin);
+    background: var(--main-color);
+  }
+
+&__input {
+    font-family: 'Source Sans Pro';
+    font-size: 1.2em;
+    font-weight: 600;
+
+    width: 90%;
+
+    border-radius: calc(var(--standard-border-radius) / 2);
+    background: transparent;
+    border: 1px solid transparent;
+    transition: all .3s;
+
+    &:focus {
+      background: var(--column-bg-light);
+      outline: none;
+
+      border: 1px solid var(--color-neutral);
+    }
+  }
+
+  &__body {
+    padding: var(--standard-margin);
+  }
+
+  &__button {
     width: 100%;
+    height: 3.5rem;
 
-    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     border-radius: 1rem;
-    background: var(--color-white);
+    background: var(--main-color);
+  }
 
-    &__header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+  &__icon {
 
-        padding: 1rem 1.5rem;
-        border-radius: 1rem 1rem 0 0;
-        background: var(--item-header);
-    }
-
-    &__input {
-        font-family: 'Source Sans Pro';
-        font-size: 1.5rem;
-        font-weight: 600;
-
-        width: 90%;
-
-        border-radius: .5rem;
-        padding: .5rem;
-        background: transparent;
-        border: 1px solid transparent;
-        transition: all .3s;
-
-        &:focus {
-            background: var(--input-item);
-            outline: none;
-
-            border: 1px solid var(--input-border);
-            box-shadow: 0 0 1rem var(--input-boxshadow);
-        }
-    }
-
-    &__body {
-        padding: 2rem;
-    }
-
-    &__button {
-        width: 100%;
-        height: 3.5rem;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        border-radius: 1rem;
-        background: var(--item-header);
-    }
-
-    &__icon {
-
-    }
+  }
 }

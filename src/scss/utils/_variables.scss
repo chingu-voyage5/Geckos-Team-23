@@ -1,29 +1,36 @@
 :root {
-    //colors
-    --color-black: #000;
-    --color-white: #fff;
+  //colors
+  --color-black: #000;
+  --color-white: #fff;
 
-	--color-danger: tomato;
-	--color-danger-hover: #c64b35;
-	--color-neutral: grey;
-	--color-neutral-hover: #615d5d;
+  --main-color: #fe9c9c;
 
-    --text-black: #000;
-    --text-column: #333333;
+  --color-danger: tomato;
+  --color-danger-hover: #c64b35;
+  --color-neutral: grey;
+  --color-neutral-hover: #615d5d;
 
-    --column-bg: #e2e4e6;
-    --column-bg-light: #f3f3f2;
+  --text-black: #000;
+  --text-column: #333333;
 
-    --item-header: #fe9c9c;
+  // --column-bg: #e2e4e6;
+  --column-bg: rgba(255,255,255,0.5);
+  --column-bg-light: #f3f3f2;
 
-    --input-border: lightblue;
-    --input-boxshadow : #75ddff;
+  --item-header: #fe9c9c;
 
-    --input-item: #ffcccc;
+  --input-border: lightblue;
+  --input-boxshadow : #75ddff;
 
-    //drop shadow
-    --drop-shadow: 3px 3px .75rem rgba(0, 0, 0, .25);
+  --input-item: #ffcccc;
 
-	//elements
-	--standard-border-radius: 10px;
+  //shadows
+  --drop-shadow: 2px 2px .75rem rgba(0, 0, 0, .15);
+
+  //elements
+  --standard-border-radius: 10px;
+  --standard-margin: 15px;
+  --standard-column-width: 320px;
+
+  --dropdown-arrow-size: 20px;
 }
