@@ -37,7 +37,6 @@ export default {
   data () {
     return {
       title: 'New Workspace',
-      workspacesLength: 0,
       userId: firebase.auth().currentUser.uid,
       userName: firebase.auth().currentUser.displayName,
       userEmail: firebase.auth().currentUser.email,
@@ -50,8 +49,8 @@ export default {
     }
   },
   methods: {
-    saveUser () {
-      db.collection('users').doc(this.userId).update(this.userDB)
+    updateDOM () {
+			this.$router.go(0)
     },
     pastelColors () {
       var r = (Math.round(Math.random() * 127) + 127).toString(16)
@@ -93,7 +92,6 @@ export default {
 
         // Populate workspaces with newly created references
         for (let i = 0; i < this.userDB.workspaceIDs.length; i++) {
-          console.log(this.userDB.workspaceIDs[i])
           this.userDB.workspaces.push(db.collection('workspaces').doc(this.userDB.workspaceIDs[i]))
         }
 
@@ -101,10 +99,12 @@ export default {
         db.collection('users').doc(this.userId).set({
           workspaces: this.userDB.workspaces
         }, { merge: true })
+
+        // Update DOM
+        this.updateDOM()
       }).catch((error) => {
         console.log(error)
       })
-      this.$forceUpdate()
     }
   },
   components: {

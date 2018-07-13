@@ -16,7 +16,11 @@
 
       <ul class="workspaces-list">
         <li v-for="(workspace, idx) in userDB.workspaces" :key="idx">
-          <a v-bind:href="'#/dashboard/' + workspace.id" v-bind:style="'color:' + workspace.color"><i class="fas fa-columns"></i> <span v-show="!sidebarClosed">{{ workspace.title }}</span></a>
+					<router-link v-bind:to="'/dashboard/' + workspace.id" v-bind:style="'color:' + workspace.color">
+						<i class="fas fa-columns"></i>
+						<span v-show="!sidebarClosed">{{ workspace.title }}</span>
+					</router-link>
+          <!-- <a v-bind:href="'#/dashboard/' + workspace.id" v-bind:style="'color:' + workspace.color"><i class="fas fa-columns"></i> <span v-show="!sidebarClosed">{{ workspace.title }}</span></a> -->
         </li>
       </ul>
 
