@@ -26,6 +26,7 @@ let config = {
     messagingSenderId: '562925944482'
 }
 
+
 firebase.initializeApp(config)
 
 // Export the database as a variable named db for use in other components
