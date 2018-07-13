@@ -29,7 +29,7 @@ let config = {
 firebase.initializeApp(config)
 
 // Export the database as a variable named db for use in other components
-export const db = firebase.firestore()
+export let db = firebase.firestore()
 
 // Initialize the app only when we are sure Firebase Auth object is ready to use.
 firebase.auth().onAuthStateChanged(function (user) {

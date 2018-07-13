@@ -101,7 +101,7 @@ export default {
         }, { merge: true })
 
         // Update DOM
-        this.updateDOM()
+        // this.updateDOM()
       }).catch((error) => {
         console.log(error)
       })
