@@ -4,7 +4,7 @@
 
 			<p>{{userWorkspaces}}</p>
 
-      <div class="workspace" v-for="(workspace, idx) in userDB.workspaces" :key="idx" v-bind:style="{ background: workspace.color }">
+      <div class="workspace" v-for="(workspace, idx) in userWorkspaces" :key="idx" v-bind:style="{ background: workspace.color }">
         <div class="top-bar">
           <span class="title">{{ workspace.title }}</span>
 
@@ -53,10 +53,10 @@ export default {
 		// Load Data
 		userWorkspaces
     .onSnapshot(querySnapshot => {
+			this.userWorkspaces = []
 			querySnapshot.forEach(workspace => {
 				console.log(workspace.data())
 				// alert('changed')
-				this.userWorkspaces = []
 				this.userWorkspaces.push(workspace.data())
 			})
 		})
