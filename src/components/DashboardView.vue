@@ -29,8 +29,7 @@
 <script>
 import firebase from 'firebase'
 import db from './firebaseInit'
-import Sidebar from '../components/Sidebar'
-// import CreateWorkspace from './CreateWorkspace'
+import Sidebar from './Sidebar'
 
 export default {
   name: 'DashboardView',
@@ -96,7 +95,6 @@ export default {
   },
   components: {
     Sidebar
-    // CreateWorkspace
   }
 }
 </script>
