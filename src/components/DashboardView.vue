@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="workspace-list-wraper">
     <div class="workspaces-list-dashboard">
 
       <div class="workspace" v-for="(workspace, idx) in userDB.workspaces" :key="idx" v-bind:style="{ background: workspace.color }">
         <div class="top-bar">
-        	<span class="title">{{ workspace.title }}</span>
+          <span class="title">{{ workspace.title }}</span>
 
-					<div class="dropdown-menu">
+          <div class="dropdown-menu">
             <button v-on:click="toggleDropDown($event)"><i class="fas fa-ellipsis-v"></i></button>
             <div class="dropdown">
               <span class="dropdown__arrow"></span>
@@ -17,8 +17,8 @@
           </div>
 
         </div>
-				<router-link class="router-link" v-bind:to="'/dashboard/' + workspace.id"></router-link>
-			</div>
+        <router-link class="router-link" v-bind:to="'/dashboard/' + workspace.id"></router-link>
+      </div>
 
       <button v-on:click="addWorkspace">
         <i class="fas fa-plus"></i>
@@ -37,7 +37,10 @@ export default {
   data () {
     return {
       title: 'New Workspace',
+      workspacesLength: 0,
       userId: firebase.auth().currentUser.uid,
+      userName: firebase.auth().currentUser.displayName,
+      userEmail: firebase.auth().currentUser.email,
       userDB: []
     }
   },
@@ -56,21 +59,21 @@ export default {
       var b = (Math.round(Math.random() * 127) + 127).toString(16)
       return '#' + r + g + b
     },
-		toggleDropDown (event) {
-			const dropDownMenu = event.target.nextElementSibling
-			const allMenus = document.querySelectorAll('.dropdown')
-			const clickedMenu = Array.prototype.indexOf.call(allMenus, dropDownMenu)
+    toggleDropDown (event) {
+      const dropDownMenu = event.target.nextElementSibling
+      const allMenus = document.querySelectorAll('.dropdown')
+      const clickedMenu = Array.prototype.indexOf.call(allMenus, dropDownMenu)
 
-			// close all open menus except clicked one
-			for (let i = 0; i < allMenus.length; i++) {
-				if (allMenus[i] !== allMenus[clickedMenu]) {
-					allMenus[i].classList.remove('visible')
-				}
-			}
+      // close all open menus except clicked one
+      for (let i = 0; i < allMenus.length; i++) {
+        if (allMenus[i] !== allMenus[clickedMenu]) {
+          allMenus[i].classList.remove('visible')
+        }
+      }
 
-			// open clicked menu
-			dropDownMenu.classList.toggle('visible')
-		},
+      // open clicked menu
+      dropDownMenu.classList.toggle('visible')
+    },
     addWorkspace () {
       var color = this.pastelColors()
       var title = this.title
@@ -78,29 +81,53 @@ export default {
           title: title,
           color: color,
           columns: []
-      }).then((docRef) => {
-        console.log(typeof docRef)
-        // const path = 'workspaces/' + docRef.id
-        this.userDB.workspaces.push(
-          db.doc('workspaces/' + docRef.id)
-        )
-        this.saveUser()
+      }).then((workspaceRef) => {
+        // Ensure workspaceIDs is updated with latest id
+        this.userDB.workspaceIDs.push(workspaceRef.id)
+        db.collection('users').doc(this.userId).set({
+          workspaceIDs: this.userDB.workspaceIDs
+        }, { merge: true })
+
+        // Delete all workspace references from workspaces
+        this.userDB.workspaces = []
+
+        // Populate workspaces with newly created references
+        for (let i = 0; i < this.userDB.workspaceIDs.length; i++) {
+          console.log(this.userDB.workspaceIDs[i])
+          this.userDB.workspaces.push(db.collection('workspaces').doc(this.userDB.workspaceIDs[i]))
+        }
+
+        // Update DB
+        db.collection('users').doc(this.userId).set({
+          workspaces: this.userDB.workspaces
+        }, { merge: true })
+      }).catch((error) => {
+        console.log(error)
       })
+      this.$forceUpdate()
     }
   },
   components: {
-    Sidebar,
+    Sidebar
     // CreateWorkspace
   }
 }
 </script>
 <style>
 
-	.workspaces-list-dashboard {
-		display: flex;
-		padding: calc( var(--standard-margin) / 2 );
-		/* background: lightblue; */
-	}
+  .workspace-list-wraper {
+    /* background: steelblue; */
+  }
+
+  .workspaces-list-dashboard {
+    max-width: calc( (var(--dashboard-workspace-width) + (var(--standard-margin) * 2)) * 5 - (var(--standard-margin) * 4) );
+    display: flex;
+    flex-wrap: wrap;
+    padding: calc( var(--standard-margin) / 2 );
+    /* Compensate for padding and margin */
+    transform: translateY( calc( var(--standard-margin) * -1 ) );
+    /* background: lightblue; */
+  }
 
   .workspaces-list-dashboard > button, .workspaces-list-dashboard .workspace {
     display: inline-block;
@@ -109,33 +136,33 @@ export default {
     border: none;
     border-radius: var(--standard-border-radius);
     background: var(--column-bg);
-		padding: var(--standard-margin);
-		margin: calc( var(--standard-margin) / 2 );
+    padding: var(--standard-margin);
+    margin: calc( var(--standard-margin) / 2 );
     cursor: pointer;
   }
 
-	.workspaces-list-dashboard .workspace {
-		position: relative;
-	}
+  .workspaces-list-dashboard .workspace {
+    position: relative;
+  }
 
-	.workspaces-list-dashboard .top-bar {
-		width: calc( 100% - (var(--standard-margin) * 2) );
-		position: absolute;
-		top: var(--standard-margin);
-		left: var(--standard-margin);
-		z-index: 1;
+  .workspaces-list-dashboard .top-bar {
+    width: calc( 100% - (var(--standard-margin) * 2) );
+    position: absolute;
+    top: var(--standard-margin);
+    left: var(--standard-margin);
+    z-index: 1;
 
-		display: flex;
-		justify-content: space-between;
-	}
+    display: flex;
+    justify-content: space-between;
+  }
 
-	.workspaces-list-dashboard .router-link {
-		width: 100%;
-		height: 100%;
+  .workspaces-list-dashboard .router-link {
+    width: 100%;
+    height: 100%;
 
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 
 </style>

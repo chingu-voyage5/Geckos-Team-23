@@ -36,16 +36,10 @@ export default {
   display: flex;
   height: 100vh;
 }
-#sidebar-container {
-  flex-grow: 1;
-  width: 40%;
-  height: 100%;
-}
 #dashboard-content {
-	width: 100%;
+  width: 100%;
   padding: 20px 40px;
   display: flex;
-	justify-content: center;
-  overflow-x: auto;
+  justify-content: center;
 }
 </style>
