@@ -2,6 +2,8 @@
   <div class="workspace-list-wraper">
     <div class="workspaces-list-dashboard">
 
+			<p>{{userWorkspaces}}</p>
+
       <div class="workspace" v-for="(workspace, idx) in userDB.workspaces" :key="idx" v-bind:style="{ background: workspace.color }">
         <div class="top-bar">
           <span class="title">{{ workspace.title }}</span>
@@ -28,7 +30,7 @@
 </template>
 <script>
 import firebase from 'firebase'
-import { db } from '../main'
+import db from './firebaseInit'
 import Sidebar from '../components/Sidebar'
 // import CreateWorkspace from './CreateWorkspace'
 
@@ -39,15 +41,27 @@ export default {
       title: 'New Workspace',
       userId: firebase.auth().currentUser.uid,
       userName: firebase.auth().currentUser.displayName,
-      userEmail: firebase.auth().currentUser.email,
-      userDB: []
+      userDB: [],
+			userWorkspaces: []
     }
   },
-  firestore () {
-    return {
-      userDB: db.collection('users').doc(this.userId)
-    }
-  },
+	created () {
+
+		const workspacesRef = db.collection('workspaces')
+		const userWorkspaces = workspacesRef.where('userIDs.id', '==', this.userId)
+
+		// Load Data
+		userWorkspaces
+    .onSnapshot(querySnapshot => {
+			querySnapshot.forEach(workspace => {
+				console.log(workspace.data())
+				// alert('changed')
+				this.userWorkspaces = []
+				this.userWorkspaces.push(workspace.data())
+			})
+		})
+
+	},
   methods: {
     updateDOM () {
 			this.$router.go(0)
