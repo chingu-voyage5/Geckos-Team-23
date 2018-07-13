@@ -2,8 +2,6 @@
   <div class="workspace-list-wraper">
     <div class="workspaces-list-dashboard">
 
-			<p>{{userWorkspaces}}</p>
-
       <div class="workspace" v-for="(workspace, idx) in userWorkspaces" :key="idx" v-bind:style="{ background: workspace.color }">
         <div class="top-bar">
           <span class="title">{{ workspace.title }}</span>
@@ -46,7 +44,6 @@ export default {
     }
   },
 	created () {
-
 		const workspacesRef = db.collection('workspaces')
 		const userWorkspaces = workspacesRef.where('userIDs.id', '==', this.userId)
 
@@ -60,7 +57,6 @@ export default {
 				this.userWorkspaces.push(workspace.data())
 			})
 		})
-
 	},
   methods: {
     updateDOM () {
