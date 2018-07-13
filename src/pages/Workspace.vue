@@ -54,7 +54,9 @@
         userId: firebase.auth().currentUser.uid,
         newColTitle: 'New Column ',
         newItemTitle: 'New Item ',
-        workspace: []
+        workspace: [],
+				// use this to update when route changes
+				routeId: $route.params.id
       }
     },
     firestore () {
