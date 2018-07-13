@@ -88,36 +88,13 @@ export default {
       dropDownMenu.classList.toggle('visible')
     },
     addWorkspace () {
-      var color = this.pastelColors()
-      var title = this.title
+      const color = this.pastelColors()
+      const title = this.title
       db.collection('workspaces').add({
           title: title,
           color: color,
-          columns: []
-      }).then((workspaceRef) => {
-        // Ensure workspaceIDs is updated with latest id
-        this.userDB.workspaceIDs.push(workspaceRef.id)
-        db.collection('users').doc(this.userId).set({
-          workspaceIDs: this.userDB.workspaceIDs
-        }, { merge: true })
-
-        // Delete all workspace references from workspaces
-        this.userDB.workspaces = []
-
-        // Populate workspaces with newly created references
-        for (let i = 0; i < this.userDB.workspaceIDs.length; i++) {
-          this.userDB.workspaces.push(db.collection('workspaces').doc(this.userDB.workspaceIDs[i]))
-        }
-
-        // Update DB
-        db.collection('users').doc(this.userId).set({
-          workspaces: this.userDB.workspaces
-        }, { merge: true })
-
-        // Update DOM
-        // this.updateDOM()
-      }).catch((error) => {
-        console.log(error)
+          columns: [],
+					userIDs: {'id': this.userId}
       })
     }
   },
