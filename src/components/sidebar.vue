@@ -108,7 +108,6 @@ export default {
     .onSnapshot(querySnapshot => {
       this.userWorkspaces = []
       querySnapshot.forEach(workspace => {
-        console.log(workspace.data())
         const data = {
           'id': workspace.id,
           'title': workspace.data().title,
