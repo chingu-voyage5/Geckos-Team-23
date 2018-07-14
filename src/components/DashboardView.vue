@@ -2,7 +2,7 @@
   <div class="workspace-list-wraper">
     <div class="workspaces-list-dashboard">
 
-      <div class="workspace" v-for="(workspace, idx) in userWorkspaces" :key="idx" v-bind:style="{ background: workspace.color }">
+      <div class="workspace" v-for="(workspace, idx) in userWorkspaces" :key="idx" v-bind:style="{ background: workspace.color }" v-bind:id="workspace.id">
         <div class="top-bar">
           <span class="title">{{ workspace.title }}</span>
 
@@ -35,10 +35,8 @@ export default {
   name: 'DashboardView',
   data () {
     return {
-      title: 'New Workspace',
+      newWorkspaceTitle: 'New Workspace',
       userId: firebase.auth().currentUser.uid,
-      userName: firebase.auth().currentUser.displayName,
-      userDB: [],
 			userWorkspaces: []
     }
   },
@@ -64,9 +62,6 @@ export default {
 		})
 	},
   methods: {
-    updateDOM () {
-			this.$router.go(0)
-    },
     pastelColors () {
       const r = (Math.round(Math.random() * 127) + 127).toString(16)
       const g = (Math.round(Math.random() * 127) + 127).toString(16)
@@ -90,7 +85,7 @@ export default {
     },
     addWorkspace () {
       db.collection('workspaces').add({
-          title: this.title,
+          title: this.newWorkspaceTitle,
           color: this.pastelColors(),
           columns: [],
 					userIDs: {'id': this.userId}
