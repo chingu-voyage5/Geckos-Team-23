@@ -49,7 +49,6 @@ export default {
     .onSnapshot(querySnapshot => {
       this.userWorkspaces = []
       querySnapshot.forEach(workspace => {
-        console.log(workspace.data())
         const data = {
           'id': workspace.id,
           'title': workspace.data().title,
@@ -103,7 +102,6 @@ export default {
 <style>
 
   .workspace-list-wraper {
-    /* background: steelblue; */
   }
 
   .workspaces-list-dashboard {
@@ -113,7 +111,6 @@ export default {
     padding: calc( var(--standard-margin) / 2 );
     /* Compensate for padding and margin */
     transform: translateY( calc( var(--standard-margin) * -1 ) );
-    /* background: lightblue; */
   }
 
   .workspaces-list-dashboard > button, .workspaces-list-dashboard .workspace {
