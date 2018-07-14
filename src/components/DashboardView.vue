@@ -11,7 +11,7 @@
             <div class="dropdown">
               <span class="dropdown__arrow"></span>
               <div class="dropdown__body">
-                <button v-on:click="deleteColumn($event)"><i class="fas fa-trash"></i> Delete</button>
+                <button v-on:click="deleteWorkspace($event)"><i class="fas fa-trash"></i> Delete</button>
               </div>
             </div>
           </div>
@@ -95,7 +95,10 @@ export default {
           columns: [],
 					userIDs: {'id': this.userId}
       })
-    }
+    },
+		deleteWorkspace (event) {
+
+		}
   },
   components: {
     Sidebar
