@@ -12,7 +12,6 @@
 
 <script>
 import Sidebar from '../components/Sidebar'
-import Navigation from '../components/Navigation'
 import DashboardView from '../components/DashboardView'
 
 export default {
@@ -25,7 +24,6 @@ export default {
   },
   components: {
     Sidebar,
-    Navigation,
     DashboardView
   }
 }
@@ -41,5 +39,6 @@ export default {
   padding: 20px 40px;
   display: flex;
   justify-content: center;
+	overflow-y: auto;
 }
 </style>
