@@ -33,7 +33,6 @@
 import firebase from 'firebase'
 
 export default {
-    components: 'Login',
     name: 'Login',
     data: function () {
       return {
@@ -42,20 +41,19 @@ export default {
       }
     },
     methods: {
-      MainPage: function () {
+      MainPage () {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-          function (user) {
-            alert('Welcome!')
-            window.location.href = '/#/Dashboard'
+          (user) => {
+            this.$router.replace('Dashboard')
           },
-          function (err) {
+          (err) => {
             alert('Oops!' + err.message)
           }
         )
       },
-      ForgotPassword: function () {
-        var auth = firebase.auth()
-        var emailAddress = this.email
+      ForgotPassword () {
+        const auth = firebase.auth()
+        const emailAddress = this.email
 
         auth.sendPasswordResetEmail(emailAddress)
       }
