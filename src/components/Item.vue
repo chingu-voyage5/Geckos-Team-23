@@ -26,18 +26,33 @@
 
 <script>
   import firebase from 'firebase'
-  import { db } from '../main'
+  import db from '../components/firebaseInit'
 
   export default {
     props: [
       'title',
       'color'
     ],
-    firestore () {
-      return {
-        workspace: db.collection('workspaces').doc(this.$route.params.id)
-      }
-    },
+		data () {
+			return {
+				routeId: this.$route.params.id,
+				workspace: {}
+			}
+		},
+		created () {
+			const workspacesRef = db.collection('workspaces')
+
+			// Load open workspace data
+			workspacesRef.doc(this.routeId).onSnapshot((workspace) => {
+				const data = {
+					'title': workspace.data().title,
+					'color': workspace.data().color,
+					'columns': workspace.data().columns,
+					'userIDs': workspace.data().userIDs
+				}
+				this.workspace = data
+			})
+		},
     methods: {
       saveWorkspace () {
         db.collection('workspaces').doc(this.$route.params.id).set(this.workspace)
