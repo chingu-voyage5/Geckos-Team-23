@@ -46,22 +46,22 @@ import db from './firebaseInit'
 
 export default {
   name: 'Signup',
-  data() {
+  data () {
     return {
-			userName: '',
+      userName: '',
       email: '',
       password: ''
     }
   },
   methods: {
-    SignUp() {
+    SignUp () {
       firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
         (user) => {
-					db.collection('users').doc(firebase.auth().currentUser.uid).set({
-		          userName: this.userName,
-							email: this.email
-		      })
-					firebase.auth().currentUser.displayName = this.userName
+          db.collection('users').doc(firebase.auth().currentUser.uid).set({
+              userName: this.userName,
+              email: this.email
+          })
+          firebase.auth().currentUser.displayName = this.userName
           this.$router.replace('Dashboard')
         },
         (err) => {
