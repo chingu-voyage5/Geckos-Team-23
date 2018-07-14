@@ -54,24 +54,24 @@
         newColTitle: 'New Column ',
         newItemTitle: 'New Item ',
         workspace: {},
-				// use this to update when route changes
-				routeId: this.$route.params.id
+        // use this to update when route changes
+        routeId: this.$route.params.id
       }
     },
-		created () {
-			const workspacesRef = db.collection('workspaces')
+    created () {
+      const workspacesRef = db.collection('workspaces')
 
-			// Load open workspace data
-			workspacesRef.doc(this.routeId).onSnapshot((workspace) => {
-				const data = {
-					'title': workspace.data().title,
-					'color': workspace.data().color,
-					'columns': workspace.data().columns,
-					'userIDs': workspace.data().userIDs
-				}
-				this.workspace = data
-			})
-		},
+      // Load open workspace data
+      workspacesRef.doc(this.routeId).onSnapshot((workspace) => {
+        const data = {
+          'title': workspace.data().title,
+          'color': workspace.data().color,
+          'columns': workspace.data().columns,
+          'userIDs': workspace.data().userIDs
+        }
+        this.workspace = data
+      })
+    },
     methods: {
       saveWorkspace () {
         db.collection('workspaces').doc(this.$route.params.id).set(this.workspace)
