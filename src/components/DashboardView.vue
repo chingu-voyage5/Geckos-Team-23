@@ -79,11 +79,11 @@ export default {
       const clickedMenu = Array.prototype.indexOf.call(allMenus, dropDownMenu)
 
       // close all open menus except clicked one
-      for (let i = 0; i < allMenus.length; i++) {
-        if (allMenus[i] !== allMenus[clickedMenu]) {
-          allMenus[i].classList.remove('visible')
+      allMenus.forEach((menu) => {
+        if (allMenus[menu] !== allMenus[clickedMenu]) {
+          allMenus[menu].classList.remove('visible')
         }
-      }
+      })
 
       // open clicked menu
       dropDownMenu.classList.toggle('visible')
