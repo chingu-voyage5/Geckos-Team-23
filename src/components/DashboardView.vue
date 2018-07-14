@@ -7,11 +7,11 @@
           <span class="title">{{ workspace.title }}</span>
 
           <div class="dropdown-menu">
-            <button v-on:click="toggleDropDown($event)"><i class="fas fa-ellipsis-v"></i></button>
+            <button id="dropdown-toggle" v-on:click="toggleDropDown($event)"><i class="fas fa-ellipsis-v"></i></button>
             <div class="dropdown">
               <span class="dropdown__arrow"></span>
               <div class="dropdown__body">
-                <button v-on:click="deleteWorkspace($event)"><i class="fas fa-trash"></i> Delete</button>
+                <button v-bind:id="workspace.id" v-on:click="deleteWorkspace"><i class="fas fa-trash"></i> Delete</button>
               </div>
             </div>
           </div>
@@ -91,7 +91,12 @@ export default {
       })
     },
     deleteWorkspace (event) {
-
+      var elementId = event.currentTarget.id
+      db.collection('workspaces').doc(elementId).delete().then(function () {
+        console.log('Document successfully deleted!')
+      }).catch(function (error) {
+        console.error('Error removing document: ', error)
+      })
     }
   },
   components: {
@@ -100,7 +105,10 @@ export default {
 }
 </script>
 <style>
-
+  #dropdown-toggle {
+    display: inline-block;
+    padding: 1px 3px;
+  }
   .workspace-list-wraper {
   }
 
