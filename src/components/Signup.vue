@@ -6,7 +6,7 @@
     <div class="tile-body">
         <form id="form">
             <label class="form-input">
-                    <input type="text" v-model="Username" autofocus="true" required />
+                    <input type="text" v-model="userName" autofocus="true" required />
                     <span class="label">Username</span>
                 <span class="underline"></span>
             </label>
@@ -42,27 +42,33 @@
 
 <script>
 import firebase from 'firebase'
+import db from './firebaseInit'
 
 export default {
-    components: 'Signup',
-    name: 'Signup',
-    data: function () {
-        return {
-            email: '',
-            password: ''
-        }
-    },
-    methods: {
-        SignUp: function () {
-            firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
-                (user) => {
-                    this.$router.replace('Dashboard')
-                },
-                (err) => {
-                    alert('Oops. ' + err.message)
-                }
-            )
-        }
+  name: 'Signup',
+  data() {
+    return {
+			userName: '',
+      email: '',
+      password: ''
     }
+  },
+  methods: {
+    SignUp() {
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
+        (user) => {
+					db.collection('users').add({
+		          userName: this.userName,
+							email: this.email
+		      })
+					firebase.auth().currentUser.displayName = this.userName
+          this.$router.replace('Dashboard')
+        },
+        (err) => {
+          alert('Oops. ' + err.message)
+        }
+      )
+    }
+  }
 }
 </script>
