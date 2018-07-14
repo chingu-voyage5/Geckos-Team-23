@@ -46,7 +46,7 @@ export default {
 		const workspacesRef = db.collection('workspaces')
 		const userWorkspaces = workspacesRef.where('userIDs.id', '==', this.userId)
 
-		// Load Data
+		// Load and Update Data
 		userWorkspaces
     .onSnapshot(querySnapshot => {
 			this.userWorkspaces = []
@@ -68,9 +68,9 @@ export default {
 			this.$router.go(0)
     },
     pastelColors () {
-      var r = (Math.round(Math.random() * 127) + 127).toString(16)
-      var g = (Math.round(Math.random() * 127) + 127).toString(16)
-      var b = (Math.round(Math.random() * 127) + 127).toString(16)
+      const r = (Math.round(Math.random() * 127) + 127).toString(16)
+      const g = (Math.round(Math.random() * 127) + 127).toString(16)
+      const b = (Math.round(Math.random() * 127) + 127).toString(16)
       return '#' + r + g + b
     },
     toggleDropDown (event) {
@@ -89,11 +89,9 @@ export default {
       dropDownMenu.classList.toggle('visible')
     },
     addWorkspace () {
-      const color = this.pastelColors()
-      const title = this.title
       db.collection('workspaces').add({
-          title: title,
-          color: color,
+          title: this.title,
+          color: this.pastelColors(),
           columns: [],
 					userIDs: {'id': this.userId}
       })
