@@ -54,7 +54,7 @@ export default {
 					'id': workspace.id,
 					'title': workspace.data().title,
 					'color': workspace.data().color,
-					'columns': workspace.data().columns,
+					'columns': workspace.data().columns, // optional ?
 					'userIDs': workspace.data().userIDs
 				}
 				this.userWorkspaces.push(data)
