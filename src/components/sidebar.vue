@@ -15,11 +15,11 @@
       <button v-on:click="switchSidebarPage"><i class="fas fa-user-circle"></i> <span v-show="!sidebarClosed">Account</span></button>
 
       <ul class="workspaces-list">
-        <li v-for="(workspace, idx) in userDB.workspaces" :key="idx">
-					<router-link v-bind:to="'/dashboard/' + workspace.id" v-bind:style="'color:' + workspace.color">
-						<i class="fas fa-columns"></i>
-						<span v-show="!sidebarClosed">{{ workspace.title }}</span>
-					</router-link>
+        <li v-for="(workspace, idx) in userWorkspaces" :key="idx">
+          <router-link v-bind:to="'/dashboard/' + workspace.id" v-bind:style="'color:' + workspace.color">
+            <i class="fas fa-columns"></i>
+            <span v-show="!sidebarClosed">{{ workspace.title }}</span>
+          </router-link>
           <!-- <a v-bind:href="'#/dashboard/' + workspace.id" v-bind:style="'color:' + workspace.color"><i class="fas fa-columns"></i> <span v-show="!sidebarClosed">{{ workspace.title }}</span></a> -->
         </li>
       </ul>
@@ -76,7 +76,7 @@
 
 <script>
 import firebase from 'firebase'
-import { db } from '../main'
+import db from './firebaseInit'
 
 export default {
   name: 'Sidebar',
@@ -93,13 +93,32 @@ export default {
       newPasswordConfirmation: '',
       changePasswordBtnDisabled: true,
       showDeleteConfirmation: false,
-      userDB: []
+      userWorkspaces: [],
+      // use this to update when route changes
+      routeId: this.$route.params.id
     }
   },
-  firestore () {
-    return {
-      userDB: db.collection('users').doc(this.userId)
-    }
+  created () {
+    const workspacesRef = db.collection('workspaces')
+    const userWorkspaces = workspacesRef.where('userIDs.id', '==', this.userId)
+
+    // Load and Update Data
+    userWorkspaces
+    .onSnapshot(querySnapshot => {
+      this.userWorkspaces = []
+      querySnapshot.forEach(workspace => {
+        console.log(workspace.data())
+        const data = {
+          'id': workspace.id,
+          'title': workspace.data().title,
+          'color': workspace.data().color,
+          'columns': workspace.data().columns, // optional ?
+          'userIDs': workspace.data().userIDs
+        }
+        this.userWorkspaces.push(data)
+        this.routeId = this.$route.params.id
+      })
+    })
   },
   methods: {
     toggleSidebar () {

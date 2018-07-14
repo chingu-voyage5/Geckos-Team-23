@@ -37,30 +37,30 @@ export default {
     return {
       newWorkspaceTitle: 'New Workspace',
       userId: firebase.auth().currentUser.uid,
-			userWorkspaces: []
+      userWorkspaces: []
     }
   },
-	created () {
-		const workspacesRef = db.collection('workspaces')
-		const userWorkspaces = workspacesRef.where('userIDs.id', '==', this.userId)
+  created () {
+    const workspacesRef = db.collection('workspaces')
+    const userWorkspaces = workspacesRef.where('userIDs.id', '==', this.userId)
 
-		// Load and Update Data
-		userWorkspaces
+    // Load and Update Data
+    userWorkspaces
     .onSnapshot(querySnapshot => {
-			this.userWorkspaces = []
-			querySnapshot.forEach(workspace => {
-				console.log(workspace.data())
-				const data = {
-					'id': workspace.id,
-					'title': workspace.data().title,
-					'color': workspace.data().color,
-					'columns': workspace.data().columns, // optional ?
-					'userIDs': workspace.data().userIDs
-				}
-				this.userWorkspaces.push(data)
-			})
-		})
-	},
+      this.userWorkspaces = []
+      querySnapshot.forEach(workspace => {
+        console.log(workspace.data())
+        const data = {
+          'id': workspace.id,
+          'title': workspace.data().title,
+          'color': workspace.data().color,
+          'columns': workspace.data().columns, // optional ?
+          'userIDs': workspace.data().userIDs
+        }
+        this.userWorkspaces.push(data)
+      })
+    })
+  },
   methods: {
     pastelColors () {
       const r = (Math.round(Math.random() * 127) + 127).toString(16)
@@ -88,12 +88,12 @@ export default {
           title: this.newWorkspaceTitle,
           color: this.pastelColors(),
           columns: [],
-					userIDs: {'id': this.userId}
+          userIDs: {'id': this.userId}
       })
     },
-		deleteWorkspace (event) {
+    deleteWorkspace (event) {
 
-		}
+    }
   },
   components: {
     Sidebar

@@ -5,5 +5,4 @@ export default {
   projectId: 'project-management-app-v2',
   storageBucket: 'project-management-app-v2.appspot.com',
   messagingSenderId: '562925944482'
-
 }

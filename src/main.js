@@ -12,7 +12,6 @@ Vue.use(VModal)
 Vue.config.productionTip = false
 let app
 
-
 // Initialize the app only when we are sure Firebase Auth object is ready to use.
 firebase.auth().onAuthStateChanged(function (user) {
   if (!app) {

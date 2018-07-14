@@ -48,9 +48,7 @@ export default {
           // Add user data to DB
           db.collection('users').add({
             email: this.signUpEmail,
-            name: this.userName,
-            image: '',
-            workspaces: []
+            userName: this.userName
           })
           .then(function (docRef) {
             console.log('Document written with ID: ', docRef.id)

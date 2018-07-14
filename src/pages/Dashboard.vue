@@ -25,17 +25,17 @@ export default {
 
 <style lang="scss">
 
-	.dashboard-container {
-	  display: flex;
-	  height: 100vh;
-	}
+  .dashboard-container {
+    display: flex;
+    height: 100vh;
+  }
 
-	#dashboard-content {
-	  width: 100%;
-	  padding: 20px 40px;
-	  display: flex;
-	  justify-content: center;
-		overflow-y: auto;
-	}
+  #dashboard-content {
+    width: 100%;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: center;
+    overflow-y: auto;
+  }
 
 </style>
