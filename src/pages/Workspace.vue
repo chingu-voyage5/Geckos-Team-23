@@ -56,7 +56,7 @@
         newItemTitle: 'New Item ',
         workspace: [],
 				// use this to update when route changes
-				routeId: $route.params.id
+				routeId: this.$route.params.id
       }
     },
     firestore () {

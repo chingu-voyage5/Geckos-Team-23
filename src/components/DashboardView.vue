@@ -52,8 +52,14 @@ export default {
 			this.userWorkspaces = []
 			querySnapshot.forEach(workspace => {
 				console.log(workspace.data())
-				// alert('changed')
-				this.userWorkspaces.push(workspace.data())
+				const data = {
+					'id': workspace.id,
+					'title': workspace.data().title,
+					'color': workspace.data().color,
+					'columns': workspace.data().columns,
+					'userIDs': workspace.data().userIDs
+				}
+				this.userWorkspaces.push(data)
 			})
 		})
 	},
