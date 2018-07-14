@@ -71,6 +71,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -212,6 +213,7 @@ export default {
     deleteAccount () {
       this.user.delete().then(() => {
         alert('Account Deleted')
+				// db.collection('users').doc()
         this.$router.replace('Home')
       }).catch(function (error) {
         alert(error)

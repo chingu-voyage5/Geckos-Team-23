@@ -57,7 +57,7 @@ export default {
     SignUp() {
       firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
         (user) => {
-					db.collection('users').add({
+					db.collection('users').doc(firebase.auth().currentUser.uid).set({
 		          userName: this.userName,
 							email: this.email
 		      })
