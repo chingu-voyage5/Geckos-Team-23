@@ -29,7 +29,7 @@
 
           <div class="column__add-item">
 
-						<button v-on:click="openAddItemDropdown($event)"><i class="fa fa-plus"></i></button>
+						<button class="" v-on:click="toggleAddItemDropdown($event)"><i class="fa fa-plus"></i></button>
 
 						<div class="add-item-dropdown">
 							<button class="add-item-btn" v-on:click="addItem($event, type)"><i class="fa fa-font"></i> Text</button>
@@ -132,6 +132,17 @@
         // Save workspace snapshot to DB
         this.saveWorkspace()
       },
+			toggleAddItemDropdown (event) {
+				const addItemDropdownBtn = event.target
+				const addItemDropdown = event.target.nextElementSibling
+				addItemDropdownBtn.classList.toggle('open')
+				if (addItemDropdownBtn.classList.contains('open')) {
+					addItemDropdown.style.height = 'auto'
+				}
+				else {
+					addItemDropdown.style.height = '0'
+				}
+			},
       addItem (event) {
         const column = event.target.parentNode
         const columnItems = column.getElementsByClassName('column-items')[0]

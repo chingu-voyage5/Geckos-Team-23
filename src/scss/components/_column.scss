@@ -54,6 +54,7 @@
   border: none;
 }
 
+// + button
 .column > div:last-child > button {
 	width: 100%;
 	height: 3.5rem;
@@ -62,12 +63,19 @@
 	border-radius: var(--standard-border-radius);
 	background: var(--column-bg-light);
 }
+.column > div:last-child > button i {
+	transition: .3s;
+}
+.column > div:last-child > button.open i {
+	transform: rotate(45deg);
+}
 
 // Add Item Dropdown
 .column .add-item-dropdown {
 	width: 100%;
-	display: flex;
-	flex-direction: column;
+	height: 0;
+	overflow: hidden;
+	transition: .3s;
 }
 // Add Item Dropdown Buttons
 .column .add-item-dropdown > * {
