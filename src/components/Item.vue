@@ -19,7 +19,7 @@
     <div class="item__body">
       <div class="text-item-content">
 				<textarea class="styled-textarea" placeholder="Write some notes here..." v-model="itemContent" v-on:keyup="saveItem">
-          {{content}}
+          {{itemContent}}
         </textarea>
       </div>
     </div>
@@ -57,6 +57,8 @@
         }
         this.workspace = data
       })
+
+			this.itemContent = this.content
     },
     methods: {
       saveWorkspace () {
