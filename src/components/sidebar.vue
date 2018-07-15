@@ -10,7 +10,7 @@
         <h2>Clipboard</h2>
       </div>
 
-      <router-link v-bind:to="'/dashboard/'"><i class="fas fa-home"></i></router-link>
+      <router-link v-bind:to="'/dashboard/'"><i class="fas fa-home"></i> <span v-show="!sidebarClosed">Dashboard</span></router-link>
 
       <button v-on:click="logOut"><i class="fas fa-sign-out-alt"></i> <span v-show="!sidebarClosed">Sign Out</span></button>
 
