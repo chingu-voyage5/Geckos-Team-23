@@ -144,7 +144,7 @@
 				}
 			},
       addItem (event) {
-        const column = event.target.parentNode
+        const column = event.target.parentNode.parentNode.parentNode
         const columnItems = column.getElementsByClassName('column-items')[0]
 
         // create new item
