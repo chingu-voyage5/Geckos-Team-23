@@ -35,7 +35,8 @@
       'title',
       'color',
 			'id',
-			'content'
+			'content',
+			'height'
     ],
     data () {
       return {
@@ -61,6 +62,7 @@
 
 			// pass read-only value of content prop into live itemContent
 			this.itemContent = this.content
+			this.textAreaHeight = this.height
     },
     methods: {
       saveWorkspace () {
