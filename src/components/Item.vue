@@ -18,7 +18,7 @@
 
     <div class="item__body">
       <div class="text-item-content">
-				<textarea class="styled-textarea" placeholder="Write some notes here..." v-model="itemContent" v-on:keyup="saveItem">
+				<textarea class="styled-textarea" placeholder="Write some notes here..." v-model="itemContent" v-on:keyup="saveItem" v-bind:style="{ height: textAreaHeight }">
           {{itemContent}}
         </textarea>
       </div>
@@ -41,7 +41,8 @@
       return {
         routeId: this.$route.params.id,
         workspace: {},
-				itemContent: ''
+				itemContent: '',
+				textAreaHeight: '20px'
       }
     },
     created () {
@@ -76,6 +77,9 @@
 
         // Save data
         this.workspace.columns[columnIndex].items[itemIndex].content = this.itemContent
+				this.textAreaHeight = event.target.style.height
+				this.workspace.columns[columnIndex].items[itemIndex].height = this.textAreaHeight
+				console.log(this.textAreaHeight)
 				this.saveWorkspace()
 			},
       toggleDropDown (event) {
@@ -118,11 +122,11 @@
   }
 </script>
 <style lang="scss">
-.styled-textarea {
-  width: 100%;
-  min-height: 80px;
-  border: 0px;
-  outline: none;
-  resize: vertical;
-}
+	.styled-textarea {
+	  width: 100%;
+		min-height: 30px;
+	  border: 0px;
+	  outline: none;
+	  resize: vertical;
+	}
 </style>

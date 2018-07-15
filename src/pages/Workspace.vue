@@ -151,9 +151,10 @@
         const data = {
           id: Date.now(),
 					type: type,
-          title: this.newItemTitle + (columnItems.children.length + 1),
+          title: 'New ' + type + ' item ' + (columnItems.children.length + 1),
           color: this.workspace.color,
-          content: ''
+          content: '',
+					height: ''
         }
 
         // Add column to workspace
