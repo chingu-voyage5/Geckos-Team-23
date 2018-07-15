@@ -58,6 +58,7 @@
         this.workspace = data
       })
 
+			// pass read-only value of content prop into live itemContent
 			this.itemContent = this.content
     },
     methods: {
@@ -119,9 +120,9 @@
 <style lang="scss">
 .styled-textarea {
   width: 100%;
-  min-height: 200px;
+  min-height: 80px;
   border: 0px;
   outline: none;
-  resize: none;
+  resize: vertical;
 }
 </style>
