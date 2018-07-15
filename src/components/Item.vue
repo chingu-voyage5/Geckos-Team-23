@@ -18,7 +18,9 @@
 
     <div class="item__body">
       <div class="text-item-content">
-				{{content}}
+				<textarea class="styled-textarea" placeholder="Write some notes here..." v-model="content">
+          content
+        </textarea>
       </div>
     </div>
   </div>
@@ -99,3 +101,12 @@
     }
   }
 </script>
+<style lang="scss">
+.styled-textarea {
+  width: 100%;
+  min-height: 200px;
+  border: 0px;
+  outline: none;
+  resize: none;
+}
+</style>

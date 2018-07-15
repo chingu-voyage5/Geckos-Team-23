@@ -34,7 +34,7 @@
 						<div class="add-item-dropdown">
 							<button class="add-item-btn" v-on:click="addItem($event, 'text')"><i class="fa fa-font"></i> Text</button>
 							<button class="add-item-btn"><i class="fa fa-folder"></i> Folder</button>
-							<button class="add-item-btn"><i class="fa fa-video"></i> Media</button>
+							<button class="add-item-btn" v-on:click="addItem($event, 'media')"><i class="fa fa-video"></i> Media</button>
 						</div>
 
           </div>
