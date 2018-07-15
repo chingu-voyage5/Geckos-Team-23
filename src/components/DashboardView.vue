@@ -84,14 +84,14 @@ export default {
     },
     addWorkspace () {
       db.collection('workspaces').add({
-          title: this.newWorkspaceTitle,
-          color: this.pastelColors(),
-          columns: [],
-          userIDs: {'id': this.userId}
+        title: this.newWorkspaceTitle,
+        color: this.pastelColors(),
+        columns: [],
+        userIDs: {'id': this.userId}
       })
     },
     deleteWorkspace (event) {
-      var elementId = event.currentTarget.id
+      const elementId = event.currentTarget.id
       db.collection('workspaces').doc(elementId).delete().then(function () {
         console.log('Document successfully deleted!')
       }).catch(function (error) {

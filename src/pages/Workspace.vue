@@ -27,8 +27,13 @@
             </Item>
           </div>
 
-          <div class="column__add-item" v-on:click="addItem($event)">
-            <i class="fa fa-plus column__icon"></i>
+          <div class="column__add-item" v-on:click="addItem($event, type)">
+						<i class="fa fa-plus column__icon"></i>
+						<select>
+							<option value="volvo">Text</option>
+							<option value="saab">Folder</option>
+							<option value="saab">Media</option>
+						</select>            
           </div>
         </div>
       </ul>
