@@ -18,8 +18,8 @@
 
     <div class="item__body">
       <div class="text-item-content">
-				<textarea class="styled-textarea" placeholder="Write some notes here..." v-model="content">
-          content
+				<textarea class="styled-textarea" placeholder="Write some notes here..." v-model="itemContent" v-on:keyup="saveItem">
+          {{content}}
         </textarea>
       </div>
     </div>
@@ -62,6 +62,19 @@
       saveWorkspace () {
         db.collection('workspaces').doc(this.$route.params.id).set(this.workspace)
       },
+			saveItem (event) {
+				const column = event.target.parentNode.parentNode.parentNode.parentNode.parentNode
+        const columnItems = column.querySelectorAll('.item')
+				const item = event.target.parentNode.parentNode.parentNode
+        const itemIndex = Array.prototype.indexOf.call(columnItems, item)
+
+				const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
+        const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
+
+        // Save data
+        this.workspace.columns[columnIndex].items[itemIndex].content = this.itemContent
+				this.saveWorkspace()
+			},
       toggleDropDown (event) {
         const dropDownMenu = event.target.nextElementSibling
         const allMenus = document.querySelectorAll('.dropdown')
