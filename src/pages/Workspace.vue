@@ -27,13 +27,16 @@
             </Item>
           </div>
 
-          <div class="column__add-item" v-on:click="addItem($event, type)">
-						<i class="fa fa-plus column__icon"></i>
-						<select>
-							<option value="volvo">Text</option>
-							<option value="saab">Folder</option>
-							<option value="saab">Media</option>
-						</select>            
+          <div class="column__add-item">
+
+						<button v-on:click="openAddItemDropdown($event)"><i class="fa fa-plus"></i></button>
+
+						<div class="add-item-dropdown">
+							<button class="add-item-btn" v-on:click="addItem($event, type)"><i class="fa fa-font"></i> Text</button>
+							<button class="add-item-btn"><i class="fa fa-folder"></i> Folder</button>
+							<button class="add-item-btn"><i class="fa fa-video"></i> Media</button>
+						</div>
+
           </div>
         </div>
       </ul>
