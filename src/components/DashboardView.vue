@@ -135,6 +135,7 @@ export default {
 
   .workspaces-list-dashboard .workspace {
     position: relative;
+		box-shadow: var(--drop-shadow);
   }
 
   .workspaces-list-dashboard .top-bar {

@@ -151,7 +151,7 @@
         const data = {
           id: Date.now(),
 					type: type,
-          title: 'New ' + type + ' item ' + (columnItems.children.length + 1),
+          title: type + ' item ' + (columnItems.children.length + 1),
           color: this.workspace.color,
           content: '',
 					height: ''

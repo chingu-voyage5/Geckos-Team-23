@@ -4,6 +4,7 @@
   background: var(--color-white);
 	border-radius: var(--standard-border-radius);
   margin-bottom: var(--standard-margin);
+	box-shadow: var(--subtle-shadow);
 
   &__header {
     display: flex;
