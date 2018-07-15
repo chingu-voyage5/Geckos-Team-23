@@ -1,5 +1,5 @@
 <template>
-  <div class="workspace">
+  <div class="workspace" v-bind:style="{ background: workspace.color }">
 
     <Sidebar />
 

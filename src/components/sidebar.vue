@@ -18,7 +18,7 @@
 
       <ul class="workspaces-list">
         <li v-for="(workspace, idx) in userWorkspaces" :key="idx">
-          <router-link v-bind:to="'/dashboard/' + workspace.id" v-bind:style="'color:' + workspace.color">
+          <router-link v-bind:to="'/dashboard/' + workspace.id" v-bind:style="{ background: workspace.color }">
             <i class="fas fa-columns"></i>
             <span v-show="!sidebarClosed">{{ workspace.title }}</span>
           </router-link>
@@ -282,11 +282,21 @@ export default {
   }
 
   .sidebar.closed {
-    width: calc( var(--standard-margin) * 2 + 1.7em );
+    width: calc( var(--standard-margin) * 2 + 20px );
+		padding: 20px 0;
   }
   .sidebar.closed .top-bar h2 {
     display: none;
   }
+	.sidebar.closed .sidebar-normal {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.sidebar.closed .sidebar-normal ul a {
+		padding: 0 3px;
+		border-radius: 2px;
+	}
 
   .sidebar .top-bar {
     display: flex;
@@ -314,8 +324,14 @@ export default {
   }
 
   .sidebar-normal > ul li:not(:first-child) {
-    margin-top: 6px;
+    margin-top: 16px;
   }
+
+	.sidebar .workspaces-list li a {
+		color: black;
+		padding: 5px;
+		border-radius: 5px;
+	}
 
   #account-settings {
     display: grid;
