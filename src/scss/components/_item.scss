@@ -3,7 +3,6 @@
 
   background: var(--color-white);
 	border-radius: var(--standard-border-radius);
-	overflow: hidden;
   margin-bottom: var(--standard-margin);
 
   &__header {
@@ -12,6 +11,8 @@
     align-items: center;
 
     padding: calc(var(--standard-margin) / 2) var(--standard-margin);
+		border-top-left-radius: var(--standard-border-radius);
+		border-top-right-radius: var(--standard-border-radius);
     background: var(--main-color);
   }
 
