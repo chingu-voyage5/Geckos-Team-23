@@ -17,8 +17,8 @@
     </div><!-- end of item__header -->
 
     <div class="item__body">
-      <div class="item__button" v-bind:style="{ background: color}">
-        <i class="fas fa-plus item__icon"></i>
+      <div class="text-item-content">
+				{{content}}
       </div>
     </div>
   </div>
@@ -31,12 +31,15 @@
   export default {
     props: [
       'title',
-      'color'
+      'color',
+			'id',
+			'content'
     ],
     data () {
       return {
         routeId: this.$route.params.id,
-        workspace: {}
+        workspace: {},
+				itemContent: ''
       }
     },
     created () {

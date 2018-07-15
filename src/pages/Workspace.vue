@@ -22,7 +22,7 @@
           </div>
 
           <div class="column-items">
-            <Item v-for="(item, idx) in column.items" :key="idx" v-bind:color="workspace.color">
+            <Item v-for="(item, idx) in column.items" :key="idx" v-bind:color="workspace.color" v-bind:id="item.id" v-bind:content="item.content">
               <input class="item__input" type="text" v-model="item.title" v-on:change="saveWorkspace">
             </Item>
           </div>
@@ -32,7 +32,7 @@
 						<button class="" v-on:click="toggleAddItemDropdown($event)"><i class="fa fa-plus"></i></button>
 
 						<div class="add-item-dropdown">
-							<button class="add-item-btn" v-on:click="addItem($event, type)"><i class="fa fa-font"></i> Text</button>
+							<button class="add-item-btn" v-on:click="addItem($event, 'text')"><i class="fa fa-font"></i> Text</button>
 							<button class="add-item-btn"><i class="fa fa-folder"></i> Folder</button>
 							<button class="add-item-btn"><i class="fa fa-video"></i> Media</button>
 						</div>
@@ -143,16 +143,17 @@
 					addItemDropdown.style.height = '0'
 				}
 			},
-      addItem (event) {
+      addItem (event, type) {
         const column = event.target.parentNode.parentNode.parentNode
         const columnItems = column.getElementsByClassName('column-items')[0]
 
         // create new item
         const data = {
           id: Date.now(),
+					type: type,
           title: this.newItemTitle + (columnItems.children.length + 1),
-          content: '',
-          color: this.workspace.color
+          color: this.workspace.color,
+          content: ''
         }
 
         // Add column to workspace
