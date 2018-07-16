@@ -4,7 +4,8 @@
 
       <div class="workspace" v-for="(workspace, idx) in userWorkspaces" :key="idx" v-bind:style="{ background: workspace.color }" v-bind:id="workspace.id">
         <div class="top-bar">
-          <span class="title">{{ workspace.title }}</span>
+          <!-- <span class="title">{{ workspace.title }}</span> -->
+					<input class="item__input" type="text" v-model="workspace.title" v-on:keyup="saveWorkspaceName($event, workspace)">
 
           <div class="dropdown-menu">
             <button id="dropdown-toggle" v-on:click="toggleDropDown($event)"><i class="fas fa-ellipsis-v"></i></button>
@@ -61,6 +62,16 @@ export default {
     })
   },
   methods: {
+		saveWorkspaceName (event, workspace) {
+			const data = {
+				'id': workspace.id,
+				'title': workspace.title,
+				'color': workspace.color,
+				'columns': workspace.columns,
+				'userIDs': workspace.userIDs
+			}
+			db.collection('workspaces').doc(workspace.id).set(data)
+		},
     pastelColors () {
       const r = (Math.round(Math.random() * 127) + 127).toString(16)
       const g = (Math.round(Math.random() * 127) + 127).toString(16)
