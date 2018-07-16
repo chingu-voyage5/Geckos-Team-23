@@ -16,4 +16,8 @@
 
   @import './scss/main.scss';
 
+	body {
+		background: var(--default-bg);
+	}
+
 </style>
