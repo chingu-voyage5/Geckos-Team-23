@@ -29,13 +29,13 @@
 
           <div class="column__add-item">
 
-						<button class="" v-on:click="toggleAddItemDropdown($event)"><i class="fa fa-plus"></i></button>
+            <button class="" v-on:click="toggleAddItemDropdown($event)"><i class="fa fa-plus"></i></button>
 
-						<div class="add-item-dropdown">
-							<button class="add-item-btn" v-on:click="addItem($event, 'text')"><i class="fa fa-font"></i> Text</button>
-							<button class="add-item-btn"><i class="fa fa-folder"></i> Folder</button>
-							<button class="add-item-btn" v-on:click="addItem($event, 'media')"><i class="fa fa-video"></i> Media</button>
-						</div>
+            <div class="add-item-dropdown">
+              <button class="add-item-btn" v-on:click="addItem($event, 'text')"><i class="fa fa-font"></i> Text</button>
+              <button class="add-item-btn"><i class="fa fa-folder"></i> Folder</button>
+              <button class="add-item-btn" v-on:click="addItem($event, 'media')"><i class="fa fa-video"></i> Media</button>
+            </div>
 
           </div>
         </div>
@@ -132,17 +132,16 @@
         // Save workspace snapshot to DB
         this.saveWorkspace()
       },
-			toggleAddItemDropdown (event) {
-				const addItemDropdownBtn = event.target
-				const addItemDropdown = event.target.nextElementSibling
-				addItemDropdownBtn.classList.toggle('open')
-				if (addItemDropdownBtn.classList.contains('open')) {
-					addItemDropdown.style.height = 'auto'
-				}
-				else {
-					addItemDropdown.style.height = '0'
-				}
-			},
+      toggleAddItemDropdown (event) {
+        const addItemDropdownBtn = event.target
+        const addItemDropdown = event.target.nextElementSibling
+        addItemDropdownBtn.classList.toggle('open')
+        if (addItemDropdownBtn.classList.contains('open')) {
+          addItemDropdown.style.height = 'auto'
+        } else {
+          addItemDropdown.style.height = '0'
+        }
+      },
       addItem (event, type) {
         const column = event.target.parentNode.parentNode.parentNode
         const columnItems = column.getElementsByClassName('column-items')[0]
@@ -150,11 +149,11 @@
         // create new item
         const data = {
           id: Date.now(),
-					type: type,
+          type: type,
           title: type.capitalize() + ' item ' + (columnItems.children.length + 1),
           color: this.workspace.color,
           content: '',
-					height: ''
+          height: ''
         }
 
         // Add column to workspace

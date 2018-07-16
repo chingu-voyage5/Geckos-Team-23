@@ -18,8 +18,7 @@
 
     <div class="item__body">
       <div class="text-item-content">
-				<textarea class="styled-textarea" placeholder="Write some notes here..." v-model="itemContent" v-on:keyup="saveItem" v-bind:style="{ height: textAreaHeight }">
-          {{itemContent}}
+        <textarea class="styled-textarea" placeholder="Write some notes here..." v-model="itemContent" v-on:keyup="saveItem" v-bind:style="{ height: textAreaHeight }">
         </textarea>
       </div>
     </div>
@@ -34,16 +33,16 @@
     props: [
       'title',
       'color',
-			'id',
-			'content',
-			'height'
+      'id',
+      'content',
+      'height'
     ],
     data () {
       return {
         routeId: this.$route.params.id,
         workspace: {},
-				itemContent: '',
-				textAreaHeight: '20px'
+        itemContent: '',
+        textAreaHeight: '20px'
       }
     },
     created () {
@@ -60,30 +59,30 @@
         this.workspace = data
       })
 
-			// pass read-only value of content prop into live itemContent
-			this.itemContent = this.content
-			this.textAreaHeight = this.height
+      // pass read-only value of content prop into live itemContent
+      this.itemContent = this.content
+      this.textAreaHeight = this.height
     },
     methods: {
       saveWorkspace () {
         db.collection('workspaces').doc(this.$route.params.id).set(this.workspace)
       },
-			saveItem (event) {
-				const column = event.target.parentNode.parentNode.parentNode.parentNode.parentNode
+      saveItem (event) {
+        const column = event.target.parentNode.parentNode.parentNode.parentNode.parentNode
         const columnItems = column.querySelectorAll('.item')
-				const item = event.target.parentNode.parentNode.parentNode
+        const item = event.target.parentNode.parentNode.parentNode
         const itemIndex = Array.prototype.indexOf.call(columnItems, item)
 
-				const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
+        const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
         const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
 
         // Save data
         this.workspace.columns[columnIndex].items[itemIndex].content = this.itemContent
-				this.textAreaHeight = event.target.style.height
-				this.workspace.columns[columnIndex].items[itemIndex].height = this.textAreaHeight
-				console.log(this.textAreaHeight)
-				this.saveWorkspace()
-			},
+        this.textAreaHeight = event.target.style.height
+        this.workspace.columns[columnIndex].items[itemIndex].height = this.textAreaHeight
+        console.log(this.textAreaHeight)
+        this.saveWorkspace()
+      },
       toggleDropDown (event) {
         const dropDownMenu = event.target.nextElementSibling
         const allMenus = document.querySelectorAll('.dropdown')
@@ -124,11 +123,11 @@
   }
 </script>
 <style lang="scss">
-	.styled-textarea {
-	  width: 100%;
-		min-height: 30px;
-	  border: 0px;
-	  outline: none;
-	  resize: vertical;
-	}
+  .styled-textarea {
+    width: 100%;
+    min-height: 30px;
+    border: 0px;
+    outline: none;
+    resize: vertical;
+  }
 </style>

@@ -283,20 +283,20 @@ export default {
 
   .sidebar.closed {
     width: calc( var(--standard-margin) * 2 + 20px );
-		padding: 20px 0;
+    padding: 20px 0;
   }
   .sidebar.closed .top-bar h2 {
     display: none;
   }
-	.sidebar.closed .sidebar-normal {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-	.sidebar.closed .sidebar-normal ul a {
-		padding: 0 3px;
-		border-radius: 2px;
-	}
+  .sidebar.closed .sidebar-normal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .sidebar.closed .sidebar-normal ul a {
+    padding: 0 3px;
+    border-radius: 2px;
+  }
 
   .sidebar .top-bar {
     display: flex;
@@ -327,11 +327,11 @@ export default {
     margin-top: 16px;
   }
 
-	.sidebar .workspaces-list li a {
-		color: black;
-		padding: 5px;
-		border-radius: 5px;
-	}
+  .sidebar .workspaces-list li a {
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+  }
 
   #account-settings {
     display: grid;
