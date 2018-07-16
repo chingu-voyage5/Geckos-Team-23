@@ -8,7 +8,7 @@
       <ul class="workspace__list">
         <div v-for="(column, idx) in workspace.columns" :key="idx" ref="column" class="column" v-bind:id="column.id">
           <div class="column__header">
-            <input class="column__input" type="text" v-model="column.title" v-on:change="saveWorkspace">
+            <input class="column__input" type="text" v-model="column.title" v-on:keyup="saveWorkspace">
 
             <div class="dropdown-menu">
               <button v-on:click="toggleDropDown($event)"><i class="fas fa-ellipsis-v"></i></button>
@@ -23,7 +23,7 @@
 
           <div class="column-items">
             <Item v-for="(item, idx) in column.items" :key="idx" v-bind:color="workspace.color" v-bind:id="item.id" v-bind:content="item.content" v-bind:height="item.height">
-              <input class="item__input" type="text" v-model="item.title" v-on:change="saveWorkspace">
+              <input class="item__input" type="text" v-model="item.title" v-on:keyup="saveWorkspace">
             </Item>
           </div>
 
