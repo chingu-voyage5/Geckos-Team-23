@@ -80,7 +80,7 @@
 <script>
 import firebase from 'firebase'
 import db from './firebaseInit'
-import { store } from '../store/index.js';
+import { store } from '../store/index.js'
 
 export default {
   name: 'Sidebar',
@@ -123,14 +123,14 @@ export default {
       })
     })
 
-		this.sidebarClosed = this.$store.state.sidebarClosed
+    this.sidebarClosed = this.$store.state.sidebarClosed
   },
   methods: {
     toggleSidebar () {
       const sidebar = document.querySelector('.sidebar')
       sidebar.classList.toggle('closed')
-			this.sidebarClosed = !this.sidebarClosed
-			this.$store.commit('toggleSidebar')
+      this.sidebarClosed = !this.sidebarClosed
+      this.$store.commit('toggleSidebar')
     },
     switchSidebarPage () {
       if (this.sidebarClosed) {

@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-		sidebarClosed: true
+    sidebarClosed: true
   },
   getters: {
     // functions to return the state if dynamic
@@ -21,6 +21,6 @@ export default new Vuex.Store({
   },
   actions: {
     // functions that commit mutations, these can contain async code
-		
+
   }
 })
