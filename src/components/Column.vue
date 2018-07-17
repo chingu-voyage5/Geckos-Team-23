@@ -27,7 +27,7 @@
 	import firebase from 'firebase'
 	import { db } from '../main'
 	import Item from '../components/Item'
-	import { mapState } from 'vuex'
+	// import { mapState } from 'vuex'
 
 	export default {
 		data () {
@@ -37,11 +37,6 @@
 				workspace: []
 			}
 		},
-		firestore () {
-      return {
-        workspace: db.collection('workspaces').doc(this.$route.params.id)
-      }
-    },
 		methods: {
 			addItem () {
 				this.$store.commit('addItem', { title: 'Item', columnId: this.columnId, id: this.items.length + 1 })
@@ -50,10 +45,6 @@
 				this.showDropdown = !this.showDropdown
 			}
 		},
-		computed: {
-			...mapState([
-				'items'
-			]),
 			filterItems () {
 				const items = this.items
 				const column = this.columnId
@@ -63,9 +54,6 @@
 		},
 		components: {
 			Item
-		},
-		props: [
-			'columnId'
-		]
+		}
 	}
 </script>
