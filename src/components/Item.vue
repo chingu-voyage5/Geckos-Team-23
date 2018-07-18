@@ -65,8 +65,9 @@
     },
     methods: {
 			dragStart(event) {
-			  event.dataTransfer.setData("Text", event.target.id)
+			  event.dataTransfer.setData("Item", event.target.id)
 				console.log(event.target)
+				this.draggingItem = event.dataTransfer.setData("Item", event.target.id)
 			},
 
       saveWorkspace () {

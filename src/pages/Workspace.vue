@@ -68,7 +68,8 @@
         newItemTitle: 'New Item ',
         workspace: {},
         // use this to update when route changes
-        routeId: this.$route.params.id
+        routeId: this.$route.params.id,
+				draggingItem: ''
       }
     },
     watch: {
@@ -104,18 +105,14 @@
       })
     },
     methods: {
-			dragStart(event) {
-			  event.dataTransfer.setData("Text", event.target.id);
-			  document.getElementById("demo").innerHTML = "Started to drag the item element";
-			},
 			allowDrop(event) {
-			  event.preventDefault();
+			  event.preventDefault()
 			},
 			drop(event) {
-			  event.preventDefault();
-			  var data = event.dataTransfer.getData("Text");
-			  event.target.appendChild(document.getElementById(data));
-			  document.getElementById("demo").innerHTML = "The item element was dropped";
+			  event.preventDefault()
+			  const data = event.dataTransfer.getData("Item")
+				console.log(event.target)
+				console.log(this.draggingItem)
 			},
 
       saveWorkspace () {
