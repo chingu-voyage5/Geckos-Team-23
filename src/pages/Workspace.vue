@@ -22,9 +22,14 @@
           </div>
 
           <div class="column-items">
-            <Item v-for="(item, idx) in column.items" :key="idx" v-bind:color="workspace.color" v-bind:id="item.id" v-bind:content="item.content" v-bind:height="item.height">
+            <Item v-for="(item, idx) in column.items" :key="idx"
+								v-bind:color="workspace.color"
+								v-bind:id="item.id"
+								v-bind:content="item.content"
+								v-bind:height="item.height">
               <input class="item__input" type="text" v-model="item.title" v-on:keyup="saveWorkspace">
             </Item>
+						<div class="droptarget" v-on:drop="drop($event)" v-on:dragover="allowDrop($event)"></div>
           </div>
 
           <div class="column__add-item">
@@ -99,6 +104,20 @@
       })
     },
     methods: {
+			dragStart(event) {
+			  event.dataTransfer.setData("Text", event.target.id);
+			  document.getElementById("demo").innerHTML = "Started to drag the item element";
+			},
+			allowDrop(event) {
+			  event.preventDefault();
+			},
+			drop(event) {
+			  event.preventDefault();
+			  var data = event.dataTransfer.getData("Text");
+			  event.target.appendChild(document.getElementById(data));
+			  document.getElementById("demo").innerHTML = "The item element was dropped";
+			},
+
       saveWorkspace () {
         db.collection('workspaces').doc(this.$route.params.id).set(this.workspace)
       },

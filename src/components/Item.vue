@@ -1,5 +1,5 @@
 <template>
-  <div class="item">
+  <div class="item" v-on:dragstart="dragStart($event)" draggable="true">
     <div class="item__header" v-bind:style="{ background: color}">
 
       <slot></slot>
@@ -64,6 +64,11 @@
       this.textAreaHeight = this.height
     },
     methods: {
+			dragStart(event) {
+			  event.dataTransfer.setData("Text", event.target.id)
+				console.log(event.target)
+			},
+
       saveWorkspace () {
         db.collection('workspaces').doc(this.$route.params.id).set(this.workspace)
       },
