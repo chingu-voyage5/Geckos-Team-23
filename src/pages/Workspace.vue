@@ -66,6 +66,24 @@
         routeId: this.$route.params.id
       }
     },
+		watch: {
+	    '$route': function (id) {
+				this.routeId = this.$route.params.id
+
+				const workspacesRef = db.collection('workspaces')
+
+	      // Load open workspace data
+	      workspacesRef.doc(this.routeId).onSnapshot((workspace) => {
+	        const data = {
+	          'title': workspace.data().title,
+	          'color': workspace.data().color,
+	          'columns': workspace.data().columns,
+	          'userIDs': workspace.data().userIDs
+	        }
+	        this.workspace = data
+	      })
+	    }
+	  },
     created () {
       const workspacesRef = db.collection('workspaces')
 
