@@ -13,3 +13,6 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+
+# Firebase config
+src\components\firebaseConfig.js
