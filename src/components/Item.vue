@@ -93,8 +93,38 @@
 			    item.style.top = (pageY - 20) + 'px'
 			  }
 
+				let currentDroppable = null; // potential droppable that we're flying over right now
+
 			  function onMouseMove(event) {
-			    moveAt(event.pageX, event.pageY);
+					moveAt(event.pageX, event.pageY)
+
+				  item.hidden = true;
+				  let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+				  item.hidden = false;
+
+				  // mousemove events may trigger out of the window (when the item is dragged off-screen)
+				  // if clientX/clientY are out of the window, then elementfromPoint returns null
+				  if (!elemBelow) return
+
+				  // potential droppables are labeled with the class "droppable" (can be other logic)
+				  let droppableBelow = elemBelow.closest('.droppable')
+
+				  if (currentDroppable != droppableBelow) { // if there are any changes
+				    // we're flying in or out...
+				    // note: both values can be null
+				    //   currentDroppable=null if we were not over a droppable (e.g over an empty space)
+				    //   droppableBelow=null if we're not over a droppable now, during this event
+
+				    if (currentDroppable) {
+				      // the logic to process "flying out" of the droppable (remove highlight)
+				      leaveDroppable(currentDroppable);
+				    }
+				    currentDroppable = droppableBelow;
+				    if (currentDroppable) {
+				      // the logic to process "flying in" of the droppable
+				      enterDroppable(currentDroppable);
+				    }
+				  }
 			  }
 
 			  // (3) move the item on mousemove
@@ -105,6 +135,10 @@
 			    document.removeEventListener('mousemove', onMouseMove)
 			    item.onmouseup = null;
 			  };
+
+				item.ondragstart = function() {
+				  return false
+				};
 
         console.log( columnIndex )
         this.$emit('dragging', item)
