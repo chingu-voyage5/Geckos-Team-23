@@ -96,15 +96,12 @@
         // move it out of any current parents directly into body
         // to make it positioned relative to the body
         document.body.append(item)
-        // ...and put that absolutely positioned item under the cursor
 
+        // ...and put that absolutely positioned item under the cursor
         moveAt(event.pageX, event.pageY)
 
         // centers the item at (pageX, pageY) coordinates
         function moveAt(pageX, pageY) {
-          // center item with cursor
-          // item.style.left = pageX - item.offsetWidth / 2 + 'px'
-          // item.style.top = pageY - item.offsetHeight / 2 + 'px'
           item.style.left = (pageX - 20) + 'px'
           item.style.top = (pageY - 20) + 'px'
         }
@@ -167,7 +164,6 @@
             toColumnIndex = Array.prototype.indexOf.call(workspaceColumns.children, toColumn)
 
             this.workspace.columns[toColumnIndex].items.push(data)
-						this.saveWorkspace()
 
             // remove from DOM
             item.parentNode.removeChild(item)
@@ -175,7 +171,10 @@
 
             // remove from DB
             console.log('Remove from column: '+ columnIndex +' Item = ' + itemIndex)
-            this.workspace.columns[columnIndex].items.splice(itemIndex, 1)
+
+						console.log(
+							this.workspace.columns[columnIndex].items.splice(itemIndex, 1)[0] // this removes column's last item
+						)
 
             this.saveWorkspace()
           }
