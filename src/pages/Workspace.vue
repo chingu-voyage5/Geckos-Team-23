@@ -23,14 +23,14 @@
 
           <div class="column-items">
             <Item v-for="(item, idx) in column.items" :key="idx"
-								v-bind:color="workspace.color"
-								v-bind:id="item.id"
-								v-bind:content="item.content"
-								v-bind:height="item.height"
-								v-on:dragging="onDragItem">
+                v-bind:color="workspace.color"
+                v-bind:id="item.id"
+                v-bind:content="item.content"
+                v-bind:height="item.height"
+                v-on:dragging="onDragItem">
               <input class="item__input" type="text" v-model="item.title" v-on:keyup="saveWorkspace">
             </Item>
-						<div class="droptarget" v-on:drop="drop($event)" v-on:dragover="allowDrop($event)"></div>
+            <div class="droptarget" v-on:drop="drop($event)" v-on:dragover="allowDrop($event)"></div>
           </div>
 
           <div class="column__add-item">
@@ -70,8 +70,8 @@
         workspace: {},
         // use this to update when route changes
         routeId: this.$route.params.id,
-				draggingItem: '',
-				overingColumn: ''
+        draggingItem: '',
+        overingColumn: ''
       }
     },
     watch: {
@@ -107,26 +107,35 @@
       })
     },
     methods: {
-			columnAppendItem (column, item) {
+      columnAppendItem (column, item) {
+        const columnItems = this.workspace.columns[column].items
 
-				// console.log( item )
-			},
-			allowDrop(event) {
-			  event.preventDefault()
-			},
-			drop(event) {
-			  event.preventDefault()
-			  const data = event.dataTransfer.getData("Item")
-				// console.log(event.target)
-				// console.log(this.draggingItem)
-			},
-			onDragItem (colItemData) {
-				// this.draggingItem = colData
-				console.log( colItemData )
+        const data = {
+          'color': '',
+          'content': '',
+          'height': '',
+          'id': item.id,
+          'title': '',
+          'type': ''
+        }
+        columnItems.push()
+        // console.log( item )
+      },
+      allowDrop (event) {
+        event.preventDefault()
+      },
+      drop (event) {
+        event.preventDefault()
+        // const data = event.dataTransfer.getData("Item")
+        console.log(event.target)
+        // console.log(this.draggingItem)
+      },
+      onDragItem (value) {
+        this.draggingItem = value
+        console.log(this.draggingItem)
 
-
-				// this.columnAppendItem(1, this.draggingItem)
-			},
+        // this.columnAppendItem(1, this.draggingItem)
+      },
 
       saveWorkspace () {
         db.collection('workspaces').doc(this.$route.params.id).set(this.workspace)

@@ -2,7 +2,7 @@
   <div class="workspace-list-wraper">
     <div class="workspaces-list-dashboard">
 
-      <div class="workspace" v-for="(workspace, idx) in userWorkspaces" :key="idx" v-bind:style="{ background: workspace.color }" v-bind:id="workspace.id">
+      <div draggable="true" class="workspace" v-for="(workspace, idx) in userWorkspaces" :key="idx" v-bind:style="{ background: workspace.color }" v-bind:id="workspace.id">
         <div class="top-bar">
           <!-- <span class="title">{{ workspace.title }}</span> -->
           <input class="item__input" type="text" v-model="workspace.title" v-on:keyup="saveWorkspaceName($event, workspace)">

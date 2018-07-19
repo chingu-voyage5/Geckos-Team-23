@@ -1,6 +1,8 @@
 <template>
-  <div class="item" v-bind:id="id" v-on:dragstart="dragStart($event)" draggable="true">
+  <div class="item" v-bind:id="id">
     <div class="item__header" v-bind:style="{ background: color}">
+
+			<i class="fas fa-circle drag-btn" v-on:mousedown="dragStart($event)"></i>
 
       <slot></slot>
 
@@ -64,28 +66,49 @@
       this.textAreaHeight = this.height
     },
     methods: {
-			dragStart(event) {
-				const item = event.target
-				const column = event.target.parentNode.parentNode
+      dragStart (event) {
+        const item = event.target.parentNode.parentNode
+        const column = item.parentNode.parentNode
         const columnItems = column.querySelectorAll('.item')
         const itemIndex = Array.prototype.indexOf.call(columnItems, item)
-				const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
+        const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
         const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
 
-				const data = {
-					'color': this.workspace.color,
-					'content': this.workspace.columns[columnIndex].items[itemIndex].content,
-					'height': this.workspace.columns[columnIndex].items[itemIndex].height,
-					'id': this.workspace.columns[columnIndex].items[itemIndex].id,
-					'title': this.workspace.columns[columnIndex].items[itemIndex].title,
-					'type': this.workspace.columns[columnIndex].items[itemIndex].type
-				}
+				// (2) prepare to moving: make absolute and on top by z-index
+			  item.style.position = 'absolute'
+			  item.style.zIndex = 1000
+			  // move it out of any current parents directly into body
+			  // to make it positioned relative to the body
+			  document.body.append(item)
+			  // ...and put that absolutely positioned item under the cursor
 
-				const colItemData = [columnIndex, itemIndex, data]
+			  moveAt(event.pageX, event.pageY)
 
-				// console.log( data )
-				this.$emit('dragging', colItemData)
-			},
+			  // centers the item at (pageX, pageY) coordinates
+			  function moveAt(pageX, pageY) {
+					// center item with cursor
+			    // item.style.left = pageX - item.offsetWidth / 2 + 'px'
+			    // item.style.top = pageY - item.offsetHeight / 2 + 'px'
+					item.style.left = (pageX - 20) + 'px'
+			    item.style.top = (pageY - 20) + 'px'
+			  }
+
+			  function onMouseMove(event) {
+			    moveAt(event.pageX, event.pageY);
+			  }
+
+			  // (3) move the item on mousemove
+			  document.addEventListener('mousemove', onMouseMove)
+
+			  // (4) drop the item, remove unneeded handlers
+			  item.onmouseup = function() {
+			    document.removeEventListener('mousemove', onMouseMove)
+			    item.onmouseup = null;
+			  };
+
+        console.log( columnIndex )
+        this.$emit('dragging', item)
+      },
 
       saveWorkspace () {
         db.collection('workspaces').doc(this.$route.params.id).set(this.workspace)
@@ -146,6 +169,7 @@
   }
 </script>
 <style lang="scss">
+
   .styled-textarea {
     width: 100%;
     min-height: 30px;
@@ -153,4 +177,9 @@
     outline: none;
     resize: vertical;
   }
+
+	.drag-btn {
+		cursor: grab;
+	}
+
 </style>

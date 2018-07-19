@@ -1,5 +1,6 @@
 .item {
   width: 100%;
+	max-width: var(--standard-column-width);
 
   background: var(--color-white);
 	border-radius: var(--standard-border-radius);
