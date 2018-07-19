@@ -75,18 +75,16 @@
         const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
 
 				let toColumn = column
-				let toColumnIndex = columnIndex
+				let toColumnIndex = Array.prototype.indexOf.call(workspaceColumns.children, toColumn)
 
 				const data = {
-          'color': '',
+          'color': this.workspace.color,
           'content': this.workspace.columns[columnIndex].items[itemIndex].content,
           'height': this.workspace.columns[columnIndex].items[itemIndex].height,
           'id': item.id,
           'title': this.workspace.columns[columnIndex].items[itemIndex].title,
           'type': this.workspace.columns[columnIndex].items[itemIndex].type
         }
-
-				console.log(item.id)
 
 				// (2) prepare to moving: make absolute and on top by z-index
 			  item.style.position = 'absolute'
@@ -110,11 +108,11 @@
 				let currentDroppable = null; // potential droppable that we're flying over right now
 
 				function enterDroppable (currentDroppable) {
-					console.log('>' + currentDroppable)
+					// console.log('>' + currentDroppable)
 					currentDroppable.style.background = 'tomato'
 				}
 				function leaveDroppable (currentDroppable) {
-					console.log('<' + currentDroppable)
+					// console.log('<' + currentDroppable)
 					currentDroppable.style.background = 'gold'
 				}
 
@@ -154,7 +152,7 @@
 			  document.addEventListener('mousemove', onMouseMove)
 
 			  // (4) drop the item, remove unneeded handlers
-			  item.onmouseup = function() {
+			  item.onmouseup = () => {
 			    document.removeEventListener('mousemove', onMouseMove)
 			    item.onmouseup = null;
 					// if not on droppable zone, return to original position
@@ -162,8 +160,16 @@
 						console.log('return')
 					} else {
 						toColumn = currentDroppable.parentNode.parentNode
+						toColumnIndex = Array.prototype.indexOf.call(workspaceColumns.children, toColumn)
 
-						console.log(toColumnIndex)
+						this.workspace.columns[toColumnIndex].items.push(data)
+
+						// remove from DOM
+						item.parentNode.removeChild(item)
+						// remove from DB
+						this.workspace.columns[columnIndex].items.splice(itemIndex, 1)
+
+						this.saveWorkspace()
 					}
 			  }
 
@@ -172,7 +178,7 @@
 				  return false
 				}
 
-        this.$emit('dragging', item)
+        // this.$emit('dragging', item)
       },
 
       saveWorkspace () {

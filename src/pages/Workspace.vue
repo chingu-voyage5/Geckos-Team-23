@@ -26,8 +26,7 @@
                 v-bind:color="workspace.color"
                 v-bind:id="item.id"
                 v-bind:content="item.content"
-                v-bind:height="item.height"
-                v-on:dragging="onDragItem">
+                v-bind:height="item.height">
               <input class="item__input" type="text" v-model="item.title" v-on:keyup="saveWorkspace">
             </Item>
             <div class="droppable"></div>
@@ -107,35 +106,27 @@
       })
     },
     methods: {
-      columnAppendItem (column, item) {
-        const columnItems = this.workspace.columns[column].items
-
-        const data = {
-          'color': '',
-          'content': '',
-          'height': '',
-          'id': item.id,
-          'title': '',
-          'type': ''
-        }
-        columnItems.push()
-        // console.log( item )
-      },
-      allowDrop (event) {
-        event.preventDefault()
-      },
-      drop (event) {
-        event.preventDefault()
-        // const data = event.dataTransfer.getData("Item")
-        console.log(event.target)
-        // console.log(this.draggingItem)
-      },
-      onDragItem (value) {
-        this.draggingItem = value
-        console.log(this.draggingItem)
-
-        // this.columnAppendItem(1, this.draggingItem)
-      },
+      // columnAppendItem (column, item) {
+      //   const columnItems = this.workspace.columns[column].items
+			//
+      //   columnItems.push()
+      //   // console.log( item )
+      // },
+      // allowDrop (event) {
+      //   event.preventDefault()
+      // },
+      // drop (event) {
+      //   event.preventDefault()
+      //   // const data = event.dataTransfer.getData("Item")
+      //   console.log(event.target)
+      //   // console.log(this.draggingItem)
+      // },
+      // onDragItem (value) {
+      //   this.draggingItem = value
+      //   console.log(this.draggingItem)
+			//
+      //   // this.columnAppendItem(1, this.draggingItem)
+      // },
 
       saveWorkspace () {
         db.collection('workspaces').doc(this.$route.params.id).set(this.workspace)
