@@ -72,8 +72,17 @@
 				const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
         const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
 
-				console.log( columnIndex )
-				this.$emit('dragging', event.target)
+				const data = {
+					'color': this.workspace.color,
+					'content': this.workspace.columns[columnIndex].items[itemIndex].content,
+					'height': this.workspace.columns[columnIndex].items[itemIndex].height,
+					'id': this.workspace.columns[columnIndex].items[itemIndex].id,
+					'title': this.workspace.columns[columnIndex].items[itemIndex].title,
+					'type': this.workspace.columns[columnIndex].items[itemIndex].type
+				}
+
+				console.log( data )
+				this.$emit('dragging', data)
 			},
 
       saveWorkspace () {
