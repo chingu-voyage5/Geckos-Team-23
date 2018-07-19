@@ -108,17 +108,7 @@
     },
     methods: {
 			columnAppendItem (column, item) {
-				const columnItems = this.workspace.columns[column].items
 
-				const data = {
-					'color': '',
-					'content': '',
-					'height': '',
-					'id': item.id,
-					'title': '',
-					'type': ''
-				}
-				columnItems.push()
 				// console.log( item )
 			},
 			allowDrop(event) {
@@ -130,12 +120,12 @@
 				// console.log(event.target)
 				// console.log(this.draggingItem)
 			},
-			onDragItem (value) {
-				this.draggingItem = value
-				// console.log( this.draggingItem )
+			onDragItem (colItemData) {
+				// this.draggingItem = colData
+				console.log( colItemData )
 
 
-				this.columnAppendItem(1, this.draggingItem)
+				// this.columnAppendItem(1, this.draggingItem)
 			},
 
       saveWorkspace () {

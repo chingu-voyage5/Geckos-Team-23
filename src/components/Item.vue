@@ -81,8 +81,10 @@
 					'type': this.workspace.columns[columnIndex].items[itemIndex].type
 				}
 
-				console.log( data )
-				this.$emit('dragging', data)
+				const colItemData = [columnIndex, itemIndex, data]
+
+				// console.log( data )
+				this.$emit('dragging', colItemData)
 			},
 
       saveWorkspace () {
