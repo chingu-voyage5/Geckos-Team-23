@@ -30,7 +30,7 @@
                 v-on:dragging="onDragItem">
               <input class="item__input" type="text" v-model="item.title" v-on:keyup="saveWorkspace">
             </Item>
-            <div class="droppable" v-on:drop="drop($event)" v-on:dragover="allowDrop($event)"></div>
+            <div class="droppable"></div>
           </div>
 
           <div class="column__add-item">

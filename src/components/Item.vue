@@ -74,6 +74,20 @@
         const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
         const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
 
+				let toColumn = column
+				let toColumnIndex = columnIndex
+
+				const data = {
+          'color': '',
+          'content': this.workspace.columns[columnIndex].items[itemIndex].content,
+          'height': this.workspace.columns[columnIndex].items[itemIndex].height,
+          'id': item.id,
+          'title': this.workspace.columns[columnIndex].items[itemIndex].title,
+          'type': this.workspace.columns[columnIndex].items[itemIndex].type
+        }
+
+				console.log(item.id)
+
 				// (2) prepare to moving: make absolute and on top by z-index
 			  item.style.position = 'absolute'
 			  item.style.zIndex = 1000
@@ -94,6 +108,15 @@
 			  }
 
 				let currentDroppable = null; // potential droppable that we're flying over right now
+
+				function enterDroppable (currentDroppable) {
+					console.log('>' + currentDroppable)
+					currentDroppable.style.background = 'tomato'
+				}
+				function leaveDroppable (currentDroppable) {
+					console.log('<' + currentDroppable)
+					currentDroppable.style.background = 'gold'
+				}
 
 			  function onMouseMove(event) {
 					moveAt(event.pageX, event.pageY)
@@ -117,12 +140,12 @@
 
 				    if (currentDroppable) {
 				      // the logic to process "flying out" of the droppable (remove highlight)
-				      leaveDroppable(currentDroppable);
+				      leaveDroppable(currentDroppable)
 				    }
-				    currentDroppable = droppableBelow;
+				    currentDroppable = droppableBelow
 				    if (currentDroppable) {
 				      // the logic to process "flying in" of the droppable
-				      enterDroppable(currentDroppable);
+				      enterDroppable(currentDroppable)
 				    }
 				  }
 			  }
@@ -134,13 +157,21 @@
 			  item.onmouseup = function() {
 			    document.removeEventListener('mousemove', onMouseMove)
 			    item.onmouseup = null;
-			  };
+					// if not on droppable zone, return to original position
+					if (!currentDroppable) {
+						console.log('return')
+					} else {
+						toColumn = currentDroppable.parentNode.parentNode
 
+						console.log(toColumnIndex)
+					}
+			  }
+
+				// avoid default behaviour
 				item.ondragstart = function() {
 				  return false
-				};
+				}
 
-        console.log( columnIndex )
         this.$emit('dragging', item)
       },
 
