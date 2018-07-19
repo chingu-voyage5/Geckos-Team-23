@@ -2,7 +2,7 @@
   <div class="item" v-bind:id="id">
     <div class="item__header" v-bind:style="{ background: color}">
 
-			<i class="fas fa-circle drag-btn" v-on:mousedown="dragStart($event)"></i>
+      <i class="fas fa-circle drag-btn" v-on:mousedown="dragStart($event)"></i>
 
       <slot></slot>
 
@@ -64,6 +64,9 @@
       // pass read-only value of content prop into live itemContent
       this.itemContent = this.content
       this.textAreaHeight = this.height
+
+      //DEBUG
+      this.itemContent = this.id
     },
     methods: {
       dragStart (event) {
@@ -74,10 +77,10 @@
         const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
         const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
 
-				let toColumn = column
-				let toColumnIndex = Array.prototype.indexOf.call(workspaceColumns.children, toColumn)
+        let toColumn = column
+        let toColumnIndex = Array.prototype.indexOf.call(workspaceColumns.children, toColumn)
 
-				const data = {
+        const data = {
           'color': this.workspace.color,
           'content': this.workspace.columns[columnIndex].items[itemIndex].content,
           'height': this.workspace.columns[columnIndex].items[itemIndex].height,
@@ -86,97 +89,102 @@
           'type': this.workspace.columns[columnIndex].items[itemIndex].type
         }
 
-				// (2) prepare to moving: make absolute and on top by z-index
-			  item.style.position = 'absolute'
-			  item.style.zIndex = 1000
-			  // move it out of any current parents directly into body
-			  // to make it positioned relative to the body
-			  document.body.append(item)
-			  // ...and put that absolutely positioned item under the cursor
+        // (2) prepare to moving: make absolute and on top by z-index
+        item.style.position = 'absolute'
+        item.style.zIndex = 1000
+				item.style.opacity = 0.5
+        // move it out of any current parents directly into body
+        // to make it positioned relative to the body
+        document.body.append(item)
+        // ...and put that absolutely positioned item under the cursor
 
-			  moveAt(event.pageX, event.pageY)
+        moveAt(event.pageX, event.pageY)
 
-			  // centers the item at (pageX, pageY) coordinates
-			  function moveAt(pageX, pageY) {
-					// center item with cursor
-			    // item.style.left = pageX - item.offsetWidth / 2 + 'px'
-			    // item.style.top = pageY - item.offsetHeight / 2 + 'px'
-					item.style.left = (pageX - 20) + 'px'
-			    item.style.top = (pageY - 20) + 'px'
-			  }
+        // centers the item at (pageX, pageY) coordinates
+        function moveAt(pageX, pageY) {
+          // center item with cursor
+          // item.style.left = pageX - item.offsetWidth / 2 + 'px'
+          // item.style.top = pageY - item.offsetHeight / 2 + 'px'
+          item.style.left = (pageX - 20) + 'px'
+          item.style.top = (pageY - 20) + 'px'
+        }
 
-				let currentDroppable = null; // potential droppable that we're flying over right now
+        let currentDroppable = null; // potential droppable that we're flying over right now
 
-				function enterDroppable (currentDroppable) {
-					// console.log('>' + currentDroppable)
-					currentDroppable.style.background = 'tomato'
-				}
-				function leaveDroppable (currentDroppable) {
-					// console.log('<' + currentDroppable)
-					currentDroppable.style.background = 'gold'
-				}
+        function enterDroppable (currentDroppable) {
+          // console.log('>' + currentDroppable)
+          currentDroppable.style.background = 'tomato'
+        }
+        function leaveDroppable (currentDroppable) {
+          // console.log('<' + currentDroppable)
+          currentDroppable.style.background = 'gold'
+        }
 
-			  function onMouseMove(event) {
-					moveAt(event.pageX, event.pageY)
+        function onMouseMove(event) {
+          moveAt(event.pageX, event.pageY)
 
-				  item.hidden = true;
-				  let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
-				  item.hidden = false;
+          item.hidden = true;
+          let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+          item.hidden = false;
 
-				  // mousemove events may trigger out of the window (when the item is dragged off-screen)
-				  // if clientX/clientY are out of the window, then elementfromPoint returns null
-				  if (!elemBelow) return
+          // mousemove events may trigger out of the window (when the item is dragged off-screen)
+          // if clientX/clientY are out of the window, then elementfromPoint returns null
+          if (!elemBelow) return
 
-				  // potential droppables are labeled with the class "droppable" (can be other logic)
-				  let droppableBelow = elemBelow.closest('.droppable')
+          // potential droppables are labeled with the class "droppable" (can be other logic)
+          let droppableBelow = elemBelow.closest('.droppable')
 
-				  if (currentDroppable != droppableBelow) { // if there are any changes
-				    // we're flying in or out...
-				    // note: both values can be null
-				    //   currentDroppable=null if we were not over a droppable (e.g over an empty space)
-				    //   droppableBelow=null if we're not over a droppable now, during this event
+          if (currentDroppable != droppableBelow) { // if there are any changes
+            // we're flying in or out...
+            // note: both values can be null
+            //   currentDroppable=null if we were not over a droppable (e.g over an empty space)
+            //   droppableBelow=null if we're not over a droppable now, during this event
 
-				    if (currentDroppable) {
-				      // the logic to process "flying out" of the droppable (remove highlight)
-				      leaveDroppable(currentDroppable)
-				    }
-				    currentDroppable = droppableBelow
-				    if (currentDroppable) {
-				      // the logic to process "flying in" of the droppable
-				      enterDroppable(currentDroppable)
-				    }
-				  }
-			  }
+            if (currentDroppable) {
+              // the logic to process "flying out" of the droppable (remove highlight)
+              leaveDroppable(currentDroppable)
+            }
+            currentDroppable = droppableBelow
+            if (currentDroppable) {
+              // the logic to process "flying in" of the droppable
+              enterDroppable(currentDroppable)
+            }
+          }
+        }
 
-			  // (3) move the item on mousemove
-			  document.addEventListener('mousemove', onMouseMove)
+        // (3) move the item on mousemove
+        document.addEventListener('mousemove', onMouseMove)
 
-			  // (4) drop the item, remove unneeded handlers
-			  item.onmouseup = () => {
-			    document.removeEventListener('mousemove', onMouseMove)
-			    item.onmouseup = null;
-					// if not on droppable zone, return to original position
-					if (!currentDroppable) {
-						console.log('return')
-					} else {
-						toColumn = currentDroppable.parentNode.parentNode
-						toColumnIndex = Array.prototype.indexOf.call(workspaceColumns.children, toColumn)
+        // (4) drop the item, remove unneeded handlers
+        item.onmouseup = () => {
+          document.removeEventListener('mousemove', onMouseMove)
+          item.onmouseup = null;
+          // if not on droppable zone, return to original position
+          if (!currentDroppable) {
+            console.log('return')
+          } else {
+            toColumn = currentDroppable.parentNode.parentNode
+            toColumnIndex = Array.prototype.indexOf.call(workspaceColumns.children, toColumn)
 
-						this.workspace.columns[toColumnIndex].items.push(data)
-
-						// remove from DOM
-						item.parentNode.removeChild(item)
-						// remove from DB
-						this.workspace.columns[columnIndex].items.splice(itemIndex, 1)
-
+            this.workspace.columns[toColumnIndex].items.push(data)
 						this.saveWorkspace()
-					}
-			  }
 
-				// avoid default behaviour
-				item.ondragstart = function() {
-				  return false
-				}
+            // remove from DOM
+            item.parentNode.removeChild(item)
+            console.log( 'Remove item from DOM: ' + item.id )
+
+            // remove from DB
+            console.log('Remove from column: '+ columnIndex +' Item = ' + itemIndex)
+            this.workspace.columns[columnIndex].items.splice(itemIndex, 1)
+
+            this.saveWorkspace()
+          }
+        }
+
+        // avoid default behaviour
+        item.ondragstart = function() {
+          return false
+        }
 
         // this.$emit('dragging', item)
       },
@@ -249,8 +257,8 @@
     resize: vertical;
   }
 
-	.drag-btn {
-		cursor: grab;
-	}
+  .drag-btn {
+    cursor: grab;
+  }
 
 </style>
