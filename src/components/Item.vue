@@ -1,5 +1,5 @@
 <template>
-  <div class="item" v-on:dragstart="dragStart($event)" draggable="true">
+  <div class="item" v-bind:id="id" v-on:dragstart="dragStart($event)" draggable="true">
     <div class="item__header" v-bind:style="{ background: color}">
 
       <slot></slot>
@@ -65,9 +65,15 @@
     },
     methods: {
 			dragStart(event) {
-			  event.dataTransfer.setData("Item", event.target.id)
-				console.log(event.target)
-				this.draggingItem = event.dataTransfer.setData("Item", event.target.id)
+				const item = event.target
+				const column = event.target.parentNode.parentNode
+        const columnItems = column.querySelectorAll('.item')
+        const itemIndex = Array.prototype.indexOf.call(columnItems, item)
+				const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
+        const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
+
+				console.log( columnIndex )
+				this.$emit('dragging', event.target)
 			},
 
       saveWorkspace () {
