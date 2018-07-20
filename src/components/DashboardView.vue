@@ -103,11 +103,15 @@ export default {
     },
     deleteWorkspace (event) {
       const elementId = event.currentTarget.id
-      db.collection('workspaces').doc(elementId).delete().then(function () {
-        console.log('Document successfully deleted!')
-      }).catch(function (error) {
-        console.error('Error removing document: ', error)
-      })
+      if (confirm('Are you sure you want to delete this workspace? This action can not be undone')) {
+        db.collection('workspaces').doc(elementId).delete().then(function () {
+          console.log('Document successfully deleted!')
+        }).catch(function (error) {
+          console.error('Error removing document: ', error)
+        })
+      } else {
+        console.log('workspace not delete')
+      }
     }
   },
   components: {

@@ -135,20 +135,25 @@
         dropDownMenu.classList.toggle('visible')
       },
       deleteColumn (event) {
-        const column = event.target.parentNode.parentNode.parentNode.parentNode.parentNode
-        const allMenus = document.querySelectorAll('.dropdown')
+        if (confirm('Are you sure you want to delete this column? This action can not be undone')) {
+          const column = event.target.parentNode.parentNode.parentNode.parentNode.parentNode
+          const allMenus = document.querySelectorAll('.dropdown')
 
-        const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
-        const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
-        this.workspace.columns.splice(columnIndex, 1)
+          const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
+          const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
+          this.workspace.columns.splice(columnIndex, 1)
 
-        // close all open menus
-        for (let i = 0; i < allMenus.length; i++) {
-          allMenus[i].classList.remove('visible')
+          // close all open menus
+          for (let i = 0; i < allMenus.length; i++) {
+            allMenus[i].classList.remove('visible')
+          }
+
+          // Save workspace snapshot to DB
+          this.saveWorkspace()
+        } else {
+          console.log('column not deleted')
         }
-
-        // Save workspace snapshot to DB
-        this.saveWorkspace()
+        
       },
       toggleAddItemDropdown (event) {
         const addItemDropdownBtn = event.target
