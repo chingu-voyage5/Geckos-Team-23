@@ -99,25 +99,29 @@
         dropDownMenu.classList.toggle('visible')
       },
       deleteItem (event) {
-        const item = event.target.parentNode.parentNode.parentNode.parentNode.parentNode
-        const columnItems = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes
+        if (confirm('Are you sure you want to delete this item? This action can not be undone')) {
+          const item = event.target.parentNode.parentNode.parentNode.parentNode.parentNode
+          const columnItems = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes
 
-        const column = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode
-        const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
-        const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
+          const column = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode
+          const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
+          const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
 
-        const allMenus = document.querySelectorAll('.dropdown')
-        const itemIndex = Array.prototype.indexOf.call(columnItems, item)
+          const allMenus = document.querySelectorAll('.dropdown')
+          const itemIndex = Array.prototype.indexOf.call(columnItems, item)
 
-        this.workspace.columns[columnIndex].items.splice(itemIndex, 1)
+          this.workspace.columns[columnIndex].items.splice(itemIndex, 1)
 
-        // close all open menus
-        for (let i = 0; i < allMenus.length; i++) {
-          allMenus[i].classList.remove('visible')
+          // close all open menus
+          for (let i = 0; i < allMenus.length; i++) {
+            allMenus[i].classList.remove('visible')
+          }
+
+          // Save workspace snapshot to DB
+          this.saveWorkspace()
+        } else {
+          console.log('item not deleted')
         }
-
-        // Save workspace snapshot to DB
-        this.saveWorkspace()
       }
     }
   }
