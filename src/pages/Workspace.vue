@@ -6,7 +6,7 @@
     <div id="workspace-content">
 
       <ul class="workspace__list">
-        <div v-for="(column, idx) in workspace.columns" :key="idx" ref="column" class="column" v-bind:id="column.id">
+        <!-- <div v-for="(column, idx) in workspace.columns" :key="idx" ref="column" class="column" v-bind:id="column.id">
           <div class="column__header">
             <input class="column__input" type="text" v-model="column.title" v-on:keyup="saveWorkspace">
 
@@ -22,7 +22,7 @@
           </div>
 
           <div class="column-items">
-            <Item v-for="(item, idx) in column.items" :key="idx" v-bind:color="workspace.color" v-bind:id="item.id" v-bind:content="item.content" v-bind:height="item.height">
+            <Item v-for="(item, idx) in column.itemIDs" :key="idx" v-bind:color="workspace.color" v-bind:id="item.id" v-bind:content="item.content" v-bind:height="item.height">
               <input class="item__input" type="text" v-model="item.title" v-on:keyup="saveWorkspace">
             </Item>
           </div>
@@ -33,12 +33,14 @@
 
             <div class="add-item-dropdown">
               <button class="add-item-btn" v-on:click="addItem($event, 'text')"><i class="fa fa-font"></i> Text</button>
-              <button class="add-item-btn"><i class="fa fa-folder"></i> Folder</button>
-              <button class="add-item-btn" v-on:click="addItem($event, 'media')"><i class="fa fa-video"></i> Media</button>
             </div>
 
           </div>
-        </div>
+        </div> -->
+
+				<Column v-for="column in columns" v-bind:id="column.id">
+					{{column.title}}
+				</Column>
       </ul>
 
       <div class="workspace__add-button" v-on:click="addColumn">
@@ -53,6 +55,7 @@
   import firebase from 'firebase'
   import db from '../components/firebaseInit'
   import Sidebar from '../components/Sidebar'
+  import Column from '../components/Column'
   import Item from '../components/Item'
 
   export default {
@@ -62,6 +65,7 @@
         newColTitle: 'New Column ',
         newItemTitle: 'New Item ',
         workspace: {},
+				columns: [],
         // use this to update when route changes
         routeId: this.$route.params.id
       }
@@ -86,6 +90,7 @@
     },
     created () {
       const workspacesRef = db.collection('workspaces')
+			const columnsRef = db.collection('columns')
 
       // Load open workspace data
       workspacesRef.doc(this.routeId).onSnapshot((workspace) => {
@@ -93,10 +98,29 @@
           'title': workspace.data().title,
           'color': workspace.data().color,
           'columns': workspace.data().columns,
+					'columnIDs': workspace.data().columnIDs,
           'userIDs': workspace.data().userIDs
         }
         this.workspace = data
       })
+
+	    const workspaceColumns = columnsRef.where('workspaceID', '==', this.routeId)
+
+	    // Load and Update Data
+	    workspaceColumns
+	    .onSnapshot(querySnapshot => {
+	      this.userWorkspaces = []
+	      querySnapshot.forEach(column => {
+	        const data = {
+						'id': column.id,
+	          'title': column.data().title,
+	          'itemIDs': column.data().itemIDs,
+						'workspaceID': column.data().workspaceID
+	        }
+	        this.columns.push(data)
+	      })
+	    })
+
     },
     methods: {
       saveWorkspace () {
@@ -161,30 +185,52 @@
         }
       },
       addItem (event, type) {
+
         const column = event.target.parentNode.parentNode.parentNode
         const columnItems = column.getElementsByClassName('column-items')[0]
 
-        // create new item
-        const data = {
-          id: Date.now(),
+        const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
+        const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
+
+        db.collection('items').add({
           type: type,
           title: type.capitalize() + ' item ' + (columnItems.children.length + 1),
           color: this.workspace.color,
           content: '',
           height: ''
-        }
+        }).then((item) => {
+          console.log(item.id)
+          this.workspace.columns[columnIndex].itemIDs.push(item.id)
+        })
 
-        // Add column to workspace
-        const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
-        const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
-        this.workspace.columns[columnIndex].items.push(data)
 
+
+
+        // const column = event.target.parentNode.parentNode.parentNode
+        // const columnItems = column.getElementsByClassName('column-items')[0]
+        //
+        // // create new item
+        // const data = {
+        //   id: Date.now(),
+        //   type: type,
+        //   title: type.capitalize() + ' item ' + (columnItems.children.length + 1),
+        //   color: this.workspace.color,
+        //   content: '',
+        //   height: ''
+        // }
+        //
+        // // Add column to workspace
+        // const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
+        // const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
+        // this.workspace.columns[columnIndex].items.push(data)
+        //
         // Save workspace snapshot to DB
         this.saveWorkspace()
       }
     },
     components: {
       Sidebar,
+      Column,
       Item
     }
   }
