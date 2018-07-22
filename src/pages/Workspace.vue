@@ -38,7 +38,7 @@
           </div>
         </div> -->
 
-				<Column v-for="column in columns" v-bind:id="column.id">
+				<Column v-for="(column, idx) in columns" :key="idx" ref="column" class="column" v-bind:id="column.id" v-bind:title="column.title">
 					{{column.title}}
 				</Column>
       </ul>
@@ -184,49 +184,6 @@
           addItemDropdown.style.height = '0'
         }
       },
-      addItem (event, type) {
-
-        const column = event.target.parentNode.parentNode.parentNode
-        const columnItems = column.getElementsByClassName('column-items')[0]
-
-        const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
-        const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
-
-        db.collection('items').add({
-          type: type,
-          title: type.capitalize() + ' item ' + (columnItems.children.length + 1),
-          color: this.workspace.color,
-          content: '',
-          height: ''
-        }).then((item) => {
-          console.log(item.id)
-          this.workspace.columns[columnIndex].itemIDs.push(item.id)
-        })
-
-
-
-
-        // const column = event.target.parentNode.parentNode.parentNode
-        // const columnItems = column.getElementsByClassName('column-items')[0]
-        //
-        // // create new item
-        // const data = {
-        //   id: Date.now(),
-        //   type: type,
-        //   title: type.capitalize() + ' item ' + (columnItems.children.length + 1),
-        //   color: this.workspace.color,
-        //   content: '',
-        //   height: ''
-        // }
-        //
-        // // Add column to workspace
-        // const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
-        // const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
-        // this.workspace.columns[columnIndex].items.push(data)
-        //
-        // Save workspace snapshot to DB
-        this.saveWorkspace()
-      }
     },
     components: {
       Sidebar,

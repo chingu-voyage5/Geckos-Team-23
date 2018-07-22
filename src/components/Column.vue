@@ -1,27 +1,23 @@
 <template>
-	<!-- <div v-for="(column, idx) in workspace.columns" :key="idx" ref="column" class="column" v-bind:id="column.id"> -->
 	<div class="column">
 		<div class="column__header">
 			<input class="column__input" type="text" v-model="colTitle" v-on:keyup="saveWorkspace">
-			<!-- <slot></slot>
-
-			<p>{{colTitle}}</p> -->
 
 			<div class="dropdown-menu">
 				<button v-on:click="toggleDropDown($event)"><i class="fas fa-ellipsis-v"></i></button>
-				<div class="dropdown">
+				<!-- <div class="dropdown"
 					<span class="dropdown__arrow"></span>
 					<div class="dropdown__body">
 						<button v-on:click="deleteColumn($event)"><i class="fas fa-trash"></i> Delete</button>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 
 		<div class="column-items">
-			<!-- <Item v-for="(item, idx) in column.itemIDs" :key="idx" v-bind:color="workspace.color" v-bind:id="item.id" v-bind:content="item.content" v-bind:height="item.height">
+			<Item v-for="(item, idx) in colItems" :key="idx" v-bind:color="item.color" v-bind:id="item.id" v-bind:content="item.content" v-bind:height="item.height">
 				<input class="item__input" type="text" v-model="item.title" v-on:keyup="saveWorkspace">
-			</Item> -->
+			</Item>
 		</div>
 
 		<div class="column__add-item">
@@ -43,20 +39,101 @@
 
 	export default {
 		props: [
-			'title'
+			'title',
+			'id'
 		],
 		data () {
 			return {
-				colTitle: ''
+				colID: this.id,
+				colTitle: '',
+				colItems: []
 			}
 		},
 		created () {
       this.colTitle = this.title
+
+			const itemsRef = db.collection('items')
+			const columnItems = itemsRef.where('columnID', '==', this.colID)
+
+	    // Load and Update Data
+	    columnItems
+	    .onSnapshot(querySnapshot => {
+	      querySnapshot.forEach(item => {
+	        const data = {
+						'id': item.id,
+	          'title': item.data().title,
+						'color': item.data().color,
+						'height': item.data().height,
+						'content': item.data().content,
+	          'columnID': item.data().columnID
+	        }
+	        this.colItems.push(data)
+	      })
+	    })
     },
 		methods: {
 			saveWorkspace () {
         db.collection('workspaces').doc(this.$route.params.id).set(this.workspace)
       },
+      toggleDropDown (event) {
+        const dropDownMenu = event.target.nextElementSibling
+        const allMenus = document.querySelectorAll('.dropdown')
+        const clickedMenu = Array.prototype.indexOf.call(allMenus, dropDownMenu)
+
+        // close all open menus except clicked one
+        for (let i = 0; i < allMenus.length; i++) {
+          if (allMenus[i] !== allMenus[clickedMenu]) {
+            allMenus[i].classList.remove('visible')
+          }
+        }
+
+        // open clicked menu
+        dropDownMenu.classList.toggle('visible')
+      },
+      addItem (event, type) {
+
+        const column = event.target.parentNode.parentNode.parentNode
+        const columnItems = column.getElementsByClassName('column-items')[0]
+
+        const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
+        const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
+
+        db.collection('items').add({
+          type: type,
+          title: type.capitalize() + ' item ' + (columnItems.children.length + 1),
+          color: this.workspace.color,
+          content: '',
+          height: '',
+					columnID: ''
+        }).then((item) => {
+          console.log(item.id)
+          this.workspace.columns[columnIndex].itemIDs.push(item.id)
+        })
+
+
+
+
+        // const column = event.target.parentNode.parentNode.parentNode
+        // const columnItems = column.getElementsByClassName('column-items')[0]
+        //
+        // // create new item
+        // const data = {
+        //   id: Date.now(),
+        //   type: type,
+        //   title: type.capitalize() + ' item ' + (columnItems.children.length + 1),
+        //   color: this.workspace.color,
+        //   content: '',
+        //   height: ''
+        // }
+        //
+        // // Add column to workspace
+        // const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
+        // const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
+        // this.workspace.columns[columnIndex].items.push(data)
+        //
+        // Save workspace snapshot to DB
+        this.saveWorkspace()
+      }
 		},
 		components: {
 			Item
