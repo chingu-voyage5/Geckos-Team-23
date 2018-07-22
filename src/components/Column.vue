@@ -22,10 +22,10 @@
 
 		<div class="column__add-item">
 
-			<button class="" v-on:click="toggleAddItemDropdown($event)"><i class="fa fa-plus"></i></button>
+			<button class="" v-on:click="addItem($event, 'text')"><i class="fa fa-plus"></i></button>
 
 			<div class="add-item-dropdown">
-				<button class="add-item-btn" v-on:click="addItem($event, 'text')"><i class="fa fa-font"></i> Text</button>
+				<button class="add-item-btn" v-on:click=""><i class="fa fa-font"></i> Text</button>
 			</div>
 
 		</div>
@@ -46,11 +46,27 @@
 			return {
 				colID: this.id,
 				colTitle: '',
-				colItems: []
+				colItems: [],
+				workspace: [],
+				routeId: this.$route.params.id
 			}
 		},
 		created () {
       this.colTitle = this.title
+
+			const workspacesRef = db.collection('workspaces')
+
+      // Load open workspace data
+      workspacesRef.doc(this.routeId).onSnapshot((workspace) => {
+        const data = {
+          'title': workspace.data().title,
+          'color': workspace.data().color,
+          'columns': workspace.data().columns,
+					'columnIDs': workspace.data().columnIDs,
+          'userIDs': workspace.data().userIDs
+        }
+        this.workspace = data
+      })
 
 			const itemsRef = db.collection('items')
 			const columnItems = itemsRef.where('columnID', '==', this.colID)
@@ -65,7 +81,8 @@
 						'color': item.data().color,
 						'height': item.data().height,
 						'content': item.data().content,
-	          'columnID': item.data().columnID
+	          'columnID': item.data().columnID,
+						'type': item.data().type
 	        }
 	        this.colItems.push(data)
 	      })
@@ -104,35 +121,10 @@
           color: this.workspace.color,
           content: '',
           height: '',
-					columnID: ''
-        }).then((item) => {
-          console.log(item.id)
-          this.workspace.columns[columnIndex].itemIDs.push(item.id)
+					columnID: this.colID
         })
 
-
-
-
-        // const column = event.target.parentNode.parentNode.parentNode
-        // const columnItems = column.getElementsByClassName('column-items')[0]
-        //
-        // // create new item
-        // const data = {
-        //   id: Date.now(),
-        //   type: type,
-        //   title: type.capitalize() + ' item ' + (columnItems.children.length + 1),
-        //   color: this.workspace.color,
-        //   content: '',
-        //   height: ''
-        // }
-        //
-        // // Add column to workspace
-        // const workspaceColumns = document.getElementsByClassName('workspace__list')[0]
-        // const columnIndex = Array.prototype.indexOf.call(workspaceColumns.children, column)
-        // this.workspace.columns[columnIndex].items.push(data)
-        //
-        // Save workspace snapshot to DB
-        this.saveWorkspace()
+        // this.saveWorkspace()
       }
 		},
 		components: {
