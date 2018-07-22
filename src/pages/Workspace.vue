@@ -127,21 +127,11 @@
         db.collection('workspaces').doc(this.$route.params.id).set(this.workspace)
       },
       addColumn () {
-        // retrieve DB columns
-        let columns = this.workspace.columns
-
-        // create new column
-        const data = {
-          id: Date.now(),
-          title: this.newColTitle + (this.workspace.columns.length + 1),
-          items: []
-        }
-
-        // Add column to workspace
-        this.workspace.columns.push(data)
-
-        // Save workspace snapshot to DB
-        this.saveWorkspace()
+				db.collection('columns').add({
+          title: 'New column',
+					itemIDs: [],
+					workspaceID: this.routeId
+        })
       },
       toggleDropDown (event) {
         const dropDownMenu = event.target.nextElementSibling
