@@ -3,28 +3,38 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+<<<<<<< HEAD
 import firebase from 'firebase'
+=======
+import store from './store'
+import VModal from 'vue-js-modal'
+import firebase from 'firebase'
+
+Vue.use(VModal)
+>>>>>>> add-item
 
 Vue.config.productionTip = false
 let app
-// Firebase
-let config = {
-    apiKey: 'AIzaSyBh4ShYKn9CEZXwZU05yW6JHL45vezOGpo',
-    authDomain: 'project-management-app-v2.firebaseapp.com',
-    databaseURL: 'https://project-management-app-v2.firebaseio.com',
-    projectId: 'project-management-app-v2',
-    storageBucket: 'project-management-app-v2.appspot.com',
-    messagingSenderId: '562925944482'
-}
 
+<<<<<<< HEAD
 firebase.initializeApp(config)
+=======
+// Initialize the app only when we are sure Firebase Auth object is ready to use.
+>>>>>>> add-item
 firebase.auth().onAuthStateChanged(function (user) {
   if (!app) {
+    /* eslint-disable no-new */
     app = new Vue({
       el: '#app',
-      template: '<App/>',
+      router,
+      store,
       components: { App },
-      router
+      template: '<App/>'
     })
   }
 })
+
+// Allows for string.capitalize()
+String.prototype.capitalize = function () {
+  return this.charAt(0).toUpperCase() + this.slice(1)
+}

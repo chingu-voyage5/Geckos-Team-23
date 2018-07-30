@@ -1,18 +1,13 @@
 <template>
-    <div class="tile">
+    <div class="tile" style="margin:auto;">
         <div class="tile-header">
         <h2 >SIGN UP</h2>
     </div>
     <div class="tile-body">
         <form id="form">
             <label class="form-input">
-                    <input type="text" v-model="name" autofocus="true" required />
-                    <span class="label">Name</span>
-                <span class="underline"></span>
-            </label>
-            <label class="form-input">
-                    <input type="text" v-model="surname" autofocus="true" required />
-                    <span class="label">Surname</span>
+                    <input type="text" v-model="userName" autofocus="true" required />
+                    <span class="label">Username</span>
                 <span class="underline"></span>
             </label>
             <label class="form-input">
@@ -26,9 +21,10 @@
                 <div class="underline"></div>
             </label>
             <div class="submit-container clearfix" style="margin-top: 2rem;">
-                <div v-on:click="MainPage" id="submit" role="button" type="button" class="btn btn-irenic float-right" tabindex="0">
+                <div v-on:click="SignUp" id="submit" role="button" type="button" class="btn btn-irenic float-right" tabindex="0">
                     <span>SIGN UP</span>
                 </div>
+                <p style="padding-top: 40px;">Or click <router-link to="/Home">here</router-link> to go back to Sign in.</p>
                     <div class="login-pending">
                         <div class=spinner>
                             <span class="dot1"></span>
@@ -46,27 +42,33 @@
 
 <script>
 import firebase from 'firebase'
+import db from './firebaseInit'
 
 export default {
-    name: 'SignUp',
-    data: function () {
-        return {
-            email: '',
-            password: ''
-        }
-    },
-    methods: {
-        MainPage: function () {
-            firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
-                function (user) {
-                    alert('Welcome!')
-                    window.location.href = '/MainPage'
-                },
-                function (err) {
-                    alert('Oops.' + err.message)
-                }
-            )
-        }
+  name: 'Signup',
+  data () {
+    return {
+      userName: '',
+      email: '',
+      password: ''
     }
+  },
+  methods: {
+    SignUp () {
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
+        (user) => {
+          db.collection('users').doc(firebase.auth().currentUser.uid).set({
+              userName: this.userName,
+              email: this.email
+          })
+          firebase.auth().currentUser.displayName = this.userName
+          this.$router.replace('Dashboard')
+        },
+        (err) => {
+          alert('Oops. ' + err.message)
+        }
+      )
+    }
+  }
 }
 </script>

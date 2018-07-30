@@ -1,0 +1,108 @@
+{
+    "users": {
+        "1": {
+            "name": "Nills",
+            "id": 1
+        },
+        "2": {
+            "name": "Corné",
+            "id": 2
+        },
+        "3": {
+            "name": "Diogo",
+            "id": 3
+        },
+        "4": {
+            "name": "Jamie",
+            "id": 4
+        }
+    },
+    "workspaces": {
+        "1": {
+            "title": "Workspace 1",
+            "id": 1,
+            "color": "#d29034",
+            "userIds": [1, 2, 3]
+        },
+        "2": {
+            "title": "Workspace 2",
+            "id": 2,
+            "color": "#055a8c",
+            "userIds": 1
+        },
+        "3": {
+            "title": "Workspace 3",
+            "id": 3,
+            "color": "#61bd4f",
+            "userIds": [1, 2, 3, 4]
+        }
+    },
+    "workspace": {
+        "1": {
+            "workspacesIds": [1, 2],
+            "id": 1
+        },
+        "2": {
+            "workspacesIds": [3, 4],
+            "id": 2
+        },
+        "3": {
+            "workspacesIds": [5],
+            "id": 3
+        }
+    },
+    "column": {
+        "1": {
+            "title": "Column 1",
+            "workspaceIds": [1],
+            "id": 1
+        },
+        "2": {
+            "title": "Column 2",
+            "workspaceIds": [2],
+            "id": 2
+        },
+        "3": {
+            "title": "Column 3",
+            "workspaceIds": [3],
+            "id": 3
+        },
+        "4": {
+            "title": "Column 4",
+            "workspaceIds": [4],
+            "id": 4
+        },
+        "5": {
+            "title": "Column 5",
+            "workspaceIds": [5],
+            "id": 5
+        }
+    },
+    "item": {
+        "1": {
+            "title": "Item 1",
+            "columnIds": [1],
+            "id": 1
+        },
+        "2": {
+            "title": "Item 2",
+            "columnIds": [2],
+            "id": 2
+        },
+        "3": {
+            "title": "Item 3",
+            "columnIds": [3],
+            "id": 3
+        },
+        "4": {
+            "title": "Item 4",
+            "columnIds": [4],
+            "id": 4
+        },
+        "5": {
+            "title": "Item 5",
+            "columnIds": [5],
+            "id": 5
+        }
+    }
+}

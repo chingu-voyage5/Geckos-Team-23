@@ -7,6 +7,12 @@
 @import './base/reset';
 @import './base/typography';
 
+//components
+@import './components/column';
+@import './components/item';
+@import './components/workspace';
+@import './components/dropdown';
+
 //pages
 @import './Login';
 @import './SignUp';

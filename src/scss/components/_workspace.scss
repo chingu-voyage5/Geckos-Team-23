@@ -1,0 +1,30 @@
+.workspace {
+  height: 100vh;
+  display: flex;
+
+  &__list {
+    display: flex;
+  }
+
+  &__add-button {
+    flex-shrink: 0; /* avoid shrinking */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 138px; /* height of column after creation */
+    width: var(--standard-column-width);
+
+    padding: 2rem;
+    border-radius: 1rem;
+    background: var(--column-bg);
+    cursor: pointer;
+  }
+}
+
+#workspace-content {
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  overflow-x: auto;
+}
